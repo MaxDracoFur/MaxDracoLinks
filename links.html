@@ -43,14 +43,30 @@
     font-family: 'Courier New', monospace;
     color: #50fa7b;
     margin-top: 50px;
-    white-space: pre-wrap; /* Preserves formatting */
-    overflow-x: auto; /* Adds a scrollbar for long lines */
+    white-space: pre-wrap; 
+    overflow-x: auto;
+  }
+
+  /* Styles for the cursor trail */
+  .trail {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 0, 0, 0.7);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: fade 1s ease-out forwards;
+  }
+
+  @keyframes fade {
+    from {opacity: 1;}
+    to {opacity: 0;}
   }
 </style>
 </head>
 <body>
 
-<h1>Max Draco - Link Tree</h1>
+<h1>Follow my antics on social media here:</h1>
 <ul>
 <li><a href="https://www.facebook.com/MaxDracoDragon/">Facebook</a></li>
 <li><a href="https://bsky.app/profile/maxdraco.bsky.social">BlueSky</a></li>
@@ -76,6 +92,17 @@ _/############//  |\^^/|  \\############\_
 
 M A X   D R A C O
 </pre>
+
+<script>
+  document.addEventListener('mousemove', function(e) {
+    const trail = document.createElement('div');
+    trail.className = 'trail';
+    trail.style.left = e.pageX + 'px';
+    trail.style.top = e.pageY + 'px';
+    document.body.appendChild(trail);
+    setTimeout(() => trail.remove(), 1000);  // removes the trail element after animation
+  });
+</script>
 
 </body>
 </html>
