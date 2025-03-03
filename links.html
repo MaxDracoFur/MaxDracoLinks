@@ -1,85 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Max Draco's Link Tree</title>
-<style>
-  body {
-    background-color: #2a2b4e;
-    color: #f8f8f2;
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;
-    margin: 0;
-    padding: 20px;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max Draco's Link Tree</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            background-image:
+                    radial-gradient(circle at 1px 1px, #4a2f2f 1px, transparent 0),
+                    radial-gradient(circle at 26px 26px, #333 1px, transparent 0);
+            background-size: 50px 50px;
+            color: #c0c0c0;
+            font-family: 'Source Code Pro', monospace;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-  h1 {
-    color: #ff79c6;
-    margin-bottom: 30px;
-  }
+        h1, h2 {
+            color: #50fa7b;
+        }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 300px; /* Set a max-width for better alignment */
+            margin: auto; /* Center align the list */
+            text-align: left; /* Left align the text */
+        }
 
-  ul li {
-    margin: 15px 0;
-  }
+        ul li {
+            margin: 15px 0;
+            display: block;
+        }
 
-  a {
-    color: #8be9fd;
-    text-decoration: none;
-    font-size: 1.2em;
-    transition: color 0.3s ease;
-  }
+        a {
+            color: #bd93f9;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
 
-  a:hover {
-    color: #ffb86c;
-  }
+        a:hover, a:focus {
+            color: #ff79c6;
+            outline: none;
+            text-shadow: 0 0 10px #ff5733;
+        }
 
-  pre {
-    font-family: 'Courier New', monospace;
-    color: #50fa7b;
-    margin-top: 50px;
-    white-space: pre-wrap;
-    overflow-x: auto;
-  }
+        pre {
+            background-color: #282a36;
+            color: #f8f8f2;
+            border: 1px solid #44475a;
+            padding: 10px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-top: 30px;
+        }
 
-  /* Styles for the cursor trail */
-  .trail {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: rgba(255, 0, 0, 0.7);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: fade 1s ease-out forwards;
-  }
+        .trail {
+            position: absolute;
+            background: #ff5555;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: trailAnim linear forwards;
+        }
 
-  @keyframes fade {
-    from {opacity: 1;}
-    to {opacity: 0;}
-  }
-</style>
+        @keyframes trailAnim {
+            to {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <h1>Max Draco</h1>
-<h2>Follow my antics on social media here:</h2>
+<h2>Join My Network: Cybersecurity, Furry, and Pinball</h2>
 <ul>
-<li><a href="https://t.me/Max_Draco">Telegram</a></li>
-<li><a href="https://bsky.app/profile/maxdraco.com">BlueSky</a></li>
-<li><a href="https://www.instagram.com/furry.max.draco/">Instagram</a></li>  
-<li><a href="https://x.com/MaxDracoFur">Twitter</a></li>
-<li><a href="https://www.facebook.com/MaxDracoDragon/">Facebook</a></li>
-<li><a href="https://ko-fi.com/maxdraco">Donate to My Fursuit Journey</a></li>
-
-  
+    <li><a href="https://t.me/Max_Draco">Telegram</a></li>
+    <li><a href="https://bsky.app/profile/maxdraco.com">BlueSky</a></li>
+    <li><a href="https://www.instagram.com/furry.max.draco/">Instagram</a></li>
+    <li><a href="https://x.com/MaxDracoFur">Twitter</a></li>
+    <li><a href="https://www.facebook.com/MaxDracoDragon/">Facebook</a></li>
+    <li><a href="https://ko-fi.com/maxdraco">Support My Fursuit Journey</a></li>
 </ul>
 
-<pre><code style="font-family: Courier, monospace; line-height: 1; margin: 0; padding: 0;">
+<pre>
 /\_/\
 ___====-_     _-====___
 _--^^^##//    \\##^^^--_
@@ -96,17 +110,20 @@ _/#######//  |\^^/|  \\#######\_
 (^^(    )^^)
 
  M A X   D R A C O
-</code>
 </pre>
 
 <script>
   document.addEventListener('mousemove', function(e) {
     const trail = document.createElement('div');
     trail.className = 'trail';
-    trail.style.left = e.pageX + 'px';
-    trail.style.top = e.pageY + 'px';
+    trail.style.left = e.pageX - Math.random() * 10 + 'px'; // randomize position slightly
+    trail.style.top = e.pageY - Math.random() * 10 + 'px'; // randomize position slightly
+    trail.style.width = (Math.random() * 10 + 5) + 'px'; // randomize width between 5px and 15px
+    trail.style.height = trail.style.width; // keep it circular
+    trail.style.animationDuration = (Math.random() * 0.4 + 0.6) + 's'; // randomize lifespan between 0.6s to 1s
+    trail.style.backgroundColor = `rgba(255, 85, 85, ${Math.random() * 0.5 + 0.5})`; // randomize intensity of the color
     document.body.appendChild(trail);
-    setTimeout(() => trail.remove(), 1000);  // removes the trail element after animation
+    setTimeout(() => trail.remove(), parseFloat(trail.style.animationDuration) * 1000); // ensure the timeout matches the animation
   });
 </script>
 
