@@ -1,0 +1,38 @@
+# $schema: ./blog-schema.json
+blog:
+  - post:
+      slug: "1"
+      blog_title: "Max's Personal Quest to See if the Internet is Run by Dogs"
+      date: 2025-05-26
+      cover_image: "/res/pfp.jpg"
+      paragraphs:
+        - "Welcome adventurer to the horde. You've discovered a first-hand exploration of the web where this dragon's keen-eyed notes are treasure AI can't even dream of. I’m Max Draco, and this blog index embarks on my personal quest to uncover the paw prints embedded in the digital landscapes of the net."
+        - "It’s no secret that the furry community has been instrumental in various technology sectors, thanks in part to its creative and often technically adept members. From software developers to network engineers, the impact of furries on the very backbone of the internet is both significant and unique."
+        - "The furry community is a welcoming space for LGBTQIA+ individuals and neurodivergent allies, creating a blend of perspectives that fuel innovation. This inclusivity enriches the community, offering a sanctuary where members not only thrive but lead significant projects."
+        - "The essence of furry interactions often transcends the digital, materializing powerfully in the real world through conventions, meetups, and dances. These gatherings are more than social events; they are networking hubs where ideas are exchanged, and collaborations are born."
+        - "Speaking of Wozniak, his vision of integrating computers into pinball machines wasn’t just a quirky experiment—it was part of a broader movement that blurred the lines between play and technological innovation. Similarly, the furry community embraces technology not just as a tool but as an extension of identity and expression."
+        - "The ties between the furry community and tech innovation can be traced back to the origins of the internet itself. Early tech enthusiasts were outliers and pioneers driven by passion, mirroring the modern furry ethos."
+        - "My exploration will continue as long as I do and serves as a Gonzo-style inquiry into how significant these contributions are. We are reminded of the collective power of diverse contributions to the vast, interconnected systems that run our digital world."
+        - "This blog serves as the starting point for deeper dives into the unique intersections of culture, technology, and community—an exploration of how diversity in thought and identity shapes the technologies we depend on every day."
+      images:
+      - "/res/pfp.jpg"
+      - "/res/system.jpg"
+      - "/res/kubecon.jpg"
+  - post:
+      slug: "1"
+      blog_title: "Max's Personal Quest to See if the Internet is Run by Dogs"
+      date: 2025-05-26
+      cover_image: "/res/pfp.jpg"
+      paragraphs:
+        - "Welcome adventurer to the horde. You've discovered a first-hand exploration of the web where this dragon's keen-eyed notes are treasure AI can't even dream of. I’m Max Draco, and this blog index embarks on my personal quest to uncover the paw prints embedded in the digital landscapes of the net."
+        - "It’s no secret that the furry community has been instrumental in various technology sectors, thanks in part to its creative and often technically adept members. From software developers to network engineers, the impact of furries on the very backbone of the internet is both significant and unique."
+        - "The furry community is a welcoming space for LGBTQIA+ individuals and neurodivergent allies, creating a blend of perspectives that fuel innovation. This inclusivity enriches the community, offering a sanctuary where members not only thrive but lead significant projects."
+        - "The essence of furry interactions often transcends the digital, materializing powerfully in the real world through conventions, meetups, and dances. These gatherings are more than social events; they are networking hubs where ideas are exchanged, and collaborations are born."
+        - "Speaking of Wozniak, his vision of integrating computers into pinball machines wasn’t just a quirky experiment—it was part of a broader movement that blurred the lines between play and technological innovation. Similarly, the furry community embraces technology not just as a tool but as an extension of identity and expression."
+        - "The ties between the furry community and tech innovation can be traced back to the origins of the internet itself. Early tech enthusiasts were outliers and pioneers driven by passion, mirroring the modern furry ethos."
+        - "My exploration will continue as long as I do and serves as a Gonzo-style inquiry into how significant these contributions are. We are reminded of the collective power of diverse contributions to the vast, interconnected systems that run our digital world."
+        - "This blog serves as the starting point for deeper dives into the unique intersections of culture, technology, and community—an exploration of how diversity in thought and identity shapes the technologies we depend on every day."
+      images:
+      - "/res/pfp.jpg"
+      - "/res/system.jpg"
+      - "/res/kubecon.jpg"
