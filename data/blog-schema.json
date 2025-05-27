@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Blog Schema",
+  "type": "object",
+  "properties": {
+    "blog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "post": {
+            "type": "object",
+            "properties": {
+              "slug": { "type": "string" },
+              "blog_title": { "type": "string" },
+              "date": { "type": "string", "format": "date" },
+              "cover_image": { "type": "string" },
+              "paragraphs": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "images": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "required": [
+              "slug",
+              "blog_title",
+              "date",
+              "cover_image",
+              "paragraphs",
+              "images"
+            ]
+          }
+        },
+        "required": ["post"]
+      }
+    }
+  },
+  "required": ["blog"]
+}
