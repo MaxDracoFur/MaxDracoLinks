@@ -1,0 +1,16 @@
+{{ define "main" }}
+<section class="py-5">
+    <div class="container">
+        <h1 class="mb-4 text-success">Max Draco’s Blog</h1>
+        <p>Welcome to my blog where I talk about cybersecurity, furry community events, and pinball adventures.</p>
+        <ul>
+            {{ range site.Data.blog.blog }}
+            {{ $post := .post }}
+            <li>
+                <a href="/blog/{{ $post.slug }}">{{ $post.blog_title }}</a> — {{ $post.date }}
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+</section>
+{{ end }}

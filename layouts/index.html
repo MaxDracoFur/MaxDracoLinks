@@ -1,0 +1,47 @@
+{{ define "main" }}
+<section class="blog py-5">
+    <div class="container col-xxl-8 px-3 px-md-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+
+                {{ $slug := .File.TranslationBaseName }}
+                {{ $posts := slice }}
+
+                {{ range site.Data.blog.blog }}
+                {{ $posts = $posts | append .post }}
+                {{ end }}
+
+                {{ $post := index (where $posts "slug" $slug) 0 }}
+
+                {{ if $post }}
+                {{- $.Scratch.Set "og_title" $post.blog_title -}}
+                {{- $.Scratch.Set "og_description" (index $post.paragraphs 0 | truncate 160) -}}
+                {{- $.Scratch.Set "og_image" $post.cover_image -}}
+
+                <div class="card shadow-sm p-4">
+                    <h1 class="h4 mb-3">{{ $post.blog_title }}</h1>
+                    <p><strong>Date:</strong> {{ $post.date }}</p>
+
+                    {{ with $post.cover_image }}
+                    <img src="{{ . }}" alt="Cover image for {{ $post.blog_title }}" class="img-fluid rounded mb-4"/>
+                    {{ end }}
+
+                    {{ range $i, $p := $post.paragraphs }}
+                    <p>{{ $p }}</p>
+                    {{ if modBool (add $i 1) 2 }}
+                    {{ $imgIndex := div (add $i 1) 2 }}
+                    {{ with index $post.images $imgIndex }}
+                    <img src="{{ . }}" alt="Related image" class="img-fluid rounded my-4"/>
+                    {{ end }}
+                    {{ end }}
+                    {{ end }}
+                </div>
+                {{ else }}
+                <p class="text-danger">No blog post found for slug "{{ $slug }}"</p>
+                {{ end }}
+
+            </div>
+        </div>
+    </div>
+</section>
+{{ end }}

@@ -1,0 +1,393 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    font-family: 'Roboto', sans-serif;
+    background-color: #fdfdfd;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Typography */
+h1, h2, h3 {
+    font-weight: 700;
+}
+
+a {
+    color: #0056b3;
+}
+
+/* Content Styling */
+.content img {
+    max-width: 100%;
+}
+
+.card {
+    border-radius: 1rem;
+    background: #fff;
+}
+
+.events {
+    padding: 2rem;
+}
+
+.event {
+    margin-bottom: 0.2rem;
+    background: white;
+    padding: 0.2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.event-image {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+/* Header */
+.site-header {
+    background-color: #fff;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo {
+    height: 80px;
+    width: auto;
+    vertical-align: middle;
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+
+.logo-link {
+    font-size: 96%;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+.logo-link:hover {
+    text-decoration: none;
+    color: #66b2ff;
+}
+
+.logo-link .brand-name {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: inherit;
+    text-decoration: none;
+}
+
+.split-container {
+    display: flex;
+    width: 100%;
+}
+
+.left-half,
+.right-half {
+    flex: 1; /* each takes 50% */
+    padding: 0.6rem;
+    box-sizing: border-box;
+}
+
+.left-half {
+    text-align: left;
+}
+
+.right-half {
+    flex: 1;
+    padding-right: 0.1rem;
+    padding-top: 0.1rem;
+    text-align: right;
+
+}
+
+.right-half .nav-links {
+    display: flex;
+    justify-content: flex-end; /* Aligns the links to the right */
+    gap: 1.25rem; /* Adds space between links */
+    width: auto; /* Makes sure the container doesn't take up the full width */
+}
+
+.site-header .logo {
+    width: auto;
+}
+
+.site-header .brand-name {
+    font-size: 1.5rem; /* Adjust as needed */
+    margin-left: 10px; /* Adjust space between logo and name */
+}
+
+.site-header .d-flex {
+    flex-wrap: nowrap;
+    align-items: center; /* Ensure the logo stays vertically centered */
+}
+
+.nav-links {
+    /*display: flex;*/
+    gap: 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links .nav-link {
+    color: #333;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 0.875rem;
+    padding: 0.25rem;
+}
+
+.nav-links .nav-link:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    padding: 20px 0;
+    margin: 0;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+footer ul {
+    /*display: flex;*/
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    gap: 1rem;
+}
+
+footer li {
+    display: inline;
+}
+
+.footer-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 2rem;
+}
+
+.footer-link:hover {
+    color: #0066ff;
+}
+
+footer small,
+footer p {
+    margin-top: 1rem;
+    display: block;
+}
+
+/* Header */
+.site-header {
+    background-color: #333; /* Match footer */
+    color: #fff;
+    padding-left: 0.2rem;
+    padding-top: 0.2rem;
+
+
+}
+
+.site-header a:hover {
+    text-decoration: none;
+    color: #66b2ff; /* or whatever hover color you like */
+}
+
+.site-header .nav-link {
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 0.875rem;
+    padding: 0.25rem;
+}
+
+.site-header .nav-link:hover {
+    color: #66b2ff; /* Optional hover color */
+    text-decoration: underline;
+}
+
+.site-header {
+    background-color: #333;
+    color: #fff;
+}
+
+.site-header .logo {
+    height: 40px;
+    width: auto;
+}
+
+.nav-links {
+    /*display: flex;*/
+
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 1.2rem;
+}
+
+.nav-links .nav-link {
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 0.62rem;
+    padding: 0.25rem 0;
+
+}
+
+.nav-links .nav-link:hover {
+    color: #66b2ff;
+    text-decoration: underline;
+}
+
+
+/* Main Events */
+.card {
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e0e0e0;
+}
+
+.card img {
+    border-radius: 0.5rem;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    transition: all 0.2s ease-in-out;
+}
+
+.events {
+    background-color: #f9f9f9;
+    padding: 0.5rem 0.5rem;
+}
+
+
+/* 🍔 */
+.nav-toggle {
+    display: none;
+}
+
+.nav-toggle-label {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 1rem;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    content: '';
+    display: block;
+    background: #fff;
+    height: 3px;
+    width: 25px;
+    border-radius: 3px;
+    position: relative;
+    transition: 0.3s ease-in-out;
+}
+
+.nav-toggle-label span::before {
+    top: -8px;
+    position: absolute;
+}
+
+.nav-toggle-label span::after {
+    top: 8px;
+    position: absolute;
+}
+main {
+    flex: 1;
+}
+
+.card {
+    border-radius: 1rem;
+    background: #1e1e1e;
+    color: #ccc;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #333;
+}
+
+.card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+    transform: translateY(-2px);
+    transition: all 0.2s ease-in-out;
+}
+
+.card img, .event-image {
+    border-radius: 0.5rem;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.events {
+    background-color: #1a1a1a;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: inset 0 0 10px #000;
+}
+
+.event {
+    margin-bottom: 0.5rem;
+    background: #222;
+    padding: 0.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+footer {
+    width: 100%;
+    padding: 20px 0;
+    background-color: #1e1e1e;
+    color: #aaa;
+    text-align: center;
+}
+
+.footer-link {
+    color: #bd93f9;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.footer-link:hover {
+    color: #ff79c6;
+}
+
+footer small, footer p {
+    margin-top: 1rem;
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+}
