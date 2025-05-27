@@ -1,0 +1,5 @@
+baseURL: "https://Maxdraco.com/"
+languageCode: "en-us"
+title: "MaxDraco"
+theme: MaxDraco
+enableRobotsTXT: true

@@ -1,0 +1,48 @@
+{{ define "main" }}
+<div class="dragon-wrapper">
+    <div class="dragon-aura ember-wyrm"></div>
+
+    <main class="events">
+        <main class="events">
+            <div class="container">
+
+                {{ range $i, $item := site.Data.blog.blog }}
+                {{ $post := $item.post }}
+
+                <div class="card blog-entry" style="position: relative; overflow: hidden;">
+
+                    <!-- Side Fire Blasts -->
+                    <div class="side-blast left-blast"></div>
+                    <div class="side-blast right-blast"></div>
+
+                    <!-- Alternating Image + Headline -->
+                    <div class="d-flex flex-wrap {{ if modBool $i 2 }}flex-row-reverse{{ end }} align-items-center gap-3">
+                        <div class="image-container" style="flex: 1 1 30%;">
+                            <a href="/blog/{{ $post.slug }}">
+                                <img src="{{ index $post.images 0 }}" alt="Cover Image" class="event-image">
+                            </a>
+                        </div>
+                        <div class="blog-summary" style="flex: 1 1 65%;">
+                            <h2 class="glitch">{{ $post.blog_title }}</h2>
+                            <p><strong>Date:</strong> {{ $post.date }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Full Width Description -->
+                    <div class="blog-details mt-3">
+                        <p>{{ index $post.paragraphs 0 | truncate 160 }}</p>
+                        <a class="btn-readmore" href="/blog/{{ $post.slug }}">Read More</a>
+                    </div>
+
+                </div>
+                {{ else }}
+                <p class="text-danger">No posts found in site.Data.blog.blog</p>
+                {{ end }}
+
+            </div>
+        </main>
+    </main>
+
+    <div class="dragon-aura ember-wyrm"></div>
+</div>
+{{ end }}
