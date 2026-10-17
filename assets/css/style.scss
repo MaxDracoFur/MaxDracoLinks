@@ -261,6 +261,47 @@ section + section {
     border-radius: 4px;
 }
 
+.trip-kicker {
+    font: 600 0.8rem/1 var(--mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 0.75rem;
+}
+
+.trip-kicker a {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.trip-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    font: 0.9rem var(--mono);
+    color: var(--muted);
+    margin: 0 0 1.5rem;
+}
+
+.trip-cover {
+    margin-top: 0;
+}
+
+.post h2 {
+    font-size: 1.25rem;
+    margin: 2.25rem 0 0.6rem;
+}
+
+.post ul, .post ol {
+    padding-left: 1.25rem;
+    margin: 0 0 1.1rem;
+}
+
+.trip-back {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+}
+
 @media (max-width: 480px) {
     .intro {
         flex-direction: column;

@@ -1,7 +1,14 @@
 {{/* Writing, split into the Furry travel series and everything else.
      A post joins the series with `series: travel` in data/blog.yaml. */}}
+{{/* Trip posts can also be Markdown pages (archetypes/travel.md) with
+     `series: travel` in front matter; both kinds are merged here. */}}
 {{ $posts := slice }}
-{{ range site.Data.blog.blog }}{{ $posts = $posts | append .post }}{{ end }}
+{{ range site.Data.blog.blog }}
+{{ $posts = $posts | append (dict "title" .post.blog_title "url" (printf "/blog/%s/" .post.slug) "date" (string .post.date) "series" .post.series) }}
+{{ end }}
+{{ range where site.RegularPages "Params.series" "travel" }}
+{{ $posts = $posts | append (dict "title" .Title "url" .RelPermalink "date" (.Date.Format "2006-01-02") "series" "travel") }}
+{{ end }}
 {{ $travel := where $posts "series" "travel" }}
 {{ $other := where $posts "series" "!=" "travel" }}
 {{ $level := .level | default "h3" }}
@@ -13,7 +20,7 @@
     <ul class="post-list">
         {{ range sort . "date" "desc" }}
         <li>
-            <a href="/blog/{{ .slug }}/">{{ .blog_title }}</a>
+            <a href="{{ .url }}">{{ .title }}</a>
             <time datetime="{{ .date }}">{{ .date }}</time>
         </li>
         {{ end }}
@@ -29,7 +36,7 @@
     <ul class="post-list">
         {{ range sort . "date" "desc" }}
         <li>
-            <a href="/blog/{{ .slug }}/">{{ .blog_title }}</a>
+            <a href="{{ .url }}">{{ .title }}</a>
             <time datetime="{{ .date }}">{{ .date }}</time>
         </li>
         {{ end }}

@@ -1,0 +1,25 @@
+{{ define "main" }}
+{{ if eq .Params.series "travel" }}
+{{- with .Params.summary }}{{ $.Store.Set "og_description" . }}{{ end -}}
+{{- with .Params.cover_image }}{{ $.Store.Set "og_image" . }}{{ end -}}
+{{- $.Store.Set "og_title" .Title -}}
+<div class="wrap">
+    <article class="post trip">
+        <p class="trip-kicker"><a href="/blog/#travel">Furry travel</a></p>
+        <h1>{{ .Title }}</h1>
+        <p class="trip-meta">
+            {{- with .Params.con }}{{ if $.Params.con_url }}<a href="{{ $.Params.con_url }}">{{ . }}</a>{{ else }}{{ . }}{{ end }}{{ end -}}
+            {{- with .Params.city }}<span>{{ . }}</span>{{ end -}}
+            {{- with .Params.dates }}<span>{{ . }}</span>{{ end -}}
+        </p>
+        {{ with .Params.cover_image }}
+        <img src="{{ . }}" alt="{{ $.Params.cover_alt }}" class="post-image trip-cover">
+        {{ end }}
+        {{ .Content }}
+        <p class="trip-back"><a href="/blog/#travel">More furry travel</a></p>
+    </article>
+</div>
+{{ else }}
+{{ partial "legacy-post.html" . }}
+{{ end }}
+{{ end }}
