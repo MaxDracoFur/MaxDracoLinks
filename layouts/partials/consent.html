@@ -1,0 +1,55 @@
+{{/*
+  Cookie consent for the GTM container. Google Tag Manager is NOT loaded at
+  all until the visitor accepts ("basic" consent mode): before that, no Google
+  request leaves the page, cookieless or otherwise. The choice lives in
+  localStorage on this origin only; "Cookie settings" in the footer reopens it.
+  Same block is copied into maxdraco-cds/site/index.html - keep them in step.
+*/}}
+<div class="consent" id="consent" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
+    <p>This site uses Google Analytics cookies to count visits. Nothing loads unless you accept.</p>
+    <div class="consent-actions">
+        <button type="button" data-consent="granted">Accept</button>
+        <button type="button" data-consent="denied">Reject</button>
+    </div>
+</div>
+<script>
+(function () {
+  var KEY = 'consent.analytics', GTM = 'GTM-W6GLJ5RD', loaded = false
+  var box = document.getElementById('consent')
+  function get () { try { return localStorage.getItem(KEY) } catch (e) { return null } }
+  function set (v) { try { localStorage.setItem(KEY, v) } catch (e) {} }
+  function loadGtm () {
+    if (loaded) return
+    loaded = true
+    window.dataLayer = window.dataLayer || []
+    function gtag () { dataLayer.push(arguments) }
+    gtag('consent', 'default', {
+      analytics_storage: 'granted',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    })
+    dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+    var j = document.createElement('script')
+    j.async = true
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM
+    document.head.appendChild(j)
+  }
+  function choose (v) {
+    set(v)
+    box.hidden = true
+    if (v === 'granted') loadGtm()
+    else if (loaded) location.reload()
+  }
+  box.addEventListener('click', function (e) {
+    var v = e.target.getAttribute && e.target.getAttribute('data-consent')
+    if (v) choose(v)
+  })
+  document.addEventListener('click', function (e) {
+    if (e.target.classList && e.target.classList.contains('consent-reopen')) box.hidden = false
+  })
+  var saved = get()
+  if (saved === 'granted') loadGtm()
+  else if (saved !== 'denied') box.hidden = false
+})()
+</script>
