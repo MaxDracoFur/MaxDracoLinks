@@ -1,13 +1,6 @@
 {{ define "main" }}
 <div class="wrap">
     <h1>Writing</h1>
-    <ul class="post-list">
-        {{ range site.Data.blog.blog }}
-        <li>
-            <a href="/blog/{{ .post.slug }}/">{{ .post.blog_title }}</a>
-            <time datetime="{{ .post.date }}">{{ .post.date }}</time>
-        </li>
-        {{ end }}
-    </ul>
+    {{ partial "writing-list.html" (dict "level" "h2") }}
 </div>
 {{ end }}

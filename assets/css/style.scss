@@ -217,6 +217,34 @@ section + section {
     color: var(--muted);
 }
 
+.section-label a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.section-label a:hover {
+    color: var(--fg);
+}
+
+.series + .series {
+    margin-top: 2rem;
+}
+
+.series-title {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.series-desc,
+.series-empty {
+    color: var(--muted);
+    margin: 0.25rem 0 0.5rem;
+}
+
+.series-empty {
+    font-style: italic;
+}
+
 // Posts
 
 .post p {

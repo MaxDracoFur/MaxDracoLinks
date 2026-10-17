@@ -1,0 +1,38 @@
+{{/* Writing, split into the Furry travel series and everything else.
+     A post joins the series with `series: travel` in data/blog.yaml. */}}
+{{ $posts := slice }}
+{{ range site.Data.blog.blog }}{{ $posts = $posts | append .post }}{{ end }}
+{{ $travel := where $posts "series" "travel" }}
+{{ $other := where $posts "series" "!=" "travel" }}
+{{ $level := .level | default "h3" }}
+
+<div class="series" id="travel">
+    {{ printf "<%s class=\"series-title\">Furry travel</%s>" $level $level | safeHTML }}
+    <p class="series-desc">Cons, meetups, and the cities around them.</p>
+    {{ with $travel }}
+    <ul class="post-list">
+        {{ range sort . "date" "desc" }}
+        <li>
+            <a href="/blog/{{ .slug }}/">{{ .blog_title }}</a>
+            <time datetime="{{ .date }}">{{ .date }}</time>
+        </li>
+        {{ end }}
+    </ul>
+    {{ else }}
+    <p class="series-empty">First trip report coming soon.</p>
+    {{ end }}
+</div>
+
+{{ with $other }}
+<div class="series">
+    {{ printf "<%s class=\"series-title\">Notes</%s>" $level $level | safeHTML }}
+    <ul class="post-list">
+        {{ range sort . "date" "desc" }}
+        <li>
+            <a href="/blog/{{ .slug }}/">{{ .blog_title }}</a>
+            <time datetime="{{ .date }}">{{ .date }}</time>
+        </li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}

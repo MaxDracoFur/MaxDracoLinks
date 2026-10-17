@@ -37,19 +37,10 @@
         </article>
     </section>
 
-    {{ with site.Data.blog.blog }}
     <section aria-labelledby="writing-h">
-        <h2 id="writing-h" class="section-label">Writing</h2>
-        <ul class="post-list">
-            {{ range . }}
-            <li>
-                <a href="/blog/{{ .post.slug }}/">{{ .post.blog_title }}</a>
-                <time datetime="{{ .post.date }}">{{ .post.date }}</time>
-            </li>
-            {{ end }}
-        </ul>
+        <h2 id="writing-h" class="section-label"><a href="/blog/">Writing</a></h2>
+        {{ partial "writing-list.html" (dict "level" "h3") }}
     </section>
-    {{ end }}
 
     <section id="contact" aria-labelledby="contact-h">
         <h2 id="contact-h" class="section-label">Contact</h2>

@@ -1,4 +1,17 @@
 # $schema: ./blog-schema.json
+# Furry travel: add `series: travel` to a post to file it under the series.
+# Each post also needs content/blog/<slug>.md (copy 1.md, change slug/url/title).
+#
+#  - post:
+#      slug: "example-con-2026"
+#      series: travel
+#      blog_title: "Example Con 2026"
+#      date: 2026-12-07
+#      cover_image: "/res/<photo>.jpg"
+#      paragraphs:
+#        - "..."
+#      images:
+#        - "/res/<photo>.jpg"
 blog:
   - post:
       slug: "1"

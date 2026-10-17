@@ -11,17 +11,37 @@
           "post": {
             "type": "object",
             "properties": {
-              "slug": { "type": "string" },
-              "blog_title": { "type": "string" },
-              "date": { "type": "string", "format": "date" },
-              "cover_image": { "type": "string" },
+              "slug": {
+                "type": "string"
+              },
+              "blog_title": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "cover_image": {
+                "type": "string"
+              },
               "paragraphs": {
                 "type": "array",
-                "items": { "type": "string" }
+                "items": {
+                  "type": "string"
+                }
               },
               "images": {
                 "type": "array",
-                "items": { "type": "string" }
+                "items": {
+                  "type": "string"
+                }
+              },
+              "series": {
+                "type": "string",
+                "enum": [
+                  "travel"
+                ],
+                "description": "Optional. 'travel' files the post under Furry travel."
               }
             },
             "required": [
@@ -34,9 +54,13 @@
             ]
           }
         },
-        "required": ["post"]
+        "required": [
+          "post"
+        ]
       }
     }
   },
-  "required": ["blog"]
+  "required": [
+    "blog"
+  ]
 }
