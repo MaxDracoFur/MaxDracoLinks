@@ -1,4 +1,4 @@
-{{/* Writing, split into the Furry travel series and everything else.
+{{/* The blog: furry travel posts first, older notes after.
      A post joins the series with `series: travel` in data/blog.yaml. */}}
 {{/* Trip posts can also be Markdown pages (archetypes/travel.md) with
      `series: travel` in front matter; both kinds are merged here. */}}
@@ -14,8 +14,7 @@
 {{ $level := .level | default "h3" }}
 
 <div class="series" id="travel">
-    {{ printf "<%s class=\"series-title\">Furry travel</%s>" $level $level | safeHTML }}
-    <p class="series-desc">Cons, meetups, and the cities around them.</p>
+    <p class="series-desc">Furry travel: cons, meetups, and the cities around them.</p>
     {{ with $travel }}
     <ul class="post-list">
         {{ range sort . "date" "desc" }}
@@ -32,7 +31,7 @@
 
 {{ with $other }}
 <div class="series">
-    {{ printf "<%s class=\"series-title\">Notes</%s>" $level $level | safeHTML }}
+    {{ printf "<%s class=\"series-title\">Older notes</%s>" $level $level | safeHTML }}
     <ul class="post-list">
         {{ range sort . "date" "desc" }}
         <li>

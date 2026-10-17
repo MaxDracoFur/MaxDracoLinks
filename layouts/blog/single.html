@@ -5,7 +5,7 @@
 {{- $.Store.Set "og_title" .Title -}}
 <div class="wrap">
     <article class="post trip">
-        <p class="trip-kicker"><a href="/blog/#travel">Furry travel</a></p>
+        <p class="trip-kicker"><a href="/blog/">Blog</a></p>
         <h1>{{ .Title }}</h1>
         <p class="trip-meta">
             {{- with .Params.con }}{{ if $.Params.con_url }}<a href="{{ $.Params.con_url }}">{{ . }}</a>{{ else }}{{ . }}{{ end }}{{ end -}}
@@ -16,7 +16,7 @@
         <img src="{{ . }}" alt="{{ $.Params.cover_alt }}" class="post-image trip-cover">
         {{ end }}
         {{ .Content }}
-        <p class="trip-back"><a href="/blog/#travel">More furry travel</a></p>
+        <p class="trip-back"><a href="/blog/">More from the blog</a></p>
     </article>
 </div>
 {{ else }}
