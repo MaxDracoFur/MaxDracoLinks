@@ -1,5 +1,16 @@
 {{ define "main" }}
 <h1>Blog</h1>
 <p class="ds-meta">Furry travel: cons, meetups, and the cities around them. Also at <a href="https://blog.maxdraco.com/">blog.maxdraco.com</a>.</p>
-{{ partial "writing-list.html" . }}
+{{ $posts := partial "posts.html" . }}
+<div class="ds-catalog">
+    {{ range $posts }}{{ partial "cd-tile.html" . }}{{ end }}
+    {{ if not (where $posts "series" "travel") }}
+    <article class="ds-tile ds-release-soon">
+        <span class="ds-case"><span class="ds-case-blank"><span>max<b>draco</b></span></span></span>
+        <h3>First trip report</h3>
+        <p class="ds-artist">Max Draco</p>
+        <p class="ds-tile-meta">Furry travel · <span class="ds-badge ds-badge-soon">Coming soon</span></p>
+    </article>
+    {{ end }}
+</div>
 {{ end }}

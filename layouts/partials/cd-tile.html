@@ -1,0 +1,11 @@
+{{/* One blog post as a catalog tile: big jewel case on top, release facts
+     below. The blog page's grid; the home page uses cd-listing.html. */}}
+{{ $style := cond (eq .series "travel") "Furry travel" "Notes" }}
+<article class="ds-tile">
+    <a class="ds-case" href="{{ .url }}" aria-label="{{ .title }}">
+        {{ with .cover }}<img src="{{ . }}" alt="" loading="lazy">{{ else }}<span class="ds-case-blank"><span>max<b>draco</b></span></span>{{ end }}
+    </a>
+    <h3><a href="{{ .url }}">{{ .title }}</a></h3>
+    <p class="ds-artist">Max Draco</p>
+    <p class="ds-tile-meta">{{ $style }}{{ with .where }} · {{ . }}{{ end }} · <time datetime="{{ .date }}">{{ .date }}</time></p>
+</article>

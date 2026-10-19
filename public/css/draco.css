@@ -434,6 +434,35 @@ a.ds-case:hover {
 .ds-release-info dd {
   margin: 0; }
 
+.ds-catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 1.5rem 1.25rem; }
+
+.ds-tile .ds-case {
+  margin-bottom: 0.55rem; }
+
+.ds-tile h3 {
+  margin: 0;
+  font: 700 0.95rem/1.25 var(--body);
+  overflow-wrap: anywhere; }
+
+.ds-tile h3 a {
+  color: var(--ink); }
+
+.ds-tile .ds-artist {
+  margin: 0.15rem 0 0.2rem; }
+
+.ds-tile-meta {
+  margin: 0;
+  font: 0.75rem/1.4 var(--ui);
+  color: var(--ink-2); }
+
+@media (max-width: 480px) {
+  .ds-catalog {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 0.9rem; } }
+
 .ds-release-soon .ds-case {
   opacity: 0.75; }
 
