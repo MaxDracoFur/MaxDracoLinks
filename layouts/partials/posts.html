@@ -1,0 +1,23 @@
+{{/* Every blog post as one list of dicts, newest first: data/blog.yaml
+     posts plus Markdown trip posts (series: travel). Used by the home page's
+     CD listings and the blog's file list. */}}
+{{ $posts := slice }}
+{{ range site.Data.blog.blog }}
+{{ $posts = $posts | append (dict
+    "title" .post.blog_title
+    "url" (printf "/blog/%s/" .post.slug)
+    "date" (string .post.date)
+    "series" (.post.series | default "")
+    "cover" (.post.cover_image | default "")
+    "where" "") }}
+{{ end }}
+{{ range where site.RegularPages "Params.series" "travel" }}
+{{ $posts = $posts | append (dict
+    "title" .Title
+    "url" .RelPermalink
+    "date" (.Date.Format "2006-01-02")
+    "series" "travel"
+    "cover" (.Params.cover_image | default "")
+    "where" (.Params.city | default "")) }}
+{{ end }}
+{{ return sort $posts "date" "desc" }}

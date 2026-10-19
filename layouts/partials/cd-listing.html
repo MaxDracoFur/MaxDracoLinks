@@ -1,0 +1,18 @@
+{{/* One blog post as a CD release: jewel case with the post's cover, then
+     the release facts. Only real fields: no invented catalogue numbers. */}}
+{{ $style := cond (eq .series "travel") "Furry travel" "Notes" }}
+<article class="ds-release">
+    <a class="ds-case" href="{{ .url }}" aria-label="{{ .title }}">
+        {{ with .cover }}<img src="{{ . }}" alt="" loading="lazy">{{ else }}<span class="ds-case-blank"><span>max<b>draco</b></span></span>{{ end }}
+    </a>
+    <div class="ds-release-info">
+        <h3><a href="{{ .url }}">{{ .title }}</a></h3>
+        <p class="ds-artist">Max Draco</p>
+        <dl>
+            <dt>Format</dt><dd>Blog post</dd>
+            <dt>Released</dt><dd><time datetime="{{ .date }}">{{ .date }}</time></dd>
+            <dt>Style</dt><dd>{{ $style }}</dd>
+            {{ with .where }}<dt>Location</dt><dd>{{ . }}</dd>{{ end }}
+        </dl>
+    </div>
+</article>

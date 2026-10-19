@@ -127,19 +127,42 @@ img {
 .ds-band-inner {
   max-width: 68rem;
   margin: 0 auto;
-  padding: 0.45rem 16px;
+  padding: 0 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem 1.25rem; }
 
+.ds-tabs {
+  list-style: none;
+  gap: 0;
+  overflow-x: auto;
+  flex-wrap: nowrap; }
+
+.ds-tabs li {
+  flex: none; }
+
+.ds-tabs a {
+  display: block;
+  padding: 0.55rem 0.9rem;
+  color: var(--band-ink);
+  text-decoration: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.25); }
+
+.ds-tabs li:first-child a {
+  border-left: 1px solid rgba(0, 0, 0, 0.25); }
+
+.ds-tabs a:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--band-ink); }
+
+.ds-tabs a[aria-current="page"] {
+  background: var(--window);
+  color: var(--ink); }
+
 .ds-shell {
   max-width: 68rem;
   margin: 1.25rem auto 0;
-  padding: 0 16px 2rem;
-  display: grid;
-  grid-template-columns: 11.5rem minmax(0, 1fr);
-  gap: 1rem;
-  align-items: start; }
+  padding: 0 16px 2rem; }
 
 .ds-rail {
   background: var(--panel);
@@ -186,7 +209,7 @@ img {
 .ds-window {
   background: var(--window);
   border: 1px solid #000;
-  border-radius: 0 var(--radius) var(--radius) var(--radius);
+  border-radius: var(--radius);
   padding: 1.25rem 1.5rem 1.75rem;
   min-width: 0;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25); }
@@ -272,6 +295,147 @@ img {
 @media (max-width: 640px) {
   .ds-files .ds-hide-sm {
     display: none; } }
+
+.ds-tracklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--rule);
+  font: 0.9rem/1.4 var(--ui); }
+
+.ds-tracklist li {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--rule); }
+
+.ds-tracklist li:last-child {
+  border-bottom: 0; }
+
+.ds-tracklist li:nth-child(even) {
+  background: var(--zebra); }
+
+.ds-tracklist li:hover {
+  background: var(--hover); }
+
+.ds-pos {
+  font: 700 0.85rem var(--mono);
+  color: var(--ink-2);
+  text-align: right; }
+
+.ds-track .ds-name {
+  font-weight: 700; }
+
+.ds-track .ds-desc {
+  display: block;
+  color: var(--ink-2);
+  font-size: 0.8rem;
+  margin-top: 0.1rem; }
+
+.ds-len {
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: var(--ink-2);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center; }
+
+@media (max-width: 640px) {
+  .ds-tracklist li {
+    grid-template-columns: 1.75rem minmax(0, 1fr); }
+  .ds-len {
+    grid-column: 2; } }
+
+.ds-releases {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+  gap: 1.25rem; }
+
+.ds-release {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: start; }
+
+.ds-case {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  background: #d9dde3;
+  border: 1px solid #222;
+  border-radius: 2px;
+  padding: 4px 4px 4px 13px;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+  overflow: hidden; }
+
+.ds-case::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 9px;
+  background: repeating-linear-gradient(180deg, #1a1a1a 0 6px, #3a3a3a 6px 8px);
+  border-right: 1px solid #000; }
+
+.ds-case::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.08) 38%, rgba(255, 255, 255, 0) 55%);
+  pointer-events: none; }
+
+.ds-case img,
+.ds-case-blank {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid #555; }
+
+.ds-case-blank {
+  display: grid;
+  place-items: center;
+  background: var(--slate);
+  color: #fff;
+  font: italic 900 0.95rem/1 var(--display); }
+
+.ds-case-blank b {
+  color: var(--lime);
+  font-weight: 900; }
+
+a.ds-case:hover {
+  border-color: var(--lime); }
+
+.ds-release-info h3 {
+  margin: 0;
+  font: 700 1rem/1.25 var(--body); }
+
+.ds-release-info h3 a {
+  color: var(--ink); }
+
+.ds-artist {
+  margin: 0.1rem 0 0.4rem;
+  color: var(--link);
+  font: 700 0.85rem var(--ui); }
+
+.ds-release-info dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.1rem 0.6rem;
+  margin: 0;
+  font: 0.75rem/1.4 var(--ui); }
+
+.ds-release-info dt {
+  color: var(--ink-2); }
+
+.ds-release-info dd {
+  margin: 0; }
+
+.ds-release-soon .ds-case {
+  opacity: 0.75; }
 
 .ds-btn {
   display: inline-block;

@@ -2,32 +2,45 @@
 <h1>Welcome to Max Draco</h1>
 <p>Chicago. Security research, CDs, Furcago, and a furry travel blog.</p>
 
-<h2 id="projects">Projects</h2>
-<table class="ds-files">
-    <thead>
-        <tr><th scope="col">Name</th><th scope="col" class="ds-hide-sm">Host</th><th scope="col">Status</th></tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><a class="ds-name" href="https://hack.maxdraco.com/">Security research</a><span class="ds-desc">Hardware, network and badge hacking. Writeups will be published at hack.maxdraco.com.</span></td>
-            <td class="ds-hide-sm"><span class="ds-host">hack.maxdraco.com</span></td>
-            <td><span class="ds-badge ds-badge-soon">Soon</span></td>
-        </tr>
-        <tr>
-            <td><a class="ds-name" href="https://cds.maxdraco.com/">Max Draco CDs</a><span class="ds-desc">A CD store on Discogs, graded and shipped from Chicago. Also buying: <a href="https://cds.maxdraco.com/#buying">sell me your CDs</a>.</span></td>
-            <td class="ds-hide-sm"><span class="ds-host">cds.maxdraco.com</span></td>
-            <td><span class="ds-badge">Open</span></td>
-        </tr>
-        <tr>
-            <td><a class="ds-name" href="https://furcago.com/">Furcago</a><span class="ds-desc">The furries of Chicago: the community's site and its directory of local chats.</span></td>
-            <td class="ds-hide-sm"><span class="ds-host">furcago.com</span></td>
-            <td><span class="ds-badge">Open</span></td>
-        </tr>
-    </tbody>
-</table>
+<h2 id="projects">Tracklist</h2>
+<ol class="ds-tracklist">
+    <li>
+        <span class="ds-pos">1</span>
+        <div class="ds-track"><a class="ds-name" href="https://hack.maxdraco.com/">Security research</a><span class="ds-desc">Hardware, network and badge hacking. Writeups will be published at hack.maxdraco.com.</span></div>
+        <span class="ds-len"><span class="ds-host">hack.</span> <span class="ds-badge ds-badge-soon">Soon</span></span>
+    </li>
+    <li>
+        <span class="ds-pos">2</span>
+        <div class="ds-track"><a class="ds-name" href="https://cds.maxdraco.com/">Max Draco CDs</a><span class="ds-desc">Sell me your CDs, or browse the store. Graded and shipped from Chicago.</span></div>
+        <span class="ds-len"><span class="ds-host">cds.</span> <span class="ds-badge">Open</span></span>
+    </li>
+    <li>
+        <span class="ds-pos">3</span>
+        <div class="ds-track"><a class="ds-name" href="https://furcago.com/">Furcago</a><span class="ds-desc">The furries of Chicago: the community's site and its directory of local chats.</span></div>
+        <span class="ds-len"><span class="ds-host">furcago.com</span> <span class="ds-badge">Open</span></span>
+    </li>
+    <li>
+        <span class="ds-pos">4</span>
+        <div class="ds-track"><a class="ds-name" href="/blog/">Blog</a><span class="ds-desc">Furry travel: cons, meetups, and the cities around them.</span></div>
+        <span class="ds-len"><span class="ds-host">blog.</span> <span class="ds-badge">Open</span></span>
+    </li>
+</ol>
 
-<h2><a href="/blog/">Blog</a></h2>
-{{ partial "writing-list.html" . }}
+<h2>Releases</h2>
+{{ $posts := partial "posts.html" . }}
+<div class="ds-releases">
+    {{ range $posts }}{{ partial "cd-listing.html" . }}{{ end }}
+    {{ if not (where $posts "series" "travel") }}
+    <article class="ds-release ds-release-soon">
+        <span class="ds-case"><span class="ds-case-blank"><span>max<b>draco</b></span></span></span>
+        <div class="ds-release-info">
+            <h3>First trip report</h3>
+            <p class="ds-artist">Max Draco</p>
+            <dl><dt>Style</dt><dd>Furry travel</dd><dt>Status</dt><dd><span class="ds-badge ds-badge-soon">Coming soon</span></dd></dl>
+        </div>
+    </article>
+    {{ end }}
+</div>
 
 <h2 id="contact">Contact</h2>
 <p>Email <a href="mailto:admin@maxdraco.com">admin@maxdraco.com</a>, or find me on

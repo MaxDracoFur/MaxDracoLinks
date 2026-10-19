@@ -20,7 +20,8 @@
     <li><strong>Readable first.</strong> Body text is 16px Arial. Verdana is for UI chrome only (nav, tables, meta, status bar), never below 12px.</li>
     <li><strong>Contrast passes WCAG AA.</strong> The 2005 greens are too light for text on white, so text uses darker greens; the original lime stays for fills, badges and progress bars.</li>
     <li><strong>Dark mode follows the system</strong>, with the slate going near-black and the window going charcoal.</li>
-    <li><strong>Phones get a tab strip</strong>: the nav rail turns horizontal under 760px wide.</li>
+    <li><strong>If it looks clickable, it is.</strong> LimeWire's green band was ad copy; here it is the real navigation.</li>
+    <li><strong>Phones</strong>: the tab band scrolls sideways; tables drop secondary columns.</li>
     <li><strong>Nothing third-party loads before consent.</strong> System fonts only, no icon fonts, no web fonts.</li>
     <li><strong>No emoji, no stock art.</strong> The only images are real photos.</li>
 </ul>
@@ -50,12 +51,25 @@
 </div>
 
 <h2>Layout</h2>
-<p>Top to bottom: <strong>title bar</strong> (photo in a black ring, wordmark, one-line tagline) on slate, the green <strong>slogan band</strong>, then the <strong>shell</strong>: a nav rail on the left and the <strong>window</strong> on the right, then the <strong>status bar</strong>. The window has square top-left and rounded other corners, like Napster's panel. Maximum width 68rem.</p>
+<p>Top to bottom: <strong>title bar</strong> (photo in a black ring, wordmark, one-line tagline) on slate, the green <strong>tab band</strong> (the site navigation), one full-width <strong>window</strong> with rounded corners, then the <strong>status bar</strong>. Maximum width 68rem. There is no side menu: the home page's tracklist already indexes the projects.</p>
 
 <h2>Components</h2>
 
-<h3>Nav rail</h3>
-<p>Boxed, gray, Verdana. The current page is a black bar with white bold text. External sections show their host on the right. On phones it becomes a horizontal tab strip and the hosts drop.</p>
+<h3>Tab band</h3>
+<p>LimeWire's green strip, used as the navigation: white Verdana tabs divided by thin rules, hover lightens, and the current page is a white tab that joins the window below it. On limewire.com the band was advertising and the tabs were a separate gray row; merging them means nothing on screen looks clickable unless it is.</p>
+
+<h3>Tracklist</h3>
+<p>The projects index on the home page, set like a CD back cover: track number, project name with a one-line description, and on the right the host and an Open / Soon badge where a track length would go. No made-up durations.</p>
+<ol class="ds-tracklist">
+    <li><span class="ds-pos">1</span><div class="ds-track"><a class="ds-name" href="#">Example project</a><span class="ds-desc">One line on what it is.</span></div><span class="ds-len"><span class="ds-host">example.</span> <span class="ds-badge">Open</span></span></li>
+</ol>
+
+<h3>Release (blog post as a CD listing)</h3>
+<p>Each post is a CD release: the post's cover photo in a jewel case (black hinge spine, clear-plastic sheen), then title, artist, and a Discogs-style list of real fields only: format, released date, style (Furry travel or Notes) and location if the post has one. A post without a photo gets a blank slate case with the wordmark.</p>
+<div class="ds-releases">
+    <article class="ds-release"><span class="ds-case"><span class="ds-case-blank"><span>max<b>draco</b></span></span></span>
+    <div class="ds-release-info"><h3>Example trip</h3><p class="ds-artist">Max Draco</p><dl><dt>Format</dt><dd>Blog post</dd><dt>Released</dt><dd>2026-01-01</dd><dt>Style</dt><dd>Furry travel</dd></dl></div></article>
+</div>
 
 <h3>File list</h3>
 <p>Every list of things (projects, posts, CDs) is a LimeWire search-results table: blue-gray header, zebra rows, lime-tint hover, bold name with a gray description under it, monospace dates.</p>
@@ -98,6 +112,6 @@
 </ul>
 
 <h2>Using it on a new page or subdomain</h2>
-<p>Link the shared stylesheet and copy the shell markup from cds.maxdraco.com: <code>header</code> (title bar + band), <code>.ds-shell</code> with <code>.ds-rail</code> and <code>main.ds-window</code>, and <code>footer.ds-status</code>. Keep the cookie-consent block as it is.</p>
+<p>Link the shared stylesheet and copy the shell markup from cds.maxdraco.com: <code>header</code> (title bar + tab band), <code>.ds-shell</code> with <code>main.ds-window</code>, and <code>footer.ds-status</code>. Keep the cookie-consent block as it is.</p>
 <pre><code>&lt;link rel="stylesheet" href="https://maxdraco.com/css/draco.css"&gt;</code></pre>
 {{ end }}

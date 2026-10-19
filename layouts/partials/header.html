@@ -1,3 +1,4 @@
+{{ $here := .RelPermalink }}
 <header>
     <div class="ds-titlebar">
         <a href="/" class="ds-brand" aria-label="Max Draco, home">
@@ -6,9 +7,14 @@
         </a>
         <p class="ds-tagline">Security research, CDs, Furcago, and a furry travel blog. Chicago.</p>
     </div>
-    <div class="ds-band">
-        <div class="ds-band-inner">
-            <span>Security research · CDs · Furcago · Furry travel</span>
-        </div>
-    </div>
+    <nav class="ds-band" aria-label="Sections">
+        <ul class="ds-band-inner ds-tabs">
+            <li><a href="/"{{ if eq $here "/" }} aria-current="page"{{ end }}>Home</a></li>
+            <li><a href="/blog/"{{ if hasPrefix $here "/blog/" }} aria-current="page"{{ end }}>Blog</a></li>
+            <li><a href="https://hack.maxdraco.com/">Security</a></li>
+            <li><a href="https://cds.maxdraco.com/">CDs</a></li>
+            <li><a href="https://furcago.com/">Furcago</a></li>
+            <li><a href="/#contact">Contact</a></li>
+        </ul>
+    </nav>
 </header>

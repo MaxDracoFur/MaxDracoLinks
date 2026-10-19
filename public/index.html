@@ -21,9 +21,10 @@
     
     
     
-    <link rel="stylesheet" href="/css/style.min.4d088d5828255618848bc7e22ea4411ce72dd251cefe007885741632e8d9c23c.css" integrity="sha256-TQiNWCglVhiEi8fiLqRBHOct0lHO/gB4hXQWMujZwjw=">
+    <link rel="stylesheet" href="/css/style.min.705acd3ff9bc3efb1aa9b2ee01a1c3f0f17af2bf5fed143dde439ed320443b43.css" integrity="sha256-cFrNP/m8PvsaqbLuAaHD8PF68r9f7RQ93kOe0yBEO0M=">
 </head>
 <body>
+
 <header>
     <div class="ds-titlebar">
         <a href="/" class="ds-brand" aria-label="Max Draco, home">
@@ -32,85 +33,80 @@
         </a>
         <p class="ds-tagline">Security research, CDs, Furcago, and a furry travel blog. Chicago.</p>
     </div>
-    <div class="ds-band">
-        <div class="ds-band-inner">
-            <span>Security research · CDs · Furcago · Furry travel</span>
-        </div>
-    </div>
+    <nav class="ds-band" aria-label="Sections">
+        <ul class="ds-band-inner ds-tabs">
+            <li><a href="/" aria-current="page">Home</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="https://hack.maxdraco.com/">Security</a></li>
+            <li><a href="https://cds.maxdraco.com/">CDs</a></li>
+            <li><a href="https://furcago.com/">Furcago</a></li>
+            <li><a href="/#contact">Contact</a></li>
+        </ul>
+    </nav>
 </header>
 
 <div class="ds-shell">
-    
-<nav class="ds-rail" aria-label="Sections">
-    <ul>
-        <li><a href="/" aria-current="page">Home</a></li>
-        <li><a href="/blog/">Blog</a></li>
-        <li><a href="https://hack.maxdraco.com/">Security <span class="ds-host">hack.</span></a></li>
-        <li><a href="https://cds.maxdraco.com/">CDs <span class="ds-host">cds.</span></a></li>
-        <li><a href="https://furcago.com/">Furcago <span class="ds-host">.com</span></a></li>
-        <li class="ds-rail-extra"><hr></li>
-        <li class="ds-rail-extra"><a href="/style/">Style guide</a></li>
-        <li><a href="/#contact">Contact</a></li>
-    </ul>
-</nav>
-
     <main class="ds-window" id="main">
         
 <h1>Welcome to Max Draco</h1>
 <p>Chicago. Security research, CDs, Furcago, and a furry travel blog.</p>
 
-<h2 id="projects">Projects</h2>
-<table class="ds-files">
-    <thead>
-        <tr><th scope="col">Name</th><th scope="col" class="ds-hide-sm">Host</th><th scope="col">Status</th></tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><a class="ds-name" href="https://hack.maxdraco.com/">Security research</a><span class="ds-desc">Hardware, network and badge hacking. Writeups will be published at hack.maxdraco.com.</span></td>
-            <td class="ds-hide-sm"><span class="ds-host">hack.maxdraco.com</span></td>
-            <td><span class="ds-badge ds-badge-soon">Soon</span></td>
-        </tr>
-        <tr>
-            <td><a class="ds-name" href="https://cds.maxdraco.com/">Max Draco CDs</a><span class="ds-desc">A CD store on Discogs, graded and shipped from Chicago. Also buying: <a href="https://cds.maxdraco.com/#buying">sell me your CDs</a>.</span></td>
-            <td class="ds-hide-sm"><span class="ds-host">cds.maxdraco.com</span></td>
-            <td><span class="ds-badge">Open</span></td>
-        </tr>
-        <tr>
-            <td><a class="ds-name" href="https://furcago.com/">Furcago</a><span class="ds-desc">The furries of Chicago: the community's site and its directory of local chats.</span></td>
-            <td class="ds-hide-sm"><span class="ds-host">furcago.com</span></td>
-            <td><span class="ds-badge">Open</span></td>
-        </tr>
-    </tbody>
-</table>
+<h2 id="projects">Tracklist</h2>
+<ol class="ds-tracklist">
+    <li>
+        <span class="ds-pos">1</span>
+        <div class="ds-track"><a class="ds-name" href="https://hack.maxdraco.com/">Security research</a><span class="ds-desc">Hardware, network and badge hacking. Writeups will be published at hack.maxdraco.com.</span></div>
+        <span class="ds-len"><span class="ds-host">hack.</span> <span class="ds-badge ds-badge-soon">Soon</span></span>
+    </li>
+    <li>
+        <span class="ds-pos">2</span>
+        <div class="ds-track"><a class="ds-name" href="https://cds.maxdraco.com/">Max Draco CDs</a><span class="ds-desc">Sell me your CDs, or browse the store. Graded and shipped from Chicago.</span></div>
+        <span class="ds-len"><span class="ds-host">cds.</span> <span class="ds-badge">Open</span></span>
+    </li>
+    <li>
+        <span class="ds-pos">3</span>
+        <div class="ds-track"><a class="ds-name" href="https://furcago.com/">Furcago</a><span class="ds-desc">The furries of Chicago: the community's site and its directory of local chats.</span></div>
+        <span class="ds-len"><span class="ds-host">furcago.com</span> <span class="ds-badge">Open</span></span>
+    </li>
+    <li>
+        <span class="ds-pos">4</span>
+        <div class="ds-track"><a class="ds-name" href="/blog/">Blog</a><span class="ds-desc">Furry travel: cons, meetups, and the cities around them.</span></div>
+        <span class="ds-len"><span class="ds-host">blog.</span> <span class="ds-badge">Open</span></span>
+    </li>
+</ol>
 
-<h2><a href="/blog/">Blog</a></h2>
+<h2>Releases</h2>
 
+<div class="ds-releases">
+    
 
+<article class="ds-release">
+    <a class="ds-case" href="/blog/1/" aria-label="draco init -test-directory=127.0.0.1 -target=0.0.0.0/0">
+        <img src="/res/pfp.jpg" alt="" loading="lazy">
+    </a>
+    <div class="ds-release-info">
+        <h3><a href="/blog/1/">draco init -test-directory=127.0.0.1 -target=0.0.0.0/0</a></h3>
+        <p class="ds-artist">Max Draco</p>
+        <dl>
+            <dt>Format</dt><dd>Blog post</dd>
+            <dt>Released</dt><dd><time datetime="2025-05-26">2025-05-26</time></dd>
+            <dt>Style</dt><dd>Notes</dd>
+            
+        </dl>
+    </div>
+</article>
 
-
-
-
-
-
-
-<table class="ds-files" id="travel">
-    <thead>
-        <tr><th scope="col">Name</th><th scope="col" class="ds-hide-sm">Type</th><th scope="col">Date</th></tr>
-    </thead>
-    <tbody>
-        
-        <tr class="ds-empty"><td colspan="3">Furry travel: cons, meetups, and the cities around them. First trip report coming soon.</td></tr>
-        
-        
-        <tr>
-            <td><a class="ds-name" href="/blog/1/">draco init -test-directory=127.0.0.1 -target=0.0.0.0/0</a></td>
-            <td class="ds-hide-sm">Older note</td>
-            <td><time datetime="2025-05-26">2025-05-26</time></td>
-        </tr>
-        
-    </tbody>
-</table>
-
+    
+    <article class="ds-release ds-release-soon">
+        <span class="ds-case"><span class="ds-case-blank"><span>max<b>draco</b></span></span></span>
+        <div class="ds-release-info">
+            <h3>First trip report</h3>
+            <p class="ds-artist">Max Draco</p>
+            <dl><dt>Style</dt><dd>Furry travel</dd><dt>Status</dt><dd><span class="ds-badge ds-badge-soon">Coming soon</span></dd></dl>
+        </div>
+    </article>
+    
+</div>
 
 <h2 id="contact">Contact</h2>
 <p>Email <a href="mailto:admin@maxdraco.com">admin@maxdraco.com</a>, or find me on
