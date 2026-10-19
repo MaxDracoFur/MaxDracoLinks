@@ -12,7 +12,7 @@
             {{- with .Params.dates }}<span>{{ . }}</span>{{ end -}}
         </p>
         {{ with .Params.cover_image }}
-        <img src="{{ . }}" alt="{{ $.Params.cover_alt }}" class="post-image trip-cover">
+        <img src="{{ partial "img-url.html" (dict "src" . "w" 1600) }}" alt="{{ $.Params.cover_alt }}" class="post-image trip-cover">
         {{ end }}
         {{ .Content }}
         <p><a class="ds-btn" href="/blog/">More from the blog</a></p>

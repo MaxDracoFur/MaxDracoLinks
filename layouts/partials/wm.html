@@ -1,0 +1,11 @@
+{{/* Watermark: resize an image resource to width .w and stamp "© maxdraco.com"
+     bottom-right, white over a soft shadow. Returns the processed resource.
+     Every photo the site serves goes through this (header mark excepted). */}}
+{{ $img := .img.Resize (printf "%dx webp q82" .w) }}
+{{ $s := math.Max 11 (math.Round (div (float $img.Width) 42)) }}
+{{ $pad := math.Round (mul $s 0.9) }}
+{{ $y := sub $img.Height (mul $s 1.9) }}
+{{ $sh := images.Text "© maxdraco.com" (dict "color" "#000000aa" "size" $s "x" (add (sub $img.Width $pad) 2) "y" (add $y 2) "alignx" "right") }}
+{{ $tx := images.Text "© maxdraco.com" (dict "color" "#ffffffdd" "size" $s "x" (sub $img.Width $pad) "y" $y "alignx" "right") }}
+{{ $out := $img | images.Filter $sh $tx }}
+{{ return $out }}

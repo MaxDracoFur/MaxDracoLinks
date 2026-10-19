@@ -1,2 +1,6 @@
 .idea
 .hugo_build.lock
+
+# Gallery originals come from Stage exports (tools/pull-gallery.sh). Never commit
+# them: this repo is public and only the watermarked builds may be published.
+assets/gallery/

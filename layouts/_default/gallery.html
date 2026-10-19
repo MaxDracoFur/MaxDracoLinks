@@ -1,0 +1,29 @@
+{{ define "main" }}
+<h1>Gallery</h1>
+<p class="ds-meta">Photos from cons, meetups and trips. Every image is watermarked.</p>
+{{/* Albums are folders under assets/gallery/, exported by Stage (destination
+     "maxdraco.com / Gallery") and pulled with tools/pull-gallery.sh. Each has a
+     trip.json (name, city, start, end) and stripped JPEGs. */}}
+{{ $albums := slice }}
+{{ range resources.Match "gallery/*/trip.json" }}
+{{ $dir := path.Dir .Name }}
+{{ $meta := . | transform.Unmarshal }}
+{{ $albums = $albums | append (dict "dir" $dir "meta" $meta "start" ($meta.start | default "")) }}
+{{ end }}
+{{ range sort $albums "start" "desc" }}
+{{ $m := .meta }}
+<section class="ds-album">
+    <h2>{{ $m.name }}</h2>
+    <p class="ds-meta">{{ with $m.city }}{{ . }} · {{ end }}{{ $m.start }}{{ if ne $m.start $m.end }} to {{ $m.end }}{{ end }}</p>
+    <div class="ds-photos">
+        {{ range resources.Match (printf "%s/*.jpg" .dir) }}
+        {{ $thumb := partial "wm.html" (dict "img" . "w" 640) }}
+        {{ $full := partial "wm.html" (dict "img" . "w" 1800) }}
+        <a href="{{ $full.RelPermalink }}" class="ds-photo"><img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="{{ $m.name }}" loading="lazy"></a>
+        {{ end }}
+    </div>
+</section>
+{{ else }}
+<div class="ds-callout"><p>No albums yet. Photos appear here once they're tagged for the Gallery in Stage and pulled in.</p></div>
+{{ end }}
+{{ end }}

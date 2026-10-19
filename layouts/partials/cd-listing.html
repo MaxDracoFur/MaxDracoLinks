@@ -3,7 +3,7 @@
 {{ $style := cond (eq .series "travel") "Furry travel" "Notes" }}
 <article class="ds-release">
     <a class="ds-case" href="{{ .url }}" aria-label="{{ .title }}">
-        {{ with .cover }}<img src="{{ . }}" alt="" loading="lazy">{{ else }}<span class="ds-case-blank"><span>max<b>draco</b></span></span>{{ end }}
+        {{ with .cover }}<img src="{{ partial "img-url.html" (dict "src" . "w" 480) }}" alt="" loading="lazy">{{ else }}<span class="ds-case-blank"><span>max<b>draco</b></span></span>{{ end }}
     </a>
     <div class="ds-release-info">
         <h3><a href="{{ .url }}">{{ .title }}</a></h3>

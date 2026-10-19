@@ -1,0 +1,8 @@
+{{/* "/res/x.jpg" -> URL of the watermarked copy built from assets/res/x.jpg.
+     Paths with no source under assets/ fall back unchanged. */}}
+{{ $path := strings.TrimPrefix "/" .src }}
+{{ $url := .src }}
+{{ with resources.Get $path }}
+{{ $url = (partial "wm.html" (dict "img" . "w" ($.w | default 1600))).RelPermalink }}
+{{ end }}
+{{ return $url }}

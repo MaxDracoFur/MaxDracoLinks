@@ -466,6 +466,25 @@ a.ds-case:hover {
 .ds-release-soon .ds-case {
   opacity: 0.75; }
 
+.ds-album + .ds-album {
+  margin-top: 1.5rem; }
+
+.ds-photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 0.6rem; }
+
+.ds-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid #000; }
+
+.ds-photo:hover img {
+  outline: 3px solid var(--lime);
+  outline-offset: -3px; }
+
 .ds-map {
   margin: 0.75rem 0 1rem; }
 

@@ -10,7 +10,7 @@ con: ""          # e.g. "Example Con 2026"
 con_url: ""      # the con's own site, optional
 city: ""         # e.g. "Rosemont, IL"
 dates: ""        # e.g. "Dec 4-7, 2026"
-cover_image: ""  # /res/travel/<file>.jpg (put the file in static/res/travel/)
+cover_image: ""  # /res/travel/<file>.jpg (put the file in assets/res/travel/ so it gets watermarked)
 cover_alt: ""    # one line describing the photo
 summary: ""      # one sentence for link previews
 ---
