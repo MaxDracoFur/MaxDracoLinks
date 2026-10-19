@@ -22,15 +22,20 @@
     <meta property="og:url" content="{{ .Permalink }}">
     <meta property="og:type" content="website">
 
-    {{ $style := resources.Get "css/style.scss" | toCSS | resources.Minify | resources.Fingerprint }}
-
+    {{ $css := resources.Get "css/style.scss" | toCSS }}
+    {{/* Unfingerprinted copy at /css/draco.css for cds./hack. (style guide: /style/). */}}
+    {{ ($css | resources.Copy "css/draco.css").Publish }}
+    {{ $style := $css | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
 </head>
 <body>
 {{ partial "header.html" . }}
-<main class="content">
-    {{ block "main" . }}{{ end }}
-</main>
+<div class="ds-shell">
+    {{ partial "rail.html" . }}
+    <main class="ds-window" id="main">
+        {{ block "main" . }}{{ end }}
+    </main>
+</div>
 {{ partial "footer.html" . }}
 {{ partial "consent.html" . }}
 </body>

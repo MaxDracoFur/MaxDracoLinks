@@ -1,44 +1,36 @@
-{{/* The blog: furry travel posts first, older notes after.
-     A post joins the series with `series: travel` in data/blog.yaml. */}}
-{{/* Trip posts can also be Markdown pages (archetypes/travel.md) with
-     `series: travel` in front matter; both kinds are merged here. */}}
+{{/* The blog as a LimeWire-style file list: furry travel first, older notes
+     after. Trip posts are Markdown (archetypes/travel.md, series: travel);
+     older posts live in data/blog.yaml. */}}
 {{ $posts := slice }}
 {{ range site.Data.blog.blog }}
 {{ $posts = $posts | append (dict "title" .post.blog_title "url" (printf "/blog/%s/" .post.slug) "date" (string .post.date) "series" .post.series) }}
 {{ end }}
 {{ range where site.RegularPages "Params.series" "travel" }}
-{{ $posts = $posts | append (dict "title" .Title "url" .RelPermalink "date" (.Date.Format "2006-01-02") "series" "travel") }}
+{{ $posts = $posts | append (dict "title" .Title "url" .RelPermalink "date" (.Date.Format "2006-01-02") "series" "travel" "where" (.Params.city | default "")) }}
 {{ end }}
 {{ $travel := where $posts "series" "travel" }}
 {{ $other := where $posts "series" "!=" "travel" }}
-{{ $level := .level | default "h3" }}
 
-<div class="series" id="travel">
-    <p class="series-desc">Furry travel: cons, meetups, and the cities around them.</p>
-    {{ with $travel }}
-    <ul class="post-list">
-        {{ range sort . "date" "desc" }}
-        <li>
-            <a href="{{ .url }}">{{ .title }}</a>
-            <time datetime="{{ .date }}">{{ .date }}</time>
-        </li>
+<table class="ds-files" id="travel">
+    <thead>
+        <tr><th scope="col">Name</th><th scope="col" class="ds-hide-sm">Type</th><th scope="col">Date</th></tr>
+    </thead>
+    <tbody>
+        {{ range sort $travel "date" "desc" }}
+        <tr>
+            <td><a class="ds-name" href="{{ .url }}">{{ .title }}</a>{{ with .where }}<span class="ds-desc">{{ . }}</span>{{ end }}</td>
+            <td class="ds-hide-sm">Furry travel</td>
+            <td><time datetime="{{ .date }}">{{ .date }}</time></td>
+        </tr>
+        {{ else }}
+        <tr class="ds-empty"><td colspan="3">Furry travel: cons, meetups, and the cities around them. First trip report coming soon.</td></tr>
         {{ end }}
-    </ul>
-    {{ else }}
-    <p class="series-empty">First trip report coming soon.</p>
-    {{ end }}
-</div>
-
-{{ with $other }}
-<div class="series">
-    {{ printf "<%s class=\"series-title\">Older notes</%s>" $level $level | safeHTML }}
-    <ul class="post-list">
-        {{ range sort . "date" "desc" }}
-        <li>
-            <a href="{{ .url }}">{{ .title }}</a>
-            <time datetime="{{ .date }}">{{ .date }}</time>
-        </li>
+        {{ range sort $other "date" "desc" }}
+        <tr>
+            <td><a class="ds-name" href="{{ .url }}">{{ .title }}</a></td>
+            <td class="ds-hide-sm">Older note</td>
+            <td><time datetime="{{ .date }}">{{ .date }}</time></td>
+        </tr>
         {{ end }}
-    </ul>
-</div>
-{{ end }}
+    </tbody>
+</table>

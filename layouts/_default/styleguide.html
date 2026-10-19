@@ -1,0 +1,103 @@
+{{ define "main" }}
+<h1>Style guide: Draco Share</h1>
+<p><strong>Napster and LimeWire, if they were still around in 2026.</strong> One stylesheet for every part of the site: maxdraco.com, the blog and its posts, cds.maxdraco.com and hack.maxdraco.com. It is published at <a href="/css/draco.css"><span class="ds-host">maxdraco.com/css/draco.css</span></a>, and the subdomains load that same file, so a change here changes everywhere.</p>
+
+<h2>Where it comes from</h2>
+<p>Every source value below was read from the archived pages on the Wayback Machine, not remembered.</p>
+<table class="ds-files">
+    <thead><tr><th scope="col">Snapshot</th><th scope="col">What it gave us</th></tr></thead>
+    <tbody>
+        <tr><td><a class="ds-name" href="https://web.archive.org/web/20000229150734/http://napster.com/">napster.com, Feb 2000</a></td><td>Khaki <code>#cccc99</code> and teal <code>#99cccc</code> blocks on grays; Arial throughout; gold <code>#ffcc00</code> for the active link.</td></tr>
+        <tr><td><a class="ds-name" href="https://web.archive.org/web/20010202023300/http://napster.com/">napster.com, Feb 2001</a></td><td>Slate page <code>#525d76</code>, a white content window with a rounded corner, a boxed left nav whose current item is a black bar, bold italic headings with a rule under them, maroon <code>#660a0a</code> links, gray pill buttons.</td></tr>
+        <tr><td><a class="ds-name" href="https://web.archive.org/web/20010202024800/http://limewire.com/">limewire.com, Feb 2001</a></td><td>Gray <code>#e7e7e7</code> panels, small Arial, dark-gray links.</td></tr>
+        <tr><td><a class="ds-name" href="https://web.archive.org/web/20050101085700/http://www.limewire.com/english/content/home.shtml">limewire.com, Jan 2005</a></td><td>Verdana at 10 to 11px, <code>#666666</code> text, lime <code>#69bd3e</code>, the green slogan band <code>#009900</code>, <code>#ebebeb</code> panels, blue-gray table heads <code>#abb7c1</code> / <code>#ccd6df</code>, red <code>#cc0000</code> callouts, and the "No Spyware, No Adware" band copy.</td></tr>
+    </tbody>
+</table>
+
+<h2>The 2026 rules</h2>
+<ul>
+    <li><strong>Keep the furniture, fix the ergonomics.</strong> Title bar, slogan band, nav rail, window, file lists and status bar stay. Type sizes, contrast and spacing are 2026.</li>
+    <li><strong>Readable first.</strong> Body text is 16px Arial. Verdana is for UI chrome only (nav, tables, meta, status bar), never below 12px.</li>
+    <li><strong>Contrast passes WCAG AA.</strong> The 2005 greens are too light for text on white, so text uses darker greens; the original lime stays for fills, badges and progress bars.</li>
+    <li><strong>Dark mode follows the system</strong>, with the slate going near-black and the window going charcoal.</li>
+    <li><strong>Phones get a tab strip</strong>: the nav rail turns horizontal under 760px wide.</li>
+    <li><strong>Nothing third-party loads before consent.</strong> System fonts only, no icon fonts, no web fonts.</li>
+    <li><strong>No emoji, no stock art.</strong> The only images are real photos.</li>
+</ul>
+
+<h2>Colour</h2>
+<p class="ds-meta">Light values shown; each token has a dark-mode value in the stylesheet.</p>
+<div class="sg-swatches">
+    <div class="sg-swatch"><div class="sg-chip" style="background:#525d76"></div><div><strong>Slate</strong><br><code>--slate #525d76</code><br>Page. Napster 2001.</div></div>
+    <div class="sg-swatch"><div class="sg-chip" style="background:#ffffff"></div><div><strong>Window</strong><br><code>--window #ffffff</code><br>Content panel.</div></div>
+    <div class="sg-swatch"><div class="sg-chip" style="background:#ebebeb"></div><div><strong>Panel</strong><br><code>--panel #ebebeb</code><br>Rail, status bar. LimeWire 2005.</div></div>
+    <div class="sg-swatch"><div class="sg-chip" style="background:#ccd6df"></div><div><strong>Head</strong><br><code>--head #ccd6df</code><br>Table headers. LimeWire 2005.</div></div>
+    <div class="sg-swatch"><div class="sg-chip" style="background:#abb7c1"></div><div><strong>Rule</strong><br><code>--rule #abb7c1</code><br>Borders. LimeWire 2005.</div></div>
+    <div class="sg-swatch"><div class="sg-chip" style="background:#69bd3e"></div><div><strong>Lime</strong><br><code>--lime #69bd3e</code><br>Fills and badges only. LimeWire 2005.</div></div>
+    <div class="sg-swatch"><div class="sg-chip" style="background:#0b7a12"></div><div><strong>Band</strong><br><code>--band #0b7a12</code><br>Slogan band. Darkened from <code>#009900</code> so white text passes AA.</div></div>
+    <div class="sg-swatch"><div class="sg-chip" style="background:#660a0a"></div><div><strong>Link</strong><br><code>--link #660a0a</code><br>Napster 2001 maroon.</div></div>
+    <div class="sg-swatch"><div class="sg-chip" style="background:#cc0000"></div><div><strong>Alert</strong><br><code>--alert #cc0000</code><br>Errors and warnings. LimeWire 2005.</div></div>
+    <div class="sg-swatch"><div class="sg-chip" style="background:#ffcc00"></div><div><strong>Focus</strong><br><code>--focus #ffcc00</code><br>Keyboard focus ring. Napster 2000's active link.</div></div>
+</div>
+
+<h2>Type</h2>
+<div class="sg-type">
+    <p><span class="ds-wordmark" style="color:var(--ink)">max<span class="ds-sub">draco</span></span> <span class="ds-meta">Wordmark: Arial Black, heavy italic, lowercase, "draco" in lime.</span></p>
+    <p style="font:italic 700 1.75rem/1.2 var(--body)">Bold italic headings <span class="ds-meta" style="font-style:normal;font-weight:400">Arial 700 italic with a 2px rule under it (Napster).</span></p>
+    <p>Body copy is Arial 16px with 1.55 line height, set in the white window.</p>
+    <p style="font:0.8rem var(--ui)">UI chrome is Verdana 12 to 13px: nav, tables, meta lines and the status bar (LimeWire).</p>
+    <p><span class="ds-host">hack.maxdraco.com</span> <span class="ds-meta">Host names and dates use the system monospace.</span></p>
+</div>
+
+<h2>Layout</h2>
+<p>Top to bottom: <strong>title bar</strong> (photo in a black ring, wordmark, one-line tagline) on slate, the green <strong>slogan band</strong>, then the <strong>shell</strong>: a nav rail on the left and the <strong>window</strong> on the right, then the <strong>status bar</strong>. The window has square top-left and rounded other corners, like Napster's panel. Maximum width 68rem.</p>
+
+<h2>Components</h2>
+
+<h3>Nav rail</h3>
+<p>Boxed, gray, Verdana. The current page is a black bar with white bold text. External sections show their host on the right. On phones it becomes a horizontal tab strip and the hosts drop.</p>
+
+<h3>File list</h3>
+<p>Every list of things (projects, posts, CDs) is a LimeWire search-results table: blue-gray header, zebra rows, lime-tint hover, bold name with a gray description under it, monospace dates.</p>
+<table class="ds-files">
+    <thead><tr><th scope="col">Name</th><th scope="col" class="ds-hide-sm">Type</th><th scope="col">Date</th></tr></thead>
+    <tbody>
+        <tr><td><a class="ds-name" href="#">Example trip</a><span class="ds-desc">City, ST</span></td><td class="ds-hide-sm">Furry travel</td><td><time>2026-01-01</time></td></tr>
+        <tr><td><a class="ds-name" href="#">Example note</a></td><td class="ds-hide-sm">Older note</td><td><time>2025-05-26</time></td></tr>
+    </tbody>
+</table>
+
+<h3>Buttons and badges</h3>
+<div class="sg-row">
+    <a class="ds-btn" href="#">Gray pill</a>
+    <a class="ds-btn ds-btn-go" href="#">Go: lime pill</a>
+    <span class="ds-badge">Open</span>
+    <span class="ds-badge ds-badge-soon">Soon</span>
+</div>
+<p class="ds-meta">Gray pills are the default (Napster's Subscribe button). Lime pills are for the one main action on a page. Badges mark status in file lists.</p>
+
+<h3>Progress bar</h3>
+<div class="ds-progress" role="img" aria-label="Example progress, about two thirds"><span style="width:66%"></span></div>
+<p class="ds-meta">The segmented download bar. Only for real progress, never decoration.</p>
+
+<h3>Callouts</h3>
+<div class="ds-callout"><p>Information callout: lime edge on the panel gray.</p></div>
+<div class="ds-callout ds-callout-alert"><p>Alert callout: red edge. Used on the 404 page.</p></div>
+
+<h3>Dialog</h3>
+<p>Pop-ups look like a 2000s client window: a slate title bar, a black 1px frame and a hard offset shadow. The cookie banner is the live example.</p>
+
+<h3>Status bar</h3>
+<p>The footer is the client's status bar: a lime "Online" dot, a line about what's shared, then the copyright, this guide and Cookie settings on the right.</p>
+
+<h2>Voice</h2>
+<ul>
+    <li>Short and plain. The band can borrow the old swagger ("No spyware, no adware") only when it is literally true.</li>
+    <li>No made-up numbers. The old clients showed live host counts; this site shows a number only if it comes from a live source.</li>
+    <li>Persona rules hold: nothing here links to the legal-name or furryrubber.com sites.</li>
+</ul>
+
+<h2>Using it on a new page or subdomain</h2>
+<p>Link the shared stylesheet and copy the shell markup from cds.maxdraco.com: <code>header</code> (title bar + band), <code>.ds-shell</code> with <code>.ds-rail</code> and <code>main.ds-window</code>, and <code>footer.ds-status</code>. Keep the cookie-consent block as it is.</p>
+<pre><code>&lt;link rel="stylesheet" href="https://maxdraco.com/css/draco.css"&gt;</code></pre>
+{{ end }}

@@ -3,9 +3,8 @@
 {{- with .Params.summary }}{{ $.Store.Set "og_description" . }}{{ end -}}
 {{- with .Params.cover_image }}{{ $.Store.Set "og_image" . }}{{ end -}}
 {{- $.Store.Set "og_title" .Title -}}
-<div class="wrap">
     <article class="post trip">
-        <p class="trip-kicker"><a href="/blog/">Blog</a></p>
+        <p class="ds-meta"><a href="/blog/">Blog</a> / Furry travel</p>
         <h1>{{ .Title }}</h1>
         <p class="trip-meta">
             {{- with .Params.con }}{{ if $.Params.con_url }}<a href="{{ $.Params.con_url }}">{{ . }}</a>{{ else }}{{ . }}{{ end }}{{ end -}}
@@ -16,9 +15,8 @@
         <img src="{{ . }}" alt="{{ $.Params.cover_alt }}" class="post-image trip-cover">
         {{ end }}
         {{ .Content }}
-        <p class="trip-back"><a href="/blog/">More from the blog</a></p>
+        <p><a class="ds-btn" href="/blog/">More from the blog</a></p>
     </article>
-</div>
 {{ else }}
 {{ partial "legacy-post.html" . }}
 {{ end }}

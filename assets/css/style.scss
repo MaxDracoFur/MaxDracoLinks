@@ -1,26 +1,70 @@
-// maxdraco.com. System fonts only: nothing third-party loads before consent.
+// Draco Share: the maxdraco.com design system.
+// "Napster and LimeWire, if they were still around in 2026." Style guide at
+// /style/. Published unfingerprinted as /css/draco.css so cds., hack. and any
+// other maxdraco.com page share one copy.
+//
+// Source palette (Wayback Machine, read from the archived HTML/CSS):
+//   napster.com 2000-02-29  #cccc99 khaki, #99cccc teal, #666666/#4f4f4f grays,
+//                           links #000099 / #336699, active #ffcc00
+//   napster.com 2001-02-02  #525d76 slate, #7c869c, #000000, #ffffff,
+//                           links #660a0a maroon
+//   limewire.com 2001-02-02 #e7e7e7 panels, Arial/Helvetica size 2, links #333333
+//   limewire.com 2005-01-01 Verdana 10-11px, #666666 text, #69bd3e lime,
+//                           #009900 band, #ebebeb panels, #abb7c1/#ccd6df heads,
+//                           #cc0000 alerts
+// 2026 changes: real type sizes, AA contrast (darker greens for text),
+// responsive, dark mode, visible focus. System fonts only (nothing third-party
+// loads before cookie consent).
 
 :root {
-    --bg: #111214;
-    --surface: #18191c;
-    --fg: #e6e4df;
-    --muted: #9a978f;
-    --rule: #2a2b2f;
-    --accent: #e0703a;
-    --accent-hover: #f08a55;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --slate: #525d76;
+    --slate-2: #7c869c;
+    --slate-ink: #ffffff;
+    --window: #ffffff;
+    --panel: #ebebeb;
+    --head: #ccd6df;
+    --rule: #abb7c1;
+    --ink: #111111;
+    --ink-2: #555555;
+    --link: #660a0a;
+    --link-hover: #a3141a;
+    --lime: #69bd3e;
+    --band: #0b7a12;
+    --band-ink: #ffffff;
+    --lime-ink: #2e6e12;
+    --alert: #cc0000;
+    --zebra: #f4f6f8;
+    --hover: #eef7e8;
+    --focus: #ffcc00;
+    --ui: Verdana, Tahoma, "DejaVu Sans", sans-serif;
+    --body: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    --display: "Arial Black", "Helvetica Neue", Arial, sans-serif;
     --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --radius: 10px;
+    color-scheme: light;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
     :root {
-        --bg: #faf9f6;
-        --surface: #f1efea;
-        --fg: #1b1b1d;
-        --muted: #63615b;
-        --rule: #dcd9d2;
-        --accent: #b44e1d;
-        --accent-hover: #8f3b12;
+        --slate: #1c2130;
+        --slate-2: #3a4258;
+        --slate-ink: #e9ecf1;
+        --window: #232835;
+        --panel: #2c3240;
+        --head: #364056;
+        --rule: #4b5568;
+        --ink: #e9ecf1;
+        --ink-2: #aab1bd;
+        --link: #f0a3a3;
+        --link-hover: #ffc4c4;
+        --lime: #7fd055;
+        --band: #1f6b1a;
+        --band-ink: #f2fff0;
+        --lime-ink: #8fdc66;
+        --alert: #ff6b6b;
+        --zebra: #272d3a;
+        --hover: #2d3a2c;
+        color-scheme: dark;
     }
 }
 
@@ -35,41 +79,23 @@ html {
 body {
     margin: 0;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: var(--bg);
-    color: var(--fg);
-    font: 17px/1.6 var(--sans);
-}
-
-main.content {
-    flex: 1;
-    padding: 3rem 0 4rem;
-}
-
-.wrap {
-    max-width: 44rem;
-    margin: 0 auto;
-    padding: 0 16px;
+    background: var(--slate);
+    color: var(--ink);
+    font: 16px/1.55 var(--body);
 }
 
 a {
-    color: var(--accent);
+    color: var(--link);
     text-underline-offset: 0.15em;
 }
 
 a:hover {
-    color: var(--accent-hover);
+    color: var(--link-hover);
 }
 
-h1, h2, h3 {
-    line-height: 1.25;
-    margin: 0 0 0.5rem;
-}
-
-h1 {
-    font-size: 2rem;
-    letter-spacing: -0.01em;
+:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
 }
 
 img {
@@ -77,258 +103,454 @@ img {
     height: auto;
 }
 
-// Header / footer
+// ---- Title bar: logo, wordmark, tagline -------------------------------------
 
-.site-header {
-    border-bottom: 1px solid var(--rule);
-}
-
-.header-row,
-.footer-row {
+.ds-titlebar {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 1rem 16px 0.75rem;
     display: flex;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem 1.5rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    color: var(--slate-ink);
 }
 
-.wordmark {
-    color: var(--fg);
-    font-weight: 700;
+.ds-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--slate-ink);
     text-decoration: none;
 }
 
-.wordmark:hover {
-    color: var(--fg);
+.ds-brand:hover {
+    color: var(--slate-ink);
 }
 
-.site-nav {
-    display: flex;
-    gap: 1.25rem;
-}
-
-.site-nav a {
-    color: var(--muted);
-    text-decoration: none;
-}
-
-.site-nav a:hover {
-    color: var(--fg);
-}
-
-.site-footer {
-    border-top: 1px solid var(--rule);
-    color: var(--muted);
-}
-
-// Home
-
-.intro {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 3.5rem;
-}
-
-.intro-photo {
-    width: 120px;
-    height: 120px;
+// The mark slot holds the profile photo in a black ring (no drawn logo).
+.ds-mark {
+    width: 56px;
+    height: 56px;
+    flex: none;
     border-radius: 50%;
     object-fit: cover;
-    flex-shrink: 0;
+    border: 3px solid #111;
+    background: #fff;
 }
 
-.lede {
+.ds-wordmark {
+    font: italic 900 2rem/1 var(--display);
+    letter-spacing: -0.03em;
+}
+
+.ds-wordmark .ds-sub {
+    color: var(--lime);
+}
+
+.ds-tagline {
+    flex: 1 1 18rem;
     margin: 0;
-    color: var(--muted);
-    font-size: 1.15rem;
+    font: italic 700 0.85rem/1.4 var(--body);
+    opacity: 0.9;
 }
 
-section + section {
-    margin-top: 3rem;
+// ---- Slogan band (LimeWire's green strip) -----------------------------------
+
+.ds-band {
+    background: var(--band);
+    color: var(--band-ink);
+    font: 700 0.8rem/1.4 var(--ui);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.35);
 }
 
-.section-label {
-    font: 600 0.8rem/1 var(--mono);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1rem;
-}
-
-.project {
-    padding: 1.25rem 0;
-    border-top: 1px solid var(--rule);
-}
-
-.project:last-child {
-    border-bottom: 1px solid var(--rule);
-}
-
-.project-head {
+.ds-band-inner {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 0.45rem 16px;
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.25rem 1rem;
+    gap: 0.25rem 1.25rem;
 }
 
-.project h3 {
-    font-size: 1.2rem;
-    margin: 0;
+// ---- Shell: nav rail + window ----------------------------------------------
+
+.ds-shell {
+    max-width: 68rem;
+    margin: 1.25rem auto 0;
+    padding: 0 16px 2rem;
+    display: grid;
+    grid-template-columns: 11.5rem minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
 }
 
-.project h3 a {
-    color: var(--fg);
+.ds-rail {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 6px 6px 6px 6px;
+    padding: 0.4rem 0;
+    font: 0.8rem/1.3 var(--ui);
+    position: sticky;
+    top: 1rem;
 }
 
-.project h3 a:hover {
-    color: var(--accent);
-}
-
-.project-host {
-    font: 0.85rem var(--mono);
-    color: var(--muted);
-}
-
-.project p {
-    margin: 0.4rem 0 0;
-}
-
-.post-list {
+.ds-rail ul {
     list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
 
-.post-list li {
+.ds-rail a {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 0.25rem 1rem;
-    padding: 0.5rem 0;
-}
-
-.post-list time,
-.post-date {
-    font: 0.85rem var(--mono);
-    color: var(--muted);
-}
-
-.section-label a {
-    color: inherit;
+    gap: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    color: var(--ink);
     text-decoration: none;
 }
 
-.section-label a:hover {
-    color: var(--fg);
+.ds-rail a:hover {
+    background: var(--hover);
 }
 
-.series + .series {
-    margin-top: 2rem;
+.ds-rail a[aria-current="page"] {
+    background: #111;
+    color: #fff;
+    font-weight: 700;
 }
 
-.series-title {
-    font-size: 1.2rem;
-    margin: 0;
+.ds-rail .ds-host {
+    font-size: 0.7rem;
+    color: var(--ink-2);
 }
 
-.series-desc,
-.series-empty {
-    color: var(--muted);
-    margin: 0.25rem 0 0.5rem;
+.ds-rail a[aria-current="page"] .ds-host {
+    color: #bbb;
 }
 
-.series-empty {
+.ds-rail hr {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 0.4rem 0.75rem;
+}
+
+.ds-window {
+    background: var(--window);
+    border: 1px solid #000;
+    border-radius: 0 var(--radius) var(--radius) var(--radius);
+    padding: 1.25rem 1.5rem 1.75rem;
+    min-width: 0;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+}
+
+// Headings: Napster's bold italic with a rule under it.
+.ds-window h1,
+.ds-window h2 {
+    font-family: var(--body);
+    font-style: italic;
+    font-weight: 700;
+    line-height: 1.2;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.2rem;
+}
+
+.ds-window h1 {
+    font-size: 1.75rem;
+    margin: 0 0 0.9rem;
+}
+
+.ds-window h2 {
+    font-size: 1.3rem;
+    margin: 2rem 0 0.75rem;
+}
+
+.ds-window h3 {
+    font-size: 1.05rem;
+    margin: 1.25rem 0 0.4rem;
+}
+
+.ds-window > :first-child {
+    margin-top: 0;
+}
+
+.ds-meta,
+.ds-window .meta {
+    font: 0.8rem/1.4 var(--ui);
+    color: var(--ink-2);
+}
+
+.ds-host {
+    font-family: var(--mono);
+}
+
+// ---- File list (LimeWire search results) -----------------------------------
+
+.ds-files {
+    width: 100%;
+    border-collapse: collapse;
+    font: 0.85rem/1.4 var(--ui);
+    border: 1px solid var(--rule);
+}
+
+.ds-files th {
+    background: var(--head);
+    color: var(--ink);
+    text-align: left;
+    font-weight: 700;
+    padding: 0.35rem 0.6rem;
+    border-bottom: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+    white-space: nowrap;
+}
+
+.ds-files td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+}
+
+.ds-files tbody tr:nth-child(even) td {
+    background: var(--zebra);
+}
+
+.ds-files tbody tr:hover td {
+    background: var(--hover);
+}
+
+.ds-files .ds-name {
+    font-weight: 700;
+}
+
+.ds-files .ds-desc {
+    display: block;
+    font-weight: 400;
+    color: var(--ink-2);
+    margin-top: 0.15rem;
+}
+
+.ds-files .ds-num,
+.ds-files time {
+    font-family: var(--mono);
+    white-space: nowrap;
+    color: var(--ink-2);
+}
+
+.ds-files .ds-empty td {
+    color: var(--ink-2);
     font-style: italic;
 }
 
-// Posts
+@media (max-width: 640px) {
+    .ds-files .ds-hide-sm {
+        display: none;
+    }
+}
+
+// ---- Buttons ----------------------------------------------------------------
+
+.ds-btn {
+    display: inline-block;
+    font: 700 0.8rem/1 var(--ui);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid #555;
+    background: linear-gradient(#fdfdfd, #c9ccd2);
+    color: #111;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 #fff;
+}
+
+.ds-btn:hover {
+    color: #111;
+    background: linear-gradient(#fff, #d8dbe0);
+}
+
+.ds-btn-go {
+    border-color: #2e6e12;
+    background: linear-gradient(#8fd96a, #4f9e2a);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.ds-btn-go:hover {
+    color: #fff;
+    background: linear-gradient(#9ee27a, #59ad31);
+}
+
+// ---- Badges, progress, callouts ----------------------------------------------
+
+.ds-badge {
+    display: inline-block;
+    font: 700 0.7rem/1 var(--ui);
+    padding: 0.2rem 0.45rem;
+    border-radius: 3px;
+    background: var(--lime);
+    color: #0b2b02;
+    vertical-align: middle;
+}
+
+.ds-badge-soon {
+    background: var(--panel);
+    color: var(--ink-2);
+    border: 1px solid var(--rule);
+}
+
+.ds-progress {
+    height: 14px;
+    border: 1px solid #555;
+    background: var(--panel);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.ds-progress > span {
+    display: block;
+    height: 100%;
+    background: repeating-linear-gradient(90deg, var(--lime) 0 10px, transparent 10px 12px);
+}
+
+.ds-callout {
+    border: 1px solid var(--rule);
+    border-left: 6px solid var(--lime);
+    background: var(--panel);
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+}
+
+.ds-callout-alert {
+    border-left-color: var(--alert);
+}
+
+// ---- Status bar footer --------------------------------------------------------
+
+.ds-status {
+    background: var(--panel);
+    border-top: 1px solid var(--rule);
+    color: var(--ink-2);
+    font: 0.75rem/1.4 var(--ui);
+}
+
+.ds-status-inner {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 0.5rem 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    align-items: center;
+}
+
+.ds-status .ds-online::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--lime);
+    margin-right: 0.4rem;
+    box-shadow: 0 0 0 1px #2e6e12;
+}
+
+.ds-status .ds-right {
+    margin-left: auto;
+}
+
+.ds-status button {
+    font: inherit;
+    color: var(--link);
+    background: none;
+    border: 0;
+    padding: 0;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+// ---- Posts --------------------------------------------------------------------
 
 .post p {
     margin: 0 0 1.1rem;
 }
 
-.post-date {
-    margin-bottom: 2rem;
-}
-
 .post-image {
     display: block;
-    margin: 1.5rem 0;
-    border-radius: 4px;
-}
-
-.trip-kicker {
-    font: 600 0.8rem/1 var(--mono);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin: 0 0 0.75rem;
-}
-
-.trip-kicker a {
-    color: var(--muted);
-    text-decoration: none;
+    margin: 1.25rem 0;
+    border: 1px solid #000;
 }
 
 .trip-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 0.25rem 1.25rem;
-    font: 0.9rem var(--mono);
-    color: var(--muted);
-    margin: 0 0 1.5rem;
+    font: 0.8rem var(--ui);
+    color: var(--ink-2);
+    margin: -0.4rem 0 1.25rem;
 }
 
-.trip-cover {
-    margin-top: 0;
-}
-
-.post h2 {
-    font-size: 1.25rem;
-    margin: 2.25rem 0 0.6rem;
-}
-
-.post ul, .post ol {
+.post ul,
+.post ol {
     padding-left: 1.25rem;
-    margin: 0 0 1.1rem;
 }
 
-.trip-back {
-    margin-top: 2.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--rule);
+.ds-window pre {
+    overflow-x: auto;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    padding: 0.6rem 0.75rem;
+    font: 0.85rem/1.4 var(--mono);
 }
 
-@media (max-width: 480px) {
-    .intro {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    h1 {
-        font-size: 1.7rem;
-    }
+// ---- Home intro ---------------------------------------------------------------
+
+.ds-intro {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
 }
 
-// Cookie consent
+.ds-intro img {
+    width: 104px;
+    height: 104px;
+    object-fit: cover;
+    border: 2px solid #000;
+    border-radius: 8px;
+    flex: none;
+}
+
+.ds-intro p {
+    margin: 0;
+}
+
+// ---- Cookie consent: a client-style dialog ---------------------------------------
 
 .consent {
     position: fixed;
     left: 16px;
     right: 16px;
     bottom: 16px;
-    max-width: 40rem;
+    max-width: 30rem;
     margin: 0 auto;
-    background: var(--surface);
-    color: var(--fg);
-    border: 1px solid var(--rule);
+    background: var(--window);
+    color: var(--ink);
+    border: 1px solid #000;
     border-radius: 6px;
-    padding: 1rem 1.25rem;
-    font-size: 0.9rem;
+    font: 0.85rem/1.45 var(--ui);
     z-index: 1000;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+}
+
+.consent::before {
+    content: "Cookies";
+    display: block;
+    background: linear-gradient(90deg, var(--slate), var(--slate-2));
+    color: #fff;
+    font-weight: 700;
+    padding: 0.3rem 0.75rem;
 }
 
 .consent[hidden] {
@@ -336,37 +558,144 @@ section + section {
 }
 
 .consent p {
-    margin: 0 0 0.75rem;
+    margin: 0.75rem 0.9rem;
 }
 
 .consent-actions {
     display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0 0.9rem 0.85rem;
 }
 
 .consent button {
-    font: inherit;
+    font: 700 0.8rem/1 var(--ui);
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid #555;
+    background: linear-gradient(#fdfdfd, #c9ccd2);
+    color: #111;
     cursor: pointer;
-    padding: 0.4rem 1rem;
-    border-radius: 4px;
-    border: 1px solid var(--accent);
-    background: transparent;
-    color: var(--accent);
-}
-
-.consent button:hover,
-.consent button:focus-visible {
-    color: var(--accent-hover);
-    border-color: var(--accent-hover);
 }
 
 .consent-reopen {
     font: inherit;
-    cursor: pointer;
+    color: var(--link);
     background: none;
-    border: none;
+    border: 0;
     padding: 0;
-    color: var(--muted);
     text-decoration: underline;
+    cursor: pointer;
+}
+
+// ---- Style guide page ---------------------------------------------------------------
+
+.sg-swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+    gap: 0.75rem;
+    margin: 0.75rem 0 1.25rem;
+}
+
+.sg-swatch {
+    border: 1px solid var(--rule);
+    font: 0.75rem/1.35 var(--ui);
+    background: var(--window);
+}
+
+.sg-chip {
+    height: 56px;
+    border-bottom: 1px solid var(--rule);
+}
+
+.sg-swatch div + div {
+    padding: 0.4rem 0.5rem;
+}
+
+.sg-swatch code {
+    font-family: var(--mono);
+}
+
+.sg-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin: 0.75rem 0 1.25rem;
+}
+
+.sg-type p {
+    margin: 0.25rem 0;
+}
+
+.sg-demo {
+    border: 1px dashed var(--rule);
+    padding: 1rem;
+    margin: 0.75rem 0 1.25rem;
+    background: var(--slate);
+}
+
+.sg-demo-window {
+    background: var(--window);
+    border: 1px solid #000;
+    border-radius: 0 var(--radius) var(--radius) var(--radius);
+    padding: 1rem;
+}
+
+// ---- Small screens: the rail becomes a tab strip ----------------------------------
+
+@media (max-width: 760px) {
+    .ds-shell {
+        grid-template-columns: 1fr;
+        margin-top: 0.75rem;
+    }
+
+    .ds-rail {
+        position: static;
+        padding: 0;
+        overflow-x: auto;
+    }
+
+    .ds-rail ul {
+        display: flex;
+    }
+
+    .ds-rail li {
+        flex: none;
+    }
+
+    .ds-rail a {
+        padding: 0.55rem 0.8rem;
+    }
+
+    .ds-rail .ds-host,
+    .ds-rail hr,
+    .ds-rail .ds-rail-extra {
+        display: none;
+    }
+
+    .ds-window {
+        padding: 1rem;
+        border-radius: 0 0 var(--radius) var(--radius);
+    }
+
+    .ds-wordmark {
+        font-size: 1.6rem;
+    }
+
+    .ds-mark {
+        width: 44px;
+        height: 44px;
+    }
+
+    .ds-intro {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
 }

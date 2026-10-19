@@ -1,4 +1,4 @@
-<div class="wrap">
+
     {{ $slug := .File.TranslationBaseName }}
     {{ $posts := slice }}
     {{ range site.Data.blog.blog }}{{ $posts = $posts | append .post }}{{ end }}
@@ -10,7 +10,7 @@
     {{- $.Store.Set "og_image" $post.cover_image -}}
     <article class="post">
         <h1>{{ $post.blog_title }}</h1>
-        <p class="post-date"><time datetime="{{ $post.date }}">{{ $post.date }}</time></p>
+        <p class="ds-meta"><time datetime="{{ $post.date }}">{{ $post.date }}</time></p>
         {{ range $i, $p := $post.paragraphs }}
         <p>{{ $p }}</p>
         {{ with index $post.images (add $i 1) }}
@@ -24,4 +24,3 @@
         {{ .Content }}
     </article>
     {{ end }}
-</div>

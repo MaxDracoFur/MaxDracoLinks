@@ -1,0 +1,13 @@
+{{ $here := .RelPermalink }}
+<nav class="ds-rail" aria-label="Sections">
+    <ul>
+        <li><a href="/"{{ if eq $here "/" }} aria-current="page"{{ end }}>Home</a></li>
+        <li><a href="/blog/"{{ if hasPrefix $here "/blog/" }} aria-current="page"{{ end }}>Blog</a></li>
+        <li><a href="https://hack.maxdraco.com/">Security <span class="ds-host">hack.</span></a></li>
+        <li><a href="https://cds.maxdraco.com/">CDs <span class="ds-host">cds.</span></a></li>
+        <li><a href="https://furcago.com/">Furcago <span class="ds-host">.com</span></a></li>
+        <li class="ds-rail-extra"><hr></li>
+        <li class="ds-rail-extra"><a href="/style/"{{ if hasPrefix $here "/style/" }} aria-current="page"{{ end }}>Style guide</a></li>
+        <li><a href="/#contact">Contact</a></li>
+    </ul>
+</nav>

@@ -1,6 +1,5 @@
 {{ define "main" }}
-<div class="wrap">
-    <h1>Blog</h1>
-    {{ partial "writing-list.html" (dict "level" "h2") }}
-</div>
+<h1>Blog</h1>
+<p class="ds-meta">Furry travel: cons, meetups, and the cities around them. Also at <a href="https://blog.maxdraco.com/">blog.maxdraco.com</a>.</p>
+{{ partial "writing-list.html" . }}
 {{ end }}
