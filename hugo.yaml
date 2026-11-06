@@ -1,5 +1,7 @@
-baseURL: "https://Maxdraco.com/"
+baseURL: "https://maxdraco.com/"
 languageCode: "en-us"
-title: "MaxDraco"
+title: "Max Draco"
 theme: MaxDraco
 enableRobotsTXT: true
+enableGitInfo: true
+disableKinds: ["taxonomy", "term"]

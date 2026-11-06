@@ -1,0 +1,47 @@
+{{/* Head tags for search + link previews. Runs in <head>, so it reads page params
+     directly: values set with .Store inside "main" arrive too late (head renders first). */}}
+{{- $siteDesc := "Max Draco, Chicago: security research, CDs, Furcago, and a furry travel blog." -}}
+{{- $title := "Max Draco" -}}
+{{- $desc := $siteDesc -}}
+{{- $img := "/res/pfp.jpg" -}}
+{{- $type := "website" -}}
+{{- if not .IsHome }}{{ with .Title }}{{ $title = printf "%s | Max Draco" . }}{{ end }}{{ end -}}
+{{- with .Params.summary }}{{ $desc = . }}{{ end -}}
+{{- with .Params.cover_image }}{{ $img = partial "img-url.html" (dict "src" . "w" 1200) }}{{ end -}}
+{{- if and (eq .Section "blog") .IsPage }}
+  {{- $type = "article" -}}
+  {{- $slug := .File.TranslationBaseName -}}
+  {{- $posts := slice }}{{ range site.Data.blog.blog }}{{ $posts = $posts | append .post }}{{ end -}}
+  {{- with index (where $posts "slug" $slug) 0 }}
+    {{- $title = printf "%s | Max Draco" .blog_title -}}
+    {{- with .paragraphs }}{{ $desc = index . 0 | plainify | truncate 160 }}{{ end -}}
+    {{- with .cover_image }}{{ $img = partial "img-url.html" (dict "src" . "w" 1200) }}{{ end -}}
+  {{- end }}
+{{- end }}
+{{- $noindex := or .Params.noindex (in (slice "taxonomy" "term") .Kind) -}}
+<meta name="description" content="{{ $desc }}">
+<link rel="canonical" href="{{ .Permalink }}">
+{{- if $noindex }}
+<meta name="robots" content="noindex, follow">
+{{- end }}
+<meta property="og:site_name" content="Max Draco">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:image" content="{{ $img | absURL }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="{{ $type }}">
+<meta name="twitter:card" content="{{ if eq $img "/res/pfp.jpg" }}summary{{ else }}summary_large_image{{ end }}">
+{{- if .IsHome }}
+<script type="application/ld+json">
+{{ dict
+  "@context" "https://schema.org"
+  "@type" "Person"
+  "name" "Max Draco"
+  "url" site.BaseURL
+  "image" ("/res/pfp.jpg" | absURL)
+  "description" $siteDesc
+  "homeLocation" (dict "@type" "Place" "name" "Chicago, IL")
+  "sameAs" (slice "https://bsky.app/profile/maxdraco.com" "https://www.instagram.com/furry.max.draco/" "https://ko-fi.com/maxdraco" "https://cds.maxdraco.com/" "https://hack.maxdraco.com/")
+  | jsonify | safeJS }}
+</script>
+{{- end }}

@@ -4,23 +4,7 @@
     <title>{{ block "title" . }}Max Draco{{ end }}</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="Max Draco, Chicago: security research, CDs, Furcago, and a furry travel blog.">
-
-    <!-- Open Graph Meta -->
-    {{ with .Store.Get "og_title" }}
-    <meta property="og:title" content="{{ . }}">
-    {{ end }}
-
-    {{ with .Store.Get "og_description" }}
-    <meta property="og:description" content="{{ . }}">
-    {{ end }}
-
-    {{ with .Store.Get "og_image" }}
-    <meta property="og:image" content="{{ . | absURL }}">
-    {{ end }}
-
-    <meta property="og:url" content="{{ .Permalink }}">
-    <meta property="og:type" content="website">
+    {{ partial "seo.html" . }}
 
     {{ $css := resources.Get "css/style.scss" | toCSS }}
     {{/* Unfingerprinted copy at /css/draco.css for cds./hack. (style guide: /style/). */}}
