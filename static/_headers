@@ -1,0 +1,6 @@
+# Cloudflare Pages response headers (card seo-titles-dupes-404).
+# The *.pages.dev copies of this site must never be indexed next to maxdraco.com.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex

@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Max Draco</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="Max Draco, Chicago: security research, CDs, Furcago, and a furry travel blog.">
+    <title>Style guide | Max Draco</title>
+<meta name="description" content="Max Draco, Chicago: security research, CDs, Furcago, and a furry travel blog.">
 <link rel="canonical" href="https://maxdraco.com/style/">
 <meta name="robots" content="noindex, follow">
 <meta property="og:site_name" content="Max Draco">
 <meta property="og:title" content="Style guide | Max Draco">
 <meta property="og:description" content="Max Draco, Chicago: security research, CDs, Furcago, and a furry travel blog.">
 <meta property="og:image" content="https://maxdraco.com/res/pfp.jpg">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="1000">
+<meta property="og:image:alt" content="Max Draco">
 <meta property="og:url" content="https://maxdraco.com/style/">
 <meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://maxdraco.com/","name":"Max Draco","position":1},{"@type":"ListItem","item":"https://maxdraco.com/style/","name":"Style guide","position":2}]}]}
+</script>
 
 
     
@@ -72,6 +81,7 @@
     <li><strong>If it looks clickable, it is.</strong> LimeWire's green band was ad copy; here it is the real navigation.</li>
     <li><strong>Phones</strong>: the tab band scrolls sideways; tables drop secondary columns.</li>
     <li><strong>Nothing third-party loads before consent</strong>, with one exception: Cloudflare's cookieless Web Analytics beacon, which sets no cookies and keeps no cross-site ID. System fonts only, no icon fonts, no web fonts.</li>
+    <li><strong>The site's own beacon</strong> (<code>/js/beacon.js</code>, first-party, no consent needed) records the page, the linking site, time on page, scroll depth, outbound link clicks and errors from the site's own scripts. No cookies, no browser storage, no IP address, no ID. It does not run when the browser sends Global Privacy Control or Do Not Track.</li>
     <li><strong>No emoji, no stock art.</strong> The only images are real photos.</li>
 </ul>
 
@@ -226,7 +236,7 @@
   else if (saved !== 'denied') box.hidden = false
 })()
 </script>
-
+<script src="/js/beacon.min.3bf130bf97101875b8796768847cf0d30b239d187dcf73151a73ff71d7c1bafe.js" integrity="sha256-O/Ewv5cQGHW4eWdohHzw0wsjnRh9z3MVGnP/cdfBuv4=" defer></script>
 <script src="/js/gems.min.d5c77359df3147509892c261aba77bd62330b51e5a95d7227d66ce96f1f2d55f.js" integrity="sha256-1cdzWd8xR1CYksJhq6d71iMwtR5aldcifWbOlvHy1V8=" defer></script>
 </body>
 </html>

@@ -13,3 +13,13 @@ binding = "GEMS"
 database_name = "maxdraco-gems"
 database_id = "dbb9f21b-6d1d-4c2c-80e9-4ba073ee9f47"
 migrations_dir = "migrations"
+
+# First-party page beacon (functions/api/b.js, card site-beacon-first-party).
+# Created 2026-11-06 with `wrangler d1 create maxdraco-beacon --location enam`;
+# schema: wrangler d1 migrations apply maxdraco-beacon --remote
+# Read + pruned by the homelab CronJob homelab/site-beacon through the D1 API.
+[[d1_databases]]
+binding = "BEACON"
+database_name = "maxdraco-beacon"
+database_id = "faeafdc9-21cf-4352-b617-1bef9c836265"
+migrations_dir = "migrations/beacon"

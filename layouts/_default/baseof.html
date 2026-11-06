@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{ block "title" . }}Max Draco{{ end }}</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     {{ partial "seo.html" . }}
@@ -21,6 +20,8 @@
 </div>
 {{ partial "footer.html" . }}
 {{ partial "consent.html" . }}
+{{- /* Cookieless first-party beacon; unfingerprinted copy at /js/beacon.js for cds./hack. */ -}}
+{{ with resources.Get "js/beacon.js" }}{{ (. | resources.Copy "js/beacon.js").Publish }}{{ with . | resources.Minify | resources.Fingerprint }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}{{ end }}
 {{ with resources.Get "js/gems.js" | resources.Minify | resources.Fingerprint }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}
 </body>
 </html>

@@ -18,7 +18,17 @@
     {{- with .cover_image }}{{ $img = partial "img-url.html" (dict "src" . "w" 1200) }}{{ end -}}
   {{- end }}
 {{- end }}
-{{- $noindex := or .Params.noindex (in (slice "taxonomy" "term") .Kind) -}}
+{{- $published := .Date -}}
+{{- $headline := .Title -}}
+{{- $imgAlt := "Max Draco" -}}
+{{- with .Params.cover_alt }}{{ $imgAlt = . }}{{ end -}}
+{{- if and (eq .Section "blog") .IsPage }}
+  {{- $slug := .File.TranslationBaseName -}}
+  {{- $posts := slice }}{{ range site.Data.blog.blog }}{{ $posts = $posts | append .post }}{{ end -}}
+  {{- with index (where $posts "slug" $slug) 0 }}{{ $headline = .blog_title }}{{ with .date }}{{ $published = time . }}{{ end }}{{ end -}}
+{{- end -}}
+{{- $noindex := or .Params.noindex (in (slice "taxonomy" "term" "404") .Kind) -}}
+<title>{{ $title }}</title>
 <meta name="description" content="{{ $desc }}">
 <link rel="canonical" href="{{ .Permalink }}">
 {{- if $noindex }}
@@ -28,20 +38,62 @@
 <meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $desc }}">
 <meta property="og:image" content="{{ $img | absURL }}">
+{{- if eq $img "/res/pfp.jpg" }}
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="1000">
+{{- end }}
+<meta property="og:image:alt" content="{{ $imgAlt }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:type" content="{{ $type }}">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="twitter:card" content="{{ if eq $img "/res/pfp.jpg" }}summary{{ else }}summary_large_image{{ end }}">
+{{- $person := dict "@id" (printf "%s#person" site.BaseURL) "@type" "Person" "name" "Max Draco" "url" site.BaseURL -}}
 {{- if .IsHome }}
 <script type="application/ld+json">
 {{ dict
   "@context" "https://schema.org"
-  "@type" "Person"
-  "name" "Max Draco"
-  "url" site.BaseURL
-  "image" ("/res/pfp.jpg" | absURL)
-  "description" $siteDesc
-  "homeLocation" (dict "@type" "Place" "name" "Chicago, IL")
-  "sameAs" (slice "https://bsky.app/profile/maxdraco.com" "https://t.me/Max_Draco" "https://www.instagram.com/furry.max.draco/" "https://www.facebook.com/MaxDracoDragon/" "https://www.discogs.com/seller/MaxDraco/profile" "https://ko-fi.com/maxdraco" "https://cds.maxdraco.com/" "https://hack.maxdraco.com/")
+  "@graph" (slice
+    (dict
+      "@type" "WebSite"
+      "@id" (printf "%s#website" site.BaseURL)
+      "name" "Max Draco"
+      "url" site.BaseURL
+      "inLanguage" "en-US"
+      "publisher" (dict "@id" (printf "%s#person" site.BaseURL)))
+    (merge $person (dict
+      "image" ("/res/pfp.jpg" | absURL)
+      "description" $siteDesc
+      "homeLocation" (dict "@type" "Place" "name" "Chicago, IL")
+      "sameAs" (slice "https://bsky.app/profile/maxdraco.com" "https://t.me/Max_Draco" "https://www.instagram.com/furry.max.draco/" "https://www.facebook.com/MaxDracoDragon/" "https://www.discogs.com/seller/MaxDraco/profile" "https://ko-fi.com/maxdraco" "https://cds.maxdraco.com/" "https://hack.maxdraco.com/"))))
   | jsonify | safeJS }}
+</script>
+{{- else }}
+{{- $crumbs := slice (dict "@type" "ListItem" "position" 1 "name" "Max Draco" "item" site.BaseURL) -}}
+{{- if and .IsPage .Parent (not .Parent.IsHome) }}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 2 "name" .Parent.Title "item" .Parent.Permalink) -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 3 "name" $headline "item" .Permalink) -}}
+{{- else }}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 2 "name" .Title "item" .Permalink) -}}
+{{- end }}
+{{- $graph := slice (dict "@type" "BreadcrumbList" "itemListElement" $crumbs) -}}
+{{- if eq $type "article" }}
+  {{- $post := dict
+    "@type" "BlogPosting"
+    "headline" $headline
+    "description" $desc
+    "image" ($img | absURL)
+    "url" .Permalink
+    "mainEntityOfPage" .Permalink
+    "inLanguage" "en-US"
+    "author" $person
+    "publisher" (dict "@id" (printf "%s#person" site.BaseURL)) -}}
+  {{- if not $published.IsZero }}{{ $post = merge $post (dict "datePublished" ($published.Format "2006-01-02")) }}{{ end -}}
+  {{- if not .Lastmod.IsZero }}{{ $post = merge $post (dict "dateModified" (.Lastmod.Format "2006-01-02")) }}{{ end -}}
+  {{- $graph = $graph | append $post -}}
+{{- end }}
+<script type="application/ld+json">
+{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}
 </script>
 {{- end }}
