@@ -7,9 +7,9 @@ compatibility_date = "2026-10-17"
 # Hidden-gem counter (functions/api/gems.js). Create once with
 #   wrangler d1 create maxdraco-gems
 #   wrangler d1 migrations apply maxdraco-gems --remote
-# and paste the printed database_id here.
+# and paste the printed database_id here (created 2026-11-05, location enam).
 [[d1_databases]]
 binding = "GEMS"
 database_name = "maxdraco-gems"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "dbb9f21b-6d1d-4c2c-80e9-4ba073ee9f47"
 migrations_dir = "migrations"
