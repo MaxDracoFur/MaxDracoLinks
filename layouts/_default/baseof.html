@@ -21,5 +21,6 @@
 </div>
 {{ partial "footer.html" . }}
 {{ partial "consent.html" . }}
+{{ with resources.Get "js/gems.js" | resources.Minify | resources.Fingerprint }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}
 </body>
 </html>
