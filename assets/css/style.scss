@@ -379,6 +379,23 @@ img {
     }
 }
 
+// Certifications: a file list whose name cell carries the badge image.
+.ds-certs .ds-cert {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.ds-certs .ds-cert img {
+    flex: none;
+    width: 48px;
+    height: 48px;
+}
+
+.ds-certs .ds-cert .ds-desc {
+    color: var(--ink-2);
+}
+
 // ---- Tracklist (the projects index, like a CD back cover) -------------------
 
 .ds-tracklist {

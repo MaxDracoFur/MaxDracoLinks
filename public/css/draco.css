@@ -296,6 +296,19 @@ img {
   .ds-files .ds-hide-sm {
     display: none; } }
 
+.ds-certs .ds-cert {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem; }
+
+.ds-certs .ds-cert img {
+  flex: none;
+  width: 48px;
+  height: 48px; }
+
+.ds-certs .ds-cert .ds-desc {
+  color: var(--ink-2); }
+
 .ds-tracklist {
   list-style: none;
   margin: 0;
