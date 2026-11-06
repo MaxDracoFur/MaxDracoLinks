@@ -1,0 +1,11 @@
+# Keeps the SHA-pinned actions current: Dependabot bumps the SHA and the
+# trailing "# vX.Y.Z" comment together, as a PR. The cooldown waits a week
+# after a release before proposing it, so a hijacked tag has time to be caught.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
