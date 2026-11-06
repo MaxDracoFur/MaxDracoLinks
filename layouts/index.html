@@ -26,24 +26,6 @@
     </li>
 </ol>
 
-{{ with site.Data.credly.badges }}
-<h2 id="certifications">Certifications</h2>
-<table class="ds-files ds-certs">
-    <thead><tr><th scope="col">Badge</th><th scope="col" class="ds-hide-sm">Issuer</th><th scope="col">Issued</th><th scope="col" class="ds-hide-sm">Expires</th></tr></thead>
-    <tbody>
-    {{ range . }}
-        {{ $img := (resources.Get .image).Resize "96x96 webp q90" }}
-        <tr>
-            <td><a class="ds-cert" href="{{ .url }}"><img src="{{ $img.RelPermalink }}" width="48" height="48" alt="" loading="lazy"><span><span class="ds-name">{{ .name }}</span><span class="ds-desc">Verify on Credly</span></span></a></td>
-            <td class="ds-hide-sm">{{ .issuer }}</td>
-            <td><time datetime="{{ .issued }}">{{ .issued }}</time></td>
-            <td class="ds-hide-sm">{{ with .expires }}<time datetime="{{ . }}">{{ . }}</time>{{ else }}<span class="ds-desc">No expiry</span>{{ end }}</td>
-        </tr>
-    {{ end }}
-    </tbody>
-</table>
-{{ end }}
-
 <h2>Latest from the blog</h2>
 {{ $posts := partial "posts.html" . }}
 <div class="ds-releases">
