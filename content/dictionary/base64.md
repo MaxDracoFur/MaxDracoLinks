@@ -20,9 +20,9 @@ classification:
      url: "https://attack.mitre.org/techniques/T1140/"}
   - {standard: capec, clause: "CAPEC-267", topic: "Leverage Alternate Encoding",
      url: "https://capec.mitre.org/data/definitions/267.html"}
-# Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first. classification ids checked against
+# Copy review: Claude drafted this entry (card maxdraco-dictionary); Max approved it 2026-11-11.
+# Sources: primary/official first. classification ids checked against
 # MITRE's ATT&CK 20.1 STIX, CWE 5.0 and CAPEC XML, NIST's 800-53 5.2.0 OSCAL catalog and the NVD CPE API on 2026-11-11.
-draft: true
+draft: false
 ---
 Base64 turns bytes into text so they can travel through systems that only handle letters and digits, such as email, URLs or config files. Every 3 bytes become 4 characters, and = signs pad the end. It is an encoding, not encryption: anyone can turn it back into the original bytes.

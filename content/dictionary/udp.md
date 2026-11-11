@@ -16,9 +16,9 @@ classification:
      url: "https://attack.mitre.org/techniques/T1095/"}
   - {standard: capec, clause: "CAPEC-308", topic: "UDP Scan",
      url: "https://capec.mitre.org/data/definitions/308.html"}
-# Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first. classification ids checked against
+# Copy review: Claude drafted this entry (card maxdraco-dictionary); Max approved it 2026-11-11.
+# Sources: primary/official first. classification ids checked against
 # MITRE's ATT&CK 20.1 STIX, CWE 5.0 and CAPEC XML, NIST's 800-53 5.2.0 OSCAL catalog and the NVD CPE API on 2026-11-11.
-draft: true
+draft: false
 ---
 UDP is one of the two basic ways programs send data over the internet (the other is TCP). A sender just fires off a datagram: there is no connection set-up, no confirmation it arrived, and nothing on its own that encrypts it. That makes it fast and simple, which is why DNS, games, video calls and classic syslog use it.

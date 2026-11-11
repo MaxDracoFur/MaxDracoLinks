@@ -18,9 +18,9 @@ classification:
      url: "https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/SP_800_53_5_2_0/home?element=AU-06(03)"}
   - {standard: cwe, clause: "CWE-778", topic: "Insufficient Logging",
      url: "https://cwe.mitre.org/data/definitions/778.html"}
-# Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first. classification ids checked against
+# Copy review: Claude drafted this entry (card maxdraco-dictionary); Max approved it 2026-11-11.
+# Sources: primary/official first. classification ids checked against
 # MITRE's ATT&CK 20.1 STIX, CWE 5.0 and CAPEC XML, NIST's 800-53 5.2.0 OSCAL catalog and the NVD CPE API on 2026-11-11.
-draft: true
+draft: false
 ---
 A SIEM gathers logs and events from servers, network devices and applications into one place, then lets a security team search them, correlate them and get alerts.
