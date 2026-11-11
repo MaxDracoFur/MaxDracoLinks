@@ -1,0 +1,20 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+{{ with .RegularPages }}
+<table class="ds-files dict-index">
+    <thead><tr><th>Term</th><th>What it is</th><th>Kind</th></tr></thead>
+    <tbody>
+    {{ range sort . "Title" }}
+    <tr>
+        <td class="ds-name"><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ if .Draft }} <span class="ds-badge ds-badge-soon">draft</span>{{ end }}</td>
+        <td class="ds-desc">{{ .Params.summary }}</td>
+        <td>{{ .Params.term_kind | humanize }}</td>
+    </tr>
+    {{ end }}
+    </tbody>
+</table>
+{{ else }}
+<p class="ds-meta">No entries yet.</p>
+{{ end }}
+{{ end }}

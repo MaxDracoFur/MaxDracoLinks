@@ -7,3 +7,6 @@ assets/gallery/
 
 # wrangler local dev state (local D1 for the gem counter)
 .wrangler/
+
+# Source health pulled at build time from the homelab checker (tools/dictionary.py sync).
+data/source_health.json

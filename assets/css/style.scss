@@ -1173,3 +1173,50 @@ a.ds-case:hover {
 .gem-lost:focus-visible {
     opacity: 0.6;
 }
+
+// Max dictionary (/dictionary/, card maxdraco-dictionary). Term links look like links with a dotted
+// underline, so a reader can tell "defined here" from an outside link.
+a.dict-term {
+    text-decoration-style: dotted;
+    text-underline-offset: 0.15em;
+}
+.dict-summary {
+    font-size: 1.1rem;
+    color: var(--ink-2);
+}
+.dict-sources li,
+.dict-uses li {
+    margin-bottom: 0.5rem;
+}
+.dict-pub,
+.dict-primary,
+.dict-health,
+.dict-orig {
+    font: 0.8rem/1.4 var(--ui);
+    color: var(--ink-2);
+    margin-left: 0.4rem;
+}
+.dict-primary {
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 0 0.3rem;
+}
+.dict-orig {
+    display: block;
+    margin-left: 0;
+}
+.dict-url {
+    overflow-wrap: anywhere;
+}
+.dict-healthy .dict-health {
+    color: var(--lime-ink);
+}
+.dict-dead .dict-health,
+.dict-failing .dict-health {
+    color: var(--alert);
+    font-weight: 700;
+}
+.dict-archive {
+    font: 0.8rem/1.4 var(--ui);
+    margin-left: 0.4rem;
+}

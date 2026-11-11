@@ -1,0 +1,33 @@
+{{ define "main" }}
+{{- $.Store.Set "og_description" .Params.summary -}}
+<article class="post dict-page">
+    <p class="ds-meta"><a href="/dictionary/">Dictionary</a> / {{ .Params.term_kind | humanize }}</p>
+    <h1>{{ .Title }}</h1>
+    <p class="dict-summary">{{ .Params.summary }}</p>
+    {{ .Content }}
+
+    {{- /* Posts that name it: a term link, or any of the page's match regexes in the post's text. */ -}}
+    {{ $slug := .File.ContentBaseName }}
+    {{ $rx := slice }}{{ range .Params.match }}{{ $rx = $rx | append (printf "(?i)%s" .) }}{{ end }}
+    {{ $uses := slice }}
+    {{ range where site.RegularPages "Section" "blog" }}
+        {{ $hit := or (strings.Contains .RawContent (printf "term \"%s\"" $slug)) (strings.Contains .RawContent (printf "/dictionary/%s/" $slug)) }}
+        {{ if not $hit }}{{ $plain := .Plain }}{{ range $rx }}{{ if findRE . $plain 1 }}{{ $hit = true }}{{ end }}{{ end }}{{ end }}
+        {{ if $hit }}{{ $uses = $uses | append . }}{{ end }}
+    {{ end }}
+    <h2>Posts that use it</h2>
+    {{ with $uses }}
+    <ul class="dict-uses">
+        {{ range sort . "Date" "desc" }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <time class="ds-meta" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>{{ if .Draft }} <span class="ds-badge ds-badge-soon">draft</span>{{ end }}</li>{{ end }}
+    </ul>
+    {{ else }}
+    <p class="ds-meta">None published yet.</p>
+    {{ end }}
+
+    <h2>Sources</h2>
+    <ol class="dict-sources">
+        {{ range $i, $s := .Params.sources }}{{ partial "dict-source.html" (dict "source" (merge $s (dict "primary" (eq $i 0)))) }}{{ end }}
+    </ol>
+    <p class="ds-meta dict-note">Every source is checked once a day. When one stops working for two days running, this page links an archived copy from the Internet Archive instead.</p>
+</article>
+{{ end }}

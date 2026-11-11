@@ -1,0 +1,8 @@
+{{- /* Link a dictionary term's first mention: {{< term "opnsense" >}} or {{< term "grafana-loki" "Loki" >}}.
+       Rule + build check: tools/dictionary.py. A missing (or, in a publish build, draft) page fails the build. */ -}}
+{{- $slug := .Get 0 -}}
+{{- with site.GetPage (printf "/dictionary/%s" $slug) -}}
+<a class="dict-term" href="{{ .RelPermalink }}" title="{{ .Params.summary }}">{{ or ($.Get 1) .Title }}</a>
+{{- else -}}
+{{- errorf "term %q: no page at content/dictionary/%s.md (or it is a draft in a publish build); %s" $slug $slug .Position -}}
+{{- end -}}

@@ -1,0 +1,28 @@
+{{- /* One dictionary source with its health from data/source_health.json (written by the homelab
+       dictionary-sources CronJob, pulled at build time by tools/dictionary.py sync).
+       Dead = two failed daily checks in a row: link the Wayback copy instead. */ -}}
+{{- $s := .source -}}
+{{- $h := dict -}}
+{{- with site.Data.source_health }}{{ with .sources }}{{ with index . $s.url }}{{ $h = . }}{{ end }}{{ end }}{{ end -}}
+{{- $status := or $h.status "unchecked" -}}
+{{- $checked := "" -}}{{ with $h.checked_at }}{{ $checked = (time .).Format "2006-01-02" }}{{ end -}}
+<li class="dict-source dict-{{ $status }}">
+    {{- if and (eq $status "dead") $h.wayback_url }}
+    <a href="{{ $h.wayback_url }}" rel="nofollow">{{ $s.title }}</a>
+    <span class="dict-health">dead, archived copy{{ with $h.wayback_timestamp }} from {{ substr . 0 4 }}-{{ substr . 4 2 }}-{{ substr . 6 2 }}{{ end }}</span>
+    <span class="dict-orig">Original: <span class="dict-url">{{ $s.url }}</span>{{ with $h.last_ok_at }}, last worked {{ (time .).Format "2006-01-02" }}{{ end }}</span>
+    {{- else }}
+    <a href="{{ $s.url }}">{{ $s.title }}</a>
+    {{- with $s.publisher }}<span class="dict-pub">{{ . }}</span>{{ end }}
+    {{- if $s.primary }}<span class="dict-primary">official</span>{{ end }}
+    <span class="dict-health">
+        {{- if eq $status "healthy" }}healthy, checked {{ $checked }}
+        {{- else if eq $status "failing" }}did not load at the last check ({{ $checked }}); checking again tomorrow
+        {{- else if eq $status "dead" }}dead, no archived copy found
+        {{- else if eq $status "robots" }}not checked: the site asks automated checkers not to
+        {{- else if eq $status "blocked" }}not checked: the site refuses automated checks
+        {{- else }}not checked yet{{ end -}}
+    </span>
+    {{- if and $h.wayback_url (ne $status "dead") }} <a class="dict-archive" href="{{ $h.wayback_url }}" rel="nofollow">archived copy</a>{{ end }}
+    {{- end }}
+</li>
