@@ -3,7 +3,7 @@
 // hostile input clipped, nothing identifying stored.
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { toRows, splitReferrer, deviceClass } from '../functions/api/b.js'
+import { toRows, splitReferrer, deviceClass, beaconAllowed, onRequestGet, onRequestPost } from '../functions/api/b.js'
 
 const meta = { origin: 'https://maxdraco.com', country: 'US', ua: 'Mozilla/5.0 (iPhone) Mobile', now: 1000 }
 const view = (over = {}) => ({ v: 1, c: 0, h: 'maxdraco.com', p: '/blog/', r: '', t: {}, nf: 0, ms: 5000, sc: 80, e: [], ...over })
@@ -87,4 +87,39 @@ test('continuation sends carry cont > 0', () => {
 test('device class only', () => {
   assert.equal(deviceClass('Mozilla/5.0 (Macintosh)'), 'desktop')
   assert.equal(deviceClass(''), null)
+})
+
+test('location gate: US/CA/BR may run; EU, EEA, UK, CH, unknown and Tor may not', () => {
+  for (const c of ['US', 'CA', 'BR', 'JP']) assert.equal(beaconAllowed(c), true, c)
+  for (const c of ['DE', 'FR', 'IE', 'RE', 'NO', 'IS', 'LI', 'GB', 'JE', 'CH', 'XX', 'T1', '', null, undefined, 'de']) {
+    assert.equal(beaconAllowed(c), false, String(c))
+  }
+})
+
+const gateReq = (country, origin = 'https://cds.maxdraco.com', q = '?g=1') => ({
+  request: Object.assign(new Request('https://maxdraco.com/api/b' + q, { headers: origin ? { origin } : {} }), { cf: country ? { country } : undefined })
+})
+
+test('GET ?g=1 answers 1/0 by country, with CORS only for our hosts', async () => {
+  let r = await onRequestGet(gateReq('US'))
+  assert.equal(await r.text(), '1')
+  assert.equal(r.headers.get('access-control-allow-origin'), 'https://cds.maxdraco.com')
+  assert.equal(r.headers.get('cache-control'), 'no-store')
+  r = await onRequestGet(gateReq('FR'))
+  assert.equal(await r.text(), '0')
+  r = await onRequestGet(gateReq(null))
+  assert.equal(await r.text(), '0')
+  r = await onRequestGet(gateReq('US', 'https://evil.example'))
+  assert.equal(r.headers.get('access-control-allow-origin'), null)
+  r = await onRequestGet(gateReq('US', undefined, ''))
+  assert.equal(r.status, 204)
+})
+
+test('a POST from a gated country never touches the database', async () => {
+  const body = JSON.stringify(view())
+  const env = { BEACON: { prepare () { throw new Error('db touched') } } }
+  const mk = country => Object.assign(new Request('https://maxdraco.com/api/b', { method: 'POST', body, headers: { origin: 'https://maxdraco.com' } }), { cf: { country } })
+  const r = await onRequestPost({ request: mk('DE'), env })
+  assert.equal(r.status, 204)
+  await assert.rejects(onRequestPost({ request: mk('US'), env }), /db touched/)
 })

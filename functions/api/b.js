@@ -15,6 +15,27 @@
 // a flood from filling the database.
 
 export const HOSTS = new Set(['maxdraco.com', 'www.maxdraco.com', 'cds.maxdraco.com', 'hack.maxdraco.com'])
+
+// GET /api/b?g=1  -> "1" (beacon may run) or "0". The beacon asks this before it reads anything.
+// "0" for the EU/EEA (incl. outermost regions with their own ISO codes), the UK and its Crown
+// dependencies/Gibraltar, and Switzerland: their cookie rules (ePrivacy Art. 5(3), PECR reg. 6)
+// cover a script reading the browser even with no cookie (EDPB Guidelines 2/2023 par. 33), and
+// the beacon is not consent-gated. Unknown or Tor ("XX", "T1", missing) also gets "0".
+// POSTs from those countries are dropped too (an old cached beacon.js has no gate).
+export const NO_BEACON = new Set([
+  'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV',
+  'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE',
+  'AX', 'GF', 'GP', 'MQ', 'RE', 'YT', 'MF',
+  'IS', 'LI', 'NO',
+  'GB', 'GI', 'IM', 'JE', 'GG',
+  'CH'
+])
+
+export function beaconAllowed (country) {
+  if (typeof country !== 'string' || !/^[A-Z]{2}$/.test(country)) return false
+  if (country === 'XX' || country === 'T1') return false
+  return !NO_BEACON.has(country)
+}
 const PER_MINUTE = 300
 const MAX_BODY = 8192
 const MAX_EVENTS = 20
@@ -132,6 +153,8 @@ export async function onRequestPost ({ request, env }) {
   })
   if (!rows.length) return done()
 
+  if (!beaconAllowed(request.cf && request.cf.country)) return done()
+
   const db = env.BEACON
   const recent = await db.prepare('SELECT COUNT(*) AS n FROM events WHERE at > ?').bind(now - 60).first()
   if (recent && recent.n >= PER_MINUTE) {
@@ -142,7 +165,16 @@ export async function onRequestPost ({ request, env }) {
   return done()
 }
 
-// Anything else (GET, preflight) gets the same empty answer.
+export async function onRequestGet ({ request }) {
+  const url = new URL(request.url)
+  if (url.searchParams.get('g') !== '1') return done()
+  const headers = { 'content-type': 'text/plain', 'cache-control': 'no-store', vary: 'Origin' }
+  const origin = request.headers.get('origin')
+  if (origin && HOSTS.has(origin.replace(/^https:\/\//, ''))) headers['access-control-allow-origin'] = origin
+  return new Response(beaconAllowed(request.cf && request.cf.country) ? '1' : '0', { headers })
+}
+
+// Anything else (preflight, other methods) gets the same empty answer.
 export async function onRequest () {
   return done()
 }
