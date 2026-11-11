@@ -15,19 +15,25 @@
         {{ if not $hit }}{{ $plain := .Plain }}{{ range $rx }}{{ if findRE . $plain 1 }}{{ $hit = true }}{{ end }}{{ end }}{{ end }}
         {{ if $hit }}{{ $uses = $uses | append . }}{{ end }}
     {{ end }}
-    <h2>Posts that use it</h2>
     {{ with $uses }}
+    <h2>Read more on this site</h2>
     <ul class="dict-uses">
-        {{ range sort . "Date" "desc" }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <time class="ds-meta" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>{{ if .Draft }} <span class="ds-badge ds-badge-soon">draft</span>{{ end }}</li>{{ end }}
+        {{ range sort . "Date" "desc" }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <time class="ds-meta" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>{{ if .Draft }} <span class="ds-badge ds-badge-soon">draft</span>{{ end }}</li>{{ end }}
     </ul>
-    {{ else }}
-    <p class="ds-meta">None published yet.</p>
     {{ end }}
 
     <h2>Sources</h2>
     <ol class="dict-sources">
         {{ range $i, $s := .Params.sources }}{{ partial "dict-source.html" (dict "source" (merge $s (dict "primary" (eq $i 0)))) }}{{ end }}
     </ol>
-    <p class="ds-meta dict-note">Every source is checked once a day. When one stops working for two days running, this page links an archived copy from the Internet Archive instead.</p>
+
+    {{- /* classification uses the Guild's (standard, clause, topic) shape; tools/dictionary.py CLASSIFY. */ -}}
+    {{ with .Params.classification }}
+    {{ $label := dict "attack" "MITRE ATT&CK" "atlas" "MITRE ATLAS" "cwe" "CWE" "capec" "CAPEC" "cpe" "NVD product name (CPE)" "sp800-53" "NIST SP 800-53" "csf" "NIST CSF 2.0" }}
+    <h2>In security catalogues</h2>
+    <ul class="dict-sources dict-classification">
+        {{ range . }}{{ partial "dict-source.html" (dict "source" (dict "url" .url "title" (printf "%s %s" .clause .topic) "publisher" (index $label .standard))) }}{{ end }}
+    </ul>
+    {{ end }}
 </article>
 {{ end }}

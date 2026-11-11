@@ -149,6 +149,62 @@ class Sources(unittest.TestCase):
         self.assertEqual(doc["sources"], [{"url": "https://opnsense.org/", "term": "opnsense",
                                            "title": "OPNsense", "primary": True}])
 
+    def test_classification_urls_are_checked_too(self):
+        s = Site()
+        s.term("tls", TLS % ("https://attack.mitre.org/techniques/T1557/"))
+        doc = D.sources_doc(D.load_terms(os.path.join(s.dir, "content", "dictionary")))
+        row = [r for r in doc["sources"] if r["term"] == "tls" and not r["primary"]][0]
+        self.assertEqual((row["url"], row["standard"], row["clause"]),
+                         ("https://attack.mitre.org/techniques/T1557/", "attack", "T1557"))
+
+
+TLS = """---
+title: "TLS"
+term_kind: technology
+summary: "Encryption in transit."
+match: ['\\bTLS\\b']
+sources:
+  - {title: "RFC 8446", url: "https://www.rfc-editor.org/rfc/rfc8446", primary: true}
+classification:
+  - {standard: attack, clause: T1557, topic: Adversary-in-the-Middle, url: "%s"}
+draft: true
+---
+TLS encrypts connections.
+"""
+
+
+class Classification(unittest.TestCase):
+    def problems(self, entry, body="TLS encrypts connections."):
+        s = Site()
+        text = TLS.replace("  - {standard: attack, clause: T1557, topic: Adversary-in-the-Middle, url: \"%s\"}",
+                           entry).replace("TLS encrypts connections.", body)
+        s.term("tls", text)
+        return D.page_problems(D.load_terms(os.path.join(s.dir, "content", "dictionary"))["tls"])
+
+    def test_canonical_urls_pass(self):
+        for e in ['  - {standard: attack, clause: T1557, topic: x, url: "https://attack.mitre.org/techniques/T1557/"}',
+                  '  - {standard: attack, clause: T1686.002, topic: x, url: "https://attack.mitre.org/techniques/T1686/002/"}',
+                  '  - {standard: attack, clause: M1037, topic: x, url: "https://attack.mitre.org/mitigations/M1037/"}',
+                  '  - {standard: cwe, clause: CWE-319, topic: x, url: "https://cwe.mitre.org/data/definitions/319.html"}',
+                  '  - {standard: capec, clause: CAPEC-94, topic: x, url: "https://capec.mitre.org/data/definitions/94.html"}',
+                  '  - {standard: cpe, clause: "cpe:2.3:a:grafana:loki", topic: x, url: "https://nvd.nist.gov/products/cpe/search/results?namingFormat=2.3&keyword=cpe%3A2.3%3Aa%3Agrafana%3Aloki"}',
+                  '  - {standard: sp800-53, clause: AU-6(3), topic: x, url: "https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/SP_800_53_5_2_0/home?element=AU-06(03)"}']:
+            self.assertEqual(self.problems(e), [], e)
+
+    def test_wrong_url_unknown_standard_bad_id(self):
+        self.assertIn("url should be", self.problems(
+            '  - {standard: cwe, clause: CWE-319, topic: x, url: "https://example.com/319"}')[0])
+        self.assertIn("is not one of", self.problems(
+            '  - {standard: owasp, clause: A01, topic: x, url: "https://owasp.org/"}')[0])
+        self.assertIn("not a valid", self.problems(
+            '  - {standard: attack, clause: T15, topic: x, url: "https://attack.mitre.org/"}')[0])
+        self.assertIn("needs", self.problems('  - {standard: attack, clause: T1557}')[0])
+
+    def test_no_why_section(self):
+        self.assertTrue(any("Why it's on this site" in p for p in self.problems(
+            '  - {standard: attack, clause: T1557, topic: x, url: "https://attack.mitre.org/techniques/T1557/"}',
+            body="TLS encrypts.\n\n## Why it's on this site\n\nBecause.")))
+
 
 if __name__ == "__main__":
     unittest.main()

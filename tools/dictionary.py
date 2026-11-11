@@ -11,6 +11,15 @@ lives at content/dictionary/<term>.md and declares, in its front matter:
     match: ['\\bOPNsense\\b']     # regexes (case-insensitive) that mean a post names it
     sources:                      # primary/official source FIRST, with primary: true
       - {title: ..., url: https://..., publisher: ..., primary: true}
+    classification:               # optional: where security catalogues file it
+      - {standard: attack, clause: T1557, topic: Adversary-in-the-Middle,
+         url: https://attack.mitre.org/techniques/T1557/}
+
+`classification` uses the Guild's citation shape (docker-guild/backend/catalog.py cites
+(standard, clause, topic) and keys its standards the same way: attack/cwe/capec/cpe/
+sp800-53/atlas/csf), so the Guild can read these as crosswalk rows. Each entry's url must be
+the catalogue's own canonical address for that id (CLASSIFY below), and goes through the
+same daily source-health check as `sources`.
 
 A post links a term with the shortcode  {{< term "opnsense" >}}  (link text =
 the page title) or  {{< term "grafana-loki" "Loki" >}}  (own text), or a plain
@@ -64,6 +73,39 @@ MASKS = [
     re.compile(r"^#{1,6} .*$", re.M),                       # headings: link in the body instead
 ]
 
+def _cprt(fw: str, el: str) -> str:
+    return f"https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/{fw}/home?element={el}"
+
+
+def _sp80053_el(cid: str) -> str:  # SC-8 -> SC-08, AU-6(3) -> AU-06(03): CPRT's element ids
+    m = re.match(r"^([A-Z]{2})-(\d+)(?:\((\d+)\))?$", cid)
+    return f"{m.group(1)}-{int(m.group(2)):02d}" + (f"({int(m.group(3)):02d})" if m.group(3) else "")
+
+
+def _attack_url(cid: str) -> str:
+    kind = {"T": "techniques", "M": "mitigations", "S": "software", "G": "groups"}[cid[0]]
+    return f"https://attack.mitre.org/{kind}/{cid.replace('.', '/')}/"
+
+
+# standard key -> (label, id pattern, canonical url for an id). Keys match the Guild's
+# STANDARDS keys (catalog.py) and depth's source kinds (sourcing.py).
+CLASSIFY = {
+    "attack": ("MITRE ATT&CK", re.compile(r"^[TMSG]\d{4}(?:\.\d{3})?$"), _attack_url),
+    "atlas": ("MITRE ATLAS", re.compile(r"^AML\.[TM]\d{4}(?:\.\d{3})?$"),
+              lambda c: f"https://atlas.mitre.org/{'techniques' if c[4] == 'T' else 'mitigations'}/{c}"),
+    "cwe": ("CWE", re.compile(r"^CWE-\d+$"),
+            lambda c: f"https://cwe.mitre.org/data/definitions/{c[4:]}.html"),
+    "capec": ("CAPEC", re.compile(r"^CAPEC-\d+$"),
+              lambda c: f"https://capec.mitre.org/data/definitions/{c[6:]}.html"),
+    "cpe": ("NVD CPE", re.compile(r"^cpe:2\.3:[aho]:[a-z0-9_.\-]+:[a-z0-9_.\-]+$"),
+            lambda c: "https://nvd.nist.gov/products/cpe/search/results?namingFormat=2.3&keyword="
+                      + c.replace(":", "%3A")),
+    "sp800-53": ("NIST SP 800-53", re.compile(r"^[A-Z]{2}-\d+(?:\(\d+\))?$"),
+                 lambda c: _cprt("SP_800_53_5_2_0", _sp80053_el(c))),
+    "csf": ("NIST CSF 2.0", re.compile(r"^[A-Z]{2}\.[A-Z]{2}(?:-\d{2})?$"),
+            lambda c: _cprt("CSF_2_0_0", c)),
+}
+
 SSH_KUBECTL = ["ssh", "-o", "ConnectTimeout=8", "-o", "BatchMode=yes", "fat",
                "sudo -n kubectl -n homelab"]
 CONFIGMAP = "dictionary-sources"
@@ -85,6 +127,7 @@ def load_terms(dict_dir: str) -> dict:
             "draft": bool(fm.get("draft", False)),
             "match": [str(p) for p in (fm.get("match") or [])],
             "sources": list(fm.get("sources") or []),
+            "classification": list(fm.get("classification") or []),
         }
     return terms
 
@@ -128,8 +171,23 @@ def page_problems(t: dict) -> list[str]:
             out.append(f"source {s['url']} is not https")
     if t["sources"] and isinstance(t["sources"][0], dict) and not t["sources"][0].get("primary"):
         out.append("the first source must be the primary/official one (`primary: true`)")
+    for c in t.get("classification", []):
+        if not isinstance(c, dict) or not all(c.get(k) for k in ("standard", "clause", "topic", "url")):
+            out.append(f"classification {c!r} needs `standard`, `clause`, `topic` and `url`")
+            continue
+        std, cid = str(c["standard"]), str(c["clause"])
+        if std not in CLASSIFY:
+            out.append(f"classification standard '{std}' is not one of {', '.join(CLASSIFY)}")
+            continue
+        _, rx, url = CLASSIFY[std]
+        if not rx.match(cid):
+            out.append(f"classification {std} '{cid}' is not a valid {CLASSIFY[std][0]} id")
+        elif c["url"] != url(cid):
+            out.append(f"classification {std} {cid}: url should be {url(cid)}")
     if not t["body"].strip():
         out.append("no definition in the body")
+    if re.search(r"^#{1,6} Why it.s on this site", t["body"], re.M | re.I):
+        out.append("pages are written for readers: no 'Why it's on this site' section (Max 2026-11-11)")
     return out
 
 
@@ -207,6 +265,11 @@ def sources_doc(terms: dict) -> dict:
             if isinstance(s, dict) and s.get("url"):
                 out.append({"url": s["url"], "term": t["slug"], "title": s.get("title", ""),
                             "primary": i == 0})
+        for c in t.get("classification", []):
+            if isinstance(c, dict) and c.get("url"):
+                out.append({"url": c["url"], "term": t["slug"], "primary": False,
+                            "title": f"{c.get('standard')} {c.get('clause')} {c.get('topic', '')}".strip(),
+                            "standard": c.get("standard"), "clause": c.get("clause")})
     return {"generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "sources": out}
 

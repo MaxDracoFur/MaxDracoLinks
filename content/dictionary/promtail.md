@@ -11,12 +11,12 @@ sources:
   - title: "Migrate from Promtail to Grafana Alloy"
     url: "https://grafana.com/docs/alloy/latest/set-up/migrate/from-promtail/"
     publisher: "Grafana Labs"
+classification:
+  - {standard: sp800-53, clause: "AU-9(2)", topic: "Store on Separate Physical Systems or Components",
+     url: "https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/SP_800_53_5_2_0/home?element=AU-09(02)"}
 # Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first; health is checked daily.
+# wording, then flips draft to false. Sources: primary/official first. classification ids checked against
+# MITRE's ATT&CK 20.1 STIX, CWE 5.0 and CAPEC XML, NIST's 800-53 5.2.0 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: true
 ---
 Promtail was the agent that read log files (or received syslog), attached labels and pushed the lines to Loki. Grafana Labs has deprecated it in favour of Grafana Alloy, which does the same job and more; its documentation includes a migration guide.
-
-## Why it's on this site
-
-My log pipeline ran on Promtail before I moved it to Alloy, so older posts and configs mention it.
