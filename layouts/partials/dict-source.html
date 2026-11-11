@@ -21,6 +21,7 @@
         {{- else if eq $status "dead" }}dead, no archived copy found
         {{- else if eq $status "robots" }}not checked: the site asks automated checkers not to
         {{- else if eq $status "blocked" }}not checked: the site refuses automated checks
+        {{- else if eq $status "unverifiable" }}not checked: the site sends automated checkers round in circles
         {{- else }}not checked yet{{ end -}}
     </span>
     {{- if and $h.wayback_url (ne $status "dead") }} <a class="dict-archive" href="{{ $h.wayback_url }}" rel="nofollow">archived copy</a>{{ end }}
