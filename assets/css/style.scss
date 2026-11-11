@@ -103,7 +103,7 @@ img {
     height: auto;
 }
 
-// ---- Title bar: logo, wordmark, tagline -------------------------------------
+// ---- Title bar: logo, wordmark ---------------------------------------------
 
 .ds-titlebar {
     max-width: 68rem;
@@ -146,13 +146,6 @@ img {
 
 .ds-wordmark .ds-sub {
     color: var(--lime);
-}
-
-.ds-tagline {
-    flex: 1 1 18rem;
-    margin: 0;
-    font: italic 700 0.85rem/1.4 var(--body);
-    opacity: 0.9;
 }
 
 // ---- Tab band: LimeWire's green strip, used as the real navigation ----------
