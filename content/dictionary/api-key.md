@@ -1,8 +1,10 @@
 ---
 title: "API key"
-term_kind: thing
+term_kind: concept
 summary: "A secret string a program sends to prove which account it is calling an API as."
 match: ['\bAPI[ _-]?keys?\b']
+topics: [identity-and-access]
+see_also: [base64]
 sources:
   - title: "API key"
     url: "https://en.wikipedia.org/wiki/API_key"

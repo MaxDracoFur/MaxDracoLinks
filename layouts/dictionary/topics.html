@@ -1,0 +1,8 @@
+{{ define "main" }}
+<article class="post dict-page">
+    <nav class="dict-crumbs ds-meta" aria-label="Breadcrumb"><ol><li><a href="/dictionary/">Dictionary</a></li><li><span aria-current="page">{{ .Title }}</span></li></ol></nav>
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    {{ partial "dict-topic-list.html" . }}
+</article>
+{{ end }}

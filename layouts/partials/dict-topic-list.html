@@ -1,0 +1,9 @@
+{{- /* Every topic with how many terms it holds (wiki "browse by topic"). */ -}}
+{{ $terms := partial "dict-terms.html" . }}
+<ul class="dict-topic-list">
+    {{ range sort (where site.RegularPages "Layout" "topic") "Title" }}
+    {{ $n := len (where $terms "Params.topics" "intersect" (slice .File.ContentBaseName)) }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <span class="ds-meta">{{ $n }} {{ cond (eq $n 1) "entry" "entries" }}</span>
+        <span class="dict-topic-desc">{{ .Params.summary }}</span>{{ if .Draft }} <span class="ds-badge ds-badge-soon">draft</span>{{ end }}</li>
+    {{ end }}
+</ul>

@@ -1,0 +1,2 @@
+{{- /* Published dictionary terms (topic pages excluded); drafts only in a --drafts build. */ -}}
+{{- return where (where site.RegularPages "Section" "dictionary") "Params.term_kind" "!=" nil -}}

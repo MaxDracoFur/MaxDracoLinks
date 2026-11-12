@@ -1,8 +1,10 @@
 ---
 title: "SIEM"
-term_kind: thing
+term_kind: concept
 summary: "Security information and event management: a system that collects logs from many sources so security events can be searched and alerted on."
 match: ['\bSIEMs?\b']
+topics: [security-operations, logging-and-monitoring]
+see_also: [syslog, grafana-loki]
 sources:
   - title: "NIST glossary: security information and event management (SIEM) tool"
     url: "https://csrc.nist.gov/glossary/term/security_information_and_event_management_tool"

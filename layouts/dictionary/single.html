@@ -1,9 +1,11 @@
 {{ define "main" }}
 {{- $.Store.Set "og_description" .Params.summary -}}
 <article class="post dict-page">
-    <p class="ds-meta"><a href="/dictionary/">Dictionary</a> / {{ .Params.term_kind | humanize }}</p>
+    {{ partial "dict-crumbs.html" . }}
     <h1>{{ .Title }}</h1>
     <p class="dict-summary">{{ .Params.summary }}</p>
+    <p class="dict-facets ds-meta"><span class="ds-badge">{{ .Params.term_kind | humanize }}</span>
+        {{- range $i, $t := .Params.topics }}{{ with site.GetPage (printf "/dictionary/topics/%s" $t) }} <a class="dict-topic" href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}{{ end }}</p>
     {{ .Content }}
 
     {{- /* Posts that name it: a term link, or any of the page's match regexes in the post's text. */ -}}
@@ -19,6 +21,23 @@
     <h2>Read more on this site</h2>
     <ul class="dict-uses">
         {{ range sort . "Date" "desc" }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <time class="ds-meta" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>{{ if .Draft }} <span class="ds-badge ds-badge-soon">draft</span>{{ end }}</li>{{ end }}
+    </ul>
+    {{ end }}
+
+    {{- /* See also: the page's own picks first, then other terms in its primary topic. */ -}}
+    {{ $self := . }}
+    {{ $all := partial "dict-terms.html" . }}
+    {{ $see := slice }}
+    {{ range .Params.see_also }}{{ with site.GetPage (printf "/dictionary/%s" .) }}{{ $see = $see | append . }}{{ end }}{{ end }}
+    {{ with index (.Params.topics | default slice) 0 }}
+        {{ range sort (where $all "Params.topics" "intersect" (slice .)) "Title" }}
+            {{ if and (ne .RelPermalink $self.RelPermalink) (not (in $see .)) }}{{ $see = $see | append . }}{{ end }}
+        {{ end }}
+    {{ end }}
+    {{ with first 8 $see }}
+    <h2>See also</h2>
+    <ul class="dict-see">
+        {{ range . }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <span class="ds-meta">{{ .Params.summary }}</span>{{ if .Draft }} <span class="ds-badge ds-badge-soon">draft</span>{{ end }}</li>{{ end }}
     </ul>
     {{ end }}
 

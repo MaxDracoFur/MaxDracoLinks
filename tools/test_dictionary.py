@@ -15,6 +15,7 @@ title: "OPNsense"
 term_kind: tool
 summary: "Firewall software."
 match: ['\\bOPNsense\\b']
+topics: [networking]
 sources:
   - {title: "OPNsense", url: "https://opnsense.org/", primary: true}
 draft: %s
@@ -28,7 +29,13 @@ class Site:
         self.dir = tempfile.mkdtemp()
         for d in ("blog", "dictionary"):
             os.makedirs(os.path.join(self.dir, "content", d))
+        os.makedirs(os.path.join(self.dir, "content", "dictionary", "topics"))
+        self.topic("networking")
         self.term("opnsense", TERM % term_draft)
+
+    def topic(self, slug, draft="false", body="How machines talk to each other."):
+        with open(os.path.join(self.dir, "content", "dictionary", "topics", slug + ".md"), "w") as fh:
+            fh.write(f"---\ntitle: {slug.title()}\ndraft: {draft}\n---\n{body}\n")
 
     def term(self, slug, text):
         with open(os.path.join(self.dir, "content", "dictionary", slug + ".md"), "w") as fh:
@@ -43,7 +50,8 @@ class Site:
     def problems(self, publish=True):
         terms = D.load_terms(os.path.join(self.dir, "content", "dictionary"))
         posts = D.load_posts(os.path.join(self.dir, "content", "blog"))
-        return D.check(posts, terms, NOW, publish)
+        topics = D.load_topics(os.path.join(self.dir, "content", "dictionary"))
+        return D.check(posts, terms, NOW, publish, topics=topics)
 
 
 class Posts(unittest.TestCase):
@@ -139,7 +147,8 @@ class Pages(unittest.TestCase):
         root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         terms = D.load_terms(os.path.join(root, "content", "dictionary"))
         for t in terms.values():
-            self.assertEqual(D.page_problems(t), [], t["file"])
+            self.assertEqual(D.page_problems(t, D.load_topics(os.path.join(root, "content", "dictionary")), terms),
+                             [], t["file"])
 
 
 class Sources(unittest.TestCase):
@@ -160,9 +169,10 @@ class Sources(unittest.TestCase):
 
 TLS = """---
 title: "TLS"
-term_kind: technology
+term_kind: protocol
 summary: "Encryption in transit."
 match: ['\\bTLS\\b']
+topics: [networking]
 sources:
   - {title: "RFC 8446", url: "https://www.rfc-editor.org/rfc/rfc8446", primary: true}
 classification:
@@ -204,6 +214,52 @@ class Classification(unittest.TestCase):
         self.assertTrue(any("Why it's on this site" in p for p in self.problems(
             '  - {standard: attack, clause: T1557, topic: x, url: "https://attack.mitre.org/techniques/T1557/"}',
             body="TLS encrypts.\n\n## Why it's on this site\n\nBecause.")))
+
+
+class Taxonomy(unittest.TestCase):
+    def test_kind_must_be_in_vocabulary(self):
+        s = Site()
+        s.term("x", (TERM % "false").replace("term_kind: tool", "term_kind: technology"))
+        self.assertTrue(any("term_kind" in p for p in s.problems()[0]["x.md"]))
+
+    def test_term_needs_a_topic(self):
+        s = Site()
+        s.term("x", (TERM % "false").replace("topics: [networking]\n", ""))
+        self.assertTrue(any("topics" in p for p in s.problems()[0]["x.md"]))
+
+    def test_unknown_topic_refused(self):
+        s = Site()
+        s.term("x", (TERM % "false").replace("[networking]", "[networking, cooking]"))
+        self.assertTrue(any("cooking" in p for p in s.problems()[0]["x.md"]))
+
+    def test_published_term_under_draft_topic_refused(self):
+        s = Site()
+        s.topic("networking", draft="true")
+        self.assertTrue(any("draft" in p for p in s.problems()[0]["opnsense.md"]))
+        self.assertNotIn("opnsense.md", s.problems(publish=False)[0])
+
+    def test_see_also_must_exist_and_not_be_self_or_draft(self):
+        s = Site()
+        s.term("x", (TERM % "false").replace("topics: [networking]", "topics: [networking]\nsee_also: [nope, x]"))
+        out = s.problems()[0]["x.md"]
+        self.assertTrue(any("nope" in p for p in out))
+        self.assertTrue(any("itself" in p for p in out))
+        s.term("y", TERM % "true")
+        s.term("x", (TERM % "false").replace("topics: [networking]", "topics: [networking]\nsee_also: [y]"))
+        self.assertTrue(any("draft" in p for p in s.problems()[0]["x.md"]))
+
+    def test_topic_page_needs_a_description(self):
+        s = Site()
+        s.topic("networking", body="")
+        self.assertIn("topics/networking.md", s.problems()[0])
+
+    def test_seed_topics_are_valid(self):
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        d = os.path.join(root, "content", "dictionary")
+        topics, terms = D.load_topics(d), D.load_terms(d)
+        self.assertTrue(topics)
+        for t in terms.values():
+            self.assertEqual(D.page_problems(t, topics, terms), [], t["file"])
 
 
 if __name__ == "__main__":

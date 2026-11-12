@@ -3,6 +3,7 @@ title: "OPNsense"
 term_kind: tool
 summary: "Open-source firewall and router software, built on FreeBSD."
 match: ['\bOPNsense\b']
+topics: [networking, security-operations]
 sources:
   - title: "OPNsense"
     url: "https://opnsense.org/"

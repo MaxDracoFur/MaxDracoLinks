@@ -986,3 +986,116 @@ a.dict-term {
 .dict-archive {
   font: 0.8rem/1.4 var(--ui);
   margin-left: 0.4rem; }
+
+.ds-vh {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap; }
+
+.dict-crumbs ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap; }
+
+.dict-crumbs li + li::before {
+  content: "/";
+  padding: 0 0.4rem;
+  color: var(--ink-2); }
+
+.dict-facets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+  align-items: center; }
+
+.dict-see li,
+.dict-topic-list li {
+  margin-bottom: 0.5rem; }
+
+.dict-topic-desc {
+  display: block;
+  color: var(--ink-2); }
+
+.dict-az ul,
+.dict-topics-inline {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem; }
+
+.dict-az a {
+  display: inline-block;
+  min-width: 1.75rem;
+  text-align: center; }
+
+.ds-search {
+  position: relative;
+  margin-left: auto;
+  flex: 0 1 18rem;
+  min-width: 12rem; }
+
+.ds-search input {
+  width: 100%;
+  box-sizing: border-box;
+  font: 1rem/1.4 var(--ui);
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--window);
+  color: var(--ink); }
+
+.ds-search input:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 1px; }
+
+.ds-search-list {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  top: calc(100% + 2px);
+  margin: 0;
+  padding: 0.25rem 0;
+  list-style: none;
+  max-height: 22rem;
+  overflow-y: auto;
+  background: var(--window);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15); }
+
+.ds-search-opt,
+.ds-search-none {
+  color: var(--ink);
+  padding: 0.4rem 0.6rem;
+  cursor: pointer; }
+
+.ds-search-none {
+  cursor: default;
+  color: var(--ink-2); }
+
+.ds-search-opt[aria-selected="true"],
+.ds-search-opt:hover {
+  background: var(--hover); }
+
+.ds-search-title {
+  display: block; }
+
+.ds-search-kind {
+  display: block;
+  font: 0.8rem/1.4 var(--ui);
+  color: var(--ink-2); }
+
+.ds-search-results li {
+  margin-bottom: 0.9rem; }
+
+@media (max-width: 40rem) {
+  .ds-search {
+    flex-basis: 100%;
+    margin-left: 0; } }

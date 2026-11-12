@@ -22,6 +22,7 @@
 {{ partial "consent.html" . }}
 {{- /* Cookieless first-party beacon; unfingerprinted copy at /js/beacon.js for cds./hack. */ -}}
 {{ with resources.Get "js/beacon.js" }}{{ (. | resources.Copy "js/beacon.js").Publish }}{{ with . | resources.Minify | resources.Fingerprint }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}{{ end }}
+{{ with resources.Get "js/search.js" | resources.Minify | resources.Fingerprint }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}
 {{ with resources.Get "js/gems.js" | resources.Minify | resources.Fingerprint }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}
 </body>
 </html>

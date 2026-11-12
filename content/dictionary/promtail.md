@@ -3,6 +3,8 @@ title: "Promtail"
 term_kind: tool
 summary: "Grafana Labs' older log shipper for Loki, now replaced by Grafana Alloy."
 match: ['\bPromtail\b']
+topics: [logging-and-monitoring]
+see_also: [grafana-alloy]
 sources:
   - title: "Promtail documentation"
     url: "https://grafana.com/docs/loki/latest/send-data/promtail/"

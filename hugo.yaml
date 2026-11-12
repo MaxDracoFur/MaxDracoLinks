@@ -5,3 +5,13 @@ theme: MaxDraco
 enableRobotsTXT: true
 enableGitInfo: true
 disableKinds: ["taxonomy", "term"]
+# Site search (card maxdraco-dictionary, Max 2026-11-11): /search-index.json, built with the site,
+# read by assets/js/search.js. Only pages a publish build would ship (no drafts, no future dates).
+outputFormats:
+  SearchIndex:
+    mediaType: application/json
+    baseName: search-index
+    isPlainText: true
+    notAlternative: true
+outputs:
+  home: [HTML, RSS, SearchIndex]

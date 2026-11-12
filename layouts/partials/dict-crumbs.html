@@ -1,0 +1,16 @@
+{{- /* Wiki breadcrumb for dictionary pages: Dictionary / <primary topic> / <term>, or
+       Dictionary / Topics / <topic>. seo.html emits the same trail as BreadcrumbList JSON-LD. */ -}}
+{{- $crumbs := slice (dict "name" "Dictionary" "url" "/dictionary/") -}}
+{{- if eq .Layout "topic" -}}
+  {{- $crumbs = $crumbs | append (dict "name" "Topics" "url" "/dictionary/topics/") -}}
+{{- else -}}
+  {{- with index (.Params.topics | default slice) 0 -}}
+    {{- with site.GetPage (printf "/dictionary/topics/%s" .) -}}{{ $crumbs = $crumbs | append (dict "name" .Title "url" .RelPermalink) }}{{- end -}}
+  {{- end -}}
+{{- end -}}
+<nav class="dict-crumbs ds-meta" aria-label="Breadcrumb">
+    <ol>
+        {{- range $crumbs }}<li><a href="{{ .url }}">{{ .name }}</a></li>{{ end -}}
+        <li><span aria-current="page">{{ .Title }}</span></li>
+    </ol>
+</nav>

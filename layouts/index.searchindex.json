@@ -1,0 +1,29 @@
+{{- /* Site search index (assets/js/search.js; checked by tools/search_check.py).
+       Never lists a draft, a future-dated or an expired page, whatever flags the build ran with,
+       nor a page with `search: false` or a disabled sitemap entry. */ -}}
+{{- $now := now -}}
+{{- $out := slice -}}
+{{- range site.Pages -}}
+  {{- $ok := and .Permalink (not .IsHome) (not .Draft) (not (.Date.After $now)) (not (.PublishDate.After $now)) (ne .Params.search false) (ne .Sitemap.Disable true) -}}
+  {{- if and $ok (not .ExpiryDate.IsZero) (.ExpiryDate.Before $now) }}{{ $ok = false }}{{ end -}}
+  {{- if $ok -}}
+    {{- $label := "Page" -}}
+    {{- $words := slice -}}
+    {{- if and (eq .Section "dictionary") .Params.term_kind -}}
+      {{- $label = printf "Dictionary: %s" (.Params.term_kind | humanize) -}}
+      {{- $words = $words | append .Params.term_kind -}}
+      {{- range .Params.topics }}{{ with site.GetPage (printf "/dictionary/topics/%s" .) }}{{ $words = $words | append .Title }}{{ end }}{{ end -}}
+      {{- range .Params.classification }}{{ $words = $words | append .clause }}{{ end -}}
+    {{- else if eq .Layout "topic" -}}
+      {{- $label = "Dictionary topic" -}}
+    {{- else if and (eq .Section "blog") .IsPage -}}
+      {{- $label = "Blog post" -}}
+    {{- end -}}
+    {{- range .Params.tags }}{{ $words = $words | append . }}{{ end -}}
+    {{- $sum := .Params.summary | default .Description | default (.Summary | plainify) -}}
+    {{- $sum = $sum | plainify | htmlUnescape | truncate 180 | htmlUnescape -}}
+    {{- $e := dict "t" (.Title | plainify | htmlUnescape) "u" .RelPermalink "k" $label "s" $sum "w" (delimit $words " ") -}}
+    {{- $out = $out | append $e -}}
+  {{- end -}}
+{{- end -}}
+{{- dict "pages" $out | jsonify -}}

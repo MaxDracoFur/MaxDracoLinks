@@ -1,8 +1,10 @@
 ---
 title: "UDP"
-term_kind: technology
+term_kind: protocol
 summary: "User Datagram Protocol: a simple, connectionless way to send small messages over a network, with no delivery guarantee and no encryption."
 match: ['\bUDP\b']
+topics: [networking]
+see_also: [tls, syslog]
 sources:
   - title: "RFC 768: User Datagram Protocol"
     url: "https://www.rfc-editor.org/rfc/rfc768"

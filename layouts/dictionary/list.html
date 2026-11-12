@@ -1,19 +1,31 @@
 {{ define "main" }}
 <h1>{{ .Title }}</h1>
 {{ .Content }}
-{{ with .RegularPages }}
+{{ $terms := partial "dict-terms.html" . }}
+{{ with $terms }}
+<h2>Browse by topic</h2>
+{{ partial "dict-topic-list.html" $ }}
+
+<h2>A to Z</h2>
+{{ $letters := slice }}{{ range . }}{{ $letters = $letters | append (upper (substr .Title 0 1)) }}{{ end }}
+{{ $letters = sort ($letters | uniq) }}
+<nav class="dict-az" aria-label="Jump to letter"><ul>{{ range $letters }}<li><a href="#letter-{{ . | urlize }}">{{ . }}</a></li>{{ end }}</ul></nav>
+{{ range $letters }}
+{{ $l := . }}
+<h3 id="letter-{{ $l | urlize }}">{{ $l }}</h3>
 <table class="ds-files dict-index">
     <thead><tr><th>Term</th><th>What it is</th><th>Kind</th></tr></thead>
     <tbody>
-    {{ range sort . "Title" }}
+    {{ range sort $terms "Title" }}{{ if eq (upper (substr .Title 0 1)) $l }}
     <tr>
         <td class="ds-name"><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ if .Draft }} <span class="ds-badge ds-badge-soon">draft</span>{{ end }}</td>
         <td class="ds-desc">{{ .Params.summary }}</td>
         <td>{{ .Params.term_kind | humanize }}</td>
     </tr>
-    {{ end }}
+    {{ end }}{{ end }}
     </tbody>
 </table>
+{{ end }}
 {{ else }}
 <p class="ds-meta">No entries yet.</p>
 {{ end }}

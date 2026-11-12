@@ -3,6 +3,8 @@ title: "Grafana Alloy"
 term_kind: tool
 summary: "Grafana Labs' collector that gathers logs, metrics and traces and sends them to storage like Loki."
 match: ['\bAlloy\b']
+topics: [logging-and-monitoring]
+see_also: [promtail, grafana-loki]
 sources:
   - title: "Grafana Alloy documentation"
     url: "https://grafana.com/docs/alloy/latest/"

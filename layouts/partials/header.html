@@ -5,6 +5,14 @@
             <img src="/res/pfp.jpg" alt="" class="ds-mark" width="56" height="56">
             <span class="ds-wordmark">max<span class="ds-sub">draco</span></span>
         </a>
+        {{- /* Site search (assets/js/search.js). Without JS the form opens /search/?q=. */}}
+        <form class="ds-search" role="search" action="/search/" method="get">
+            <label for="site-search" class="ds-vh">Search maxdraco.com</label>
+            <input id="site-search" name="q" type="search" placeholder="Search" autocomplete="off" spellcheck="false"
+                   role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="site-search-list">
+            <ul id="site-search-list" role="listbox" aria-label="Suggested pages" class="ds-search-list" hidden></ul>
+            <div role="status" aria-live="polite" class="ds-vh"></div>
+        </form>
     </div>
     <nav class="ds-band" aria-label="Sections">
         <ul class="ds-band-inner ds-tabs">

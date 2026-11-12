@@ -1,8 +1,10 @@
 ---
 title: "Base64"
-term_kind: technology
+term_kind: format
 summary: "A way to write any binary data using only 64 printable characters: A-Z, a-z, 0-9, + and /."
 match: ['\bbase64\b']
+topics: [data-formats]
+see_also: [api-key]
 sources:
   - title: "RFC 4648: The Base16, Base32, and Base64 Data Encodings"
     url: "https://www.rfc-editor.org/rfc/rfc4648"

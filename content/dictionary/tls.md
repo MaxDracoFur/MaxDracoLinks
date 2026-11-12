@@ -1,8 +1,10 @@
 ---
 title: "TLS"
-term_kind: technology
+term_kind: protocol
 summary: "Transport Layer Security: the encryption that protects data on its way across a network (the S in HTTPS)."
 match: ['\bTLS\b']
+topics: [cryptography, networking]
+see_also: [udp]
 sources:
   - title: "RFC 8446: The Transport Layer Security (TLS) Protocol Version 1.3"
     url: "https://www.rfc-editor.org/rfc/rfc8446"

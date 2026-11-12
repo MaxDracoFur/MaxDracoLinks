@@ -1,8 +1,10 @@
 ---
 title: "syslog"
-term_kind: technology
+term_kind: protocol
 summary: "The standard way computers and network devices send log messages to a log server."
 match: ['\bsyslog\b']
+topics: [logging-and-monitoring, networking]
+see_also: [grafana-alloy, siem]
 sources:
   - title: "RFC 5424: The Syslog Protocol"
     url: "https://www.rfc-editor.org/rfc/rfc5424"

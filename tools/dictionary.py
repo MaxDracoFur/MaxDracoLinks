@@ -6,7 +6,9 @@ its FIRST mention links to that term's page at /dictionary/<term>/. Each page
 lives at content/dictionary/<term>.md and declares, in its front matter:
 
     title: "OPNsense"
-    term_kind: tool               # tool | technology | place | thing
+    term_kind: tool               # what it is: see KINDS
+    topics: [networking]          # what area it belongs to; first = primary (breadcrumb)
+    see_also: [syslog]            # optional: other terms worth reading next
     summary: "one-line definition"
     match: ['\\bOPNsense\\b']     # regexes (case-insensitive) that mean a post names it
     sources:                      # primary/official source FIRST, with primary: true
@@ -38,6 +40,11 @@ primary source first, a non-https source, a regex Hugo's RE2 can't run).
     python3 tools/dictionary.py sync      # hand source URLs to the homelab checker and pull
                                           # its health into data/source_health.json (never fails)
 
+Wiki pattern (Max 2026-11-11, "start taxonomizing the dictionary"): every topic is a page
+at content/dictionary/topics/<slug>.md (title + a paragraph saying what the area covers).
+A term's `topics` must name those pages and `see_also` must name other terms; a published
+term may not point at a draft topic or term. /dictionary/ browses by topic and A-Z.
+
 Our OWN systems (badgescope, party...) are not dictionary terms: they are
 sequenced by concepts.yaml / tools/concepts.py.
 """
@@ -56,7 +63,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from concepts import _split, _when, load_posts, published  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-KINDS = ("tool", "technology", "place", "thing")
+KINDS = ("tool", "protocol", "standard", "format", "concept", "organisation", "place", "thing")
 SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 # RE2 (Hugo's findRE) has no lookaround or backreferences.
 NOT_RE2 = re.compile(r"\(\?[=!<]|\\[1-9]")
@@ -128,8 +135,37 @@ def load_terms(dict_dir: str) -> dict:
             "match": [str(p) for p in (fm.get("match") or [])],
             "sources": list(fm.get("sources") or []),
             "classification": list(fm.get("classification") or []),
+            "topics": [str(x) for x in (fm.get("topics") or [])],
+            "see_also": [str(x) for x in (fm.get("see_also") or [])],
         }
     return terms
+
+
+def load_topics(dict_dir: str) -> dict:
+    topics = {}
+    tdir = os.path.join(dict_dir, "topics")
+    if not os.path.isdir(tdir):
+        return topics
+    for name in sorted(os.listdir(tdir)):
+        if not name.endswith(".md") or name.startswith("_"):
+            continue
+        with open(os.path.join(tdir, name)) as fh:
+            fm, body = _split(fh.read())
+        slug = name[:-3]
+        topics[slug] = {"file": f"topics/{name}", "slug": slug, "title": fm.get("title") or "",
+                        "draft": bool(fm.get("draft", False)), "body": body}
+    return topics
+
+
+def topic_problems(t: dict) -> list[str]:
+    out = []
+    if not SLUG.match(t["slug"]):
+        out.append(f"slug '{t['slug']}' must be lowercase words joined by '-'")
+    if not str(t["title"]).strip():
+        out.append("no `title`")
+    if not t["body"].strip():
+        out.append("no description: say in a paragraph what this area covers")
+    return out
 
 
 def section_draft(dict_dir: str) -> bool:
@@ -141,7 +177,10 @@ def section_draft(dict_dir: str) -> bool:
     return bool(fm.get("draft", False))
 
 
-def page_problems(t: dict) -> list[str]:
+def page_problems(t: dict, topics: dict | None = None, terms: dict | None = None,
+                  publish: bool = False) -> list[str]:
+    """topics/terms given: also check that topics and see_also point at real pages (and, when
+    publishing a published term, at published ones)."""
     out = []
     fm = t["fm"]
     if not SLUG.match(t["slug"]):
@@ -184,6 +223,23 @@ def page_problems(t: dict) -> list[str]:
             out.append(f"classification {std} '{cid}' is not a valid {CLASSIFY[std][0]} id")
         elif c["url"] != url(cid):
             out.append(f"classification {std} {cid}: url should be {url(cid)}")
+    if not t.get("topics"):
+        out.append("no `topics`: name at least one area it belongs to (content/dictionary/topics/)")
+    live = publish and not t.get("draft")
+    if topics is not None:
+        for slug in t.get("topics", []):
+            if slug not in topics:
+                out.append(f"topic '{slug}' has no page (write content/dictionary/topics/{slug}.md)")
+            elif live and topics[slug]["draft"]:
+                out.append(f"topic '{slug}' is still a draft")
+    if terms is not None:
+        for slug in t.get("see_also", []):
+            if slug == t["slug"]:
+                out.append("see_also lists the term itself")
+            elif slug not in terms:
+                out.append(f"see_also '{slug}' has no page")
+            elif live and terms[slug]["draft"]:
+                out.append(f"see_also '{slug}' is still a draft")
     if not t["body"].strip():
         out.append("no definition in the body")
     if re.search(r"^#{1,6} Why it.s on this site", t["body"], re.M | re.I):
@@ -243,15 +299,21 @@ def post_problems(post: dict, terms: dict, publish: bool) -> list[str]:
 
 
 def check(posts: list[dict], terms: dict, now: datetime, publish: bool,
-          index_draft: bool = False) -> tuple[dict, dict]:
+          index_draft: bool = False, topics: dict | None = None) -> tuple[dict, dict]:
     """-> ({page file: [problem]}, {post file: [problem]}) for what the build ships."""
     pages = {}
+    topics = {} if topics is None else topics
     for t in terms.values():
         if publish and t["draft"]:
             continue
-        out = page_problems(t)
+        out = page_problems(t, topics, terms, publish)
         if out:
             pages[t["file"]] = out
+    for tp in topics.values():
+        if publish and tp["draft"]:
+            continue
+        if out := topic_problems(tp):
+            pages[tp["file"]] = out
     if publish and index_draft and any(not t["draft"] for t in terms.values()):
         pages["_index.md"] = ["a term page is published but the /dictionary/ index is still a draft"]
     built = [p for p in posts if published(p, now, drafts=not publish)]
@@ -318,7 +380,8 @@ def main(argv=None) -> int:
         p["line_offset"] = full[:len(full) - len(p["body"])].count("\n")
     now = datetime.now(timezone.utc).replace(tzinfo=None)
     publish = a.mode == "check"
-    pages, postp = check(posts, terms, now, publish, index_draft=section_draft(dict_dir))
+    pages, postp = check(posts, terms, now, publish, index_draft=section_draft(dict_dir),
+                         topics=load_topics(dict_dir))
     for f, out in pages.items():
         for line in out:
             print(f"dictionary: refusing: dictionary/{f}: {line}", file=sys.stderr)

@@ -1,0 +1,29 @@
+{{ define "main" }}
+{{- /* One topic of the dictionary (wiki pattern): its description, then its terms grouped by kind. */ -}}
+<article class="post dict-page dict-topic-page">
+    {{ partial "dict-crumbs.html" . }}
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    {{ $slug := .File.ContentBaseName }}
+    {{ $terms := where (partial "dict-terms.html" .) "Params.topics" "intersect" (slice $slug) }}
+    {{ $kinds := slice }}{{ range $terms }}{{ $kinds = $kinds | append .Params.term_kind }}{{ end }}
+    {{ range sort ($kinds | uniq) }}
+    {{ $k := . }}
+    <h2>{{ if eq $k "organisation" }}Organisations{{ else }}{{ $k | humanize | pluralize }}{{ end }}</h2>
+    <ul class="dict-see">
+        {{ range sort (where $terms "Params.term_kind" $k) "Title" }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <span class="ds-meta">{{ .Params.summary }}</span>{{ if .Draft }} <span class="ds-badge ds-badge-soon">draft</span>{{ end }}</li>{{ end }}
+    </ul>
+    {{ else }}
+    <p class="ds-meta">No entries in this topic yet.</p>
+    {{ end }}
+    {{- /* Related topics: others that share at least one of these terms. */ -}}
+    {{ $rel := slice }}
+    {{ range $terms }}{{ range .Params.topics }}{{ if and (ne . $slug) (not (in $rel .)) }}{{ $rel = $rel | append . }}{{ end }}{{ end }}{{ end }}
+    {{ with $rel }}
+    <h2>Related topics</h2>
+    <ul class="dict-topics-inline">
+        {{ range sort . }}{{ with site.GetPage (printf "/dictionary/topics/%s" .) }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}{{ end }}
+    </ul>
+    {{ end }}
+</article>
+{{ end }}

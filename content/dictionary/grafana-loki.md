@@ -3,6 +3,8 @@ title: "Grafana Loki"
 term_kind: tool
 summary: "A log storage and search system from Grafana Labs that indexes labels, not the full text."
 match: ['\bLoki\b']
+topics: [logging-and-monitoring]
+see_also: [grafana-alloy, promtail]
 sources:
   - title: "Grafana Loki"
     url: "https://grafana.com/oss/loki/"
