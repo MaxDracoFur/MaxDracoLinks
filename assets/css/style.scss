@@ -844,6 +844,65 @@ a.ds-case:hover {
     font: 0.85rem/1.4 var(--mono);
 }
 
+// Post tables (markdown, via _markup/render-table.html). Same look as .ds-files:
+// outlined box, ruled cells, blue-gray header, zebra rows. The wrapper scrolls
+// sideways on phones so a wide table never pushes the page.
+.post-table {
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 0 0 1.25rem;
+    border: 1px solid var(--rule);
+    background: var(--window);
+}
+
+.post-table:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+}
+
+.post-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font: 0.85rem/1.45 var(--ui);
+}
+
+.post-table th,
+.post-table td {
+    padding: 0.5rem 0.7rem;
+    border: 1px solid var(--rule);
+    vertical-align: top;
+    text-align: left;
+}
+
+// The wrapper draws the outer edge; drop the cells' own outer borders so it isn't doubled.
+.post-table tr > :first-child { border-left: 0; }
+.post-table tr > :last-child { border-right: 0; }
+.post-table thead tr:first-child > * { border-top: 0; }
+.post-table tbody tr:last-child > * { border-bottom: 0; }
+
+.post-table th {
+    background: var(--head);
+    color: var(--ink);
+    font-weight: 700;
+    border-bottom: 2px solid var(--rule);
+}
+
+// Prose cells stay readable on phones: the table is wider than the screen and
+// scrolls, and the extra width goes to the wordy columns, not the short ones.
+@media (max-width: 640px) {
+    .post-table table {
+        min-width: 34rem;
+    }
+}
+
+.post-table tbody tr:nth-child(even) td {
+    background: var(--zebra);
+}
+
+.post-table tbody tr:hover td {
+    background: var(--hover);
+}
+
 // ---- Home intro ---------------------------------------------------------------
 
 .ds-intro {
