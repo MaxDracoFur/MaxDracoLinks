@@ -20,4 +20,4 @@ sources:
 # Sources: primary/official first, each fetched 200 on 2026-11-12. classification ids checked at their canonical URLs.
 draft: false
 ---
-ads.txt is a plain text file a website publishes at the top of its address (example.com/ads.txt). Each line names an ad company and the account number allowed to sell ads on that site, for example a {{< term "google-adsense" >}} publisher ID. Advertisers read it before they buy, to confirm which ad accounts the site has authorised to sell its ad space. Because it is public, it also tells anyone which ad accounts a site is paid through.
+ads.txt is a plain text file a website publishes at the top of its address (example.com/ads.txt). Each line names an ad company and the account number allowed to sell ads on that site, for example a {{< term "google-adsense" >}} publisher ID. Advertisers read it before they buy, to confirm which ad accounts the site lets sell its ad space. Because it is public, it also tells anyone which ad accounts a site is paid through.
