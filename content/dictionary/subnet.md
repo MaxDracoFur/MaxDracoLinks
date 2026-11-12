@@ -20,4 +20,4 @@ classification:
 # Sources: primary/official first, each fetched 200 on 2026-11-12. classification ids checked at their canonical URLs.
 draft: false
 ---
-A subnet is one section of a network, defined by a block of {{< term "ip-address" "IP addresses" >}}, such as every address from 192.168.1.0 to 192.168.1.255. Devices in the same subnet, or network segment, talk to each other directly. Traffic to a different subnet has to go through a {{< term "router" >}}, which is where rules can be applied, so splitting a network into segments is a basic way to keep untrusted devices away from important ones.
+A subnet is one section of a network, defined by a block of {{< term "ip-address" "IP addresses" >}}, such as every address from 192.0.2.0 to 192.0.2.255. Devices in the same subnet, or network segment, talk to each other directly. Traffic to a different subnet has to go through a {{< term "router" >}}, which is where rules can be applied, so splitting a network into segments is a basic way to keep untrusted devices away from important ones.
