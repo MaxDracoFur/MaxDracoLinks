@@ -20,8 +20,8 @@ classification:
   - {standard: sp800-53, clause: "AC-17", topic: "Remote Access",
      url: "https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/SP_800_53_5_2_0/home?element=AC-17"}
 # Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first. classification ids checked against
+# wording (Max approved it 2026-11-11). Sources: primary/official first. classification ids checked against
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
-draft: true
+draft: false
 ---
 A VPN (virtual private network) creates an encrypted tunnel from a device to another network, so the device can use that network as if it were plugged in there. Companies use VPNs to let staff reach internal systems from home; individuals use them to get back to their home network, or to hide their traffic from the local network they're on. Anything on the local network sees only encrypted traffic going to the VPN server.

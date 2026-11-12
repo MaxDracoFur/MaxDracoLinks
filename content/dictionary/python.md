@@ -18,8 +18,8 @@ classification:
   - {standard: cpe, clause: "cpe:2.3:a:python:python", topic: "the name NVD files Python vulnerabilities under",
      url: "https://nvd.nist.gov/products/cpe/search/results?namingFormat=2.3&keyword=cpe%3A2.3%3Aa%3Apython%3Apython"}
 # Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first. classification ids checked against
+# wording (Max approved it 2026-11-11). Sources: primary/official first. classification ids checked against
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
-draft: true
+draft: false
 ---
 Python is a free, open-source programming language designed to be easy to read. It comes with a large standard library and is widely used for scripts, automation, web services, data analysis and security tooling. Programs run through an interpreter rather than being compiled first, so a script is just a text file you can read and change.

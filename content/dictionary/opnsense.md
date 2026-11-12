@@ -29,4 +29,4 @@ classification:
 # MITRE's ATT&CK 20.1 STIX, CWE 5.0 and CAPEC XML, NIST's 800-53 5.2.0 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-OPNsense is free, open-source software that turns a computer into a firewall and router. It runs on {{< term "freebsd" >}} and is managed from a web interface, with a REST {{< term "api" >}} for scripts. It started in 2015 as a fork of {{< term "pfsense" >}} and is developed by Deciso, a company in the Netherlands.
+OPNsense is free, open-source software that turns a computer into a firewall and router. It runs on {{< term "freebsd" >}} and is managed from a web interface, with a REST {{< term "api" >}} for scripts that authenticates each call with an {{< term "api-key" "API key" >}} and secret. It can send its logs to a central server over {{< term "syslog" >}}. It started in 2015 as a fork of {{< term "pfsense" >}} and is developed by Deciso, a company in the Netherlands.

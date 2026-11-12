@@ -18,8 +18,8 @@ classification:
   - {standard: attack, clause: "T1543.004", topic: "Create or Modify System Process: Launch Daemon",
      url: "https://attack.mitre.org/techniques/T1543/004/"}
 # Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first. classification ids checked against
+# wording (Max approved it 2026-11-11). Sources: primary/official first. classification ids checked against
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
-draft: true
+draft: false
 ---
 macOS is the operating system Apple ships on its Mac computers. Underneath the graphical interface it is a Unix system, so it has a terminal and many of the same command-line tools as Linux. It keeps passwords and keys in an encrypted store called the Keychain, and runs background services through a system called launchd.

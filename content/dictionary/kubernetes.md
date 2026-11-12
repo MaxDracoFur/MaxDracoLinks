@@ -25,8 +25,8 @@ classification:
   - {standard: attack, clause: "T1613", topic: "Container and Resource Discovery",
      url: "https://attack.mitre.org/techniques/T1613/"}
 # Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first. classification ids checked against
+# wording (Max approved it 2026-11-11). Sources: primary/official first. classification ids checked against
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
-draft: true
+draft: false
 ---
 Kubernetes (often written k8s) runs software packaged as containers across a group of machines called a cluster. You describe what should be running, such as three copies of a web app with a given amount of memory, and Kubernetes starts them, restarts them when they fail and moves them when a machine goes down. It began at {{< term "google" >}} and is now an open-source project of the Cloud Native Computing Foundation.

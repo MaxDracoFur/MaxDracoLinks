@@ -20,8 +20,8 @@ classification:
   - {standard: sp800-53, clause: "SC-7", topic: "Boundary Protection",
      url: "https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/SP_800_53_5_2_0/home?element=SC-07"}
 # Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first. classification ids checked against
+# wording (Max approved it 2026-11-11). Sources: primary/official first. classification ids checked against
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
-draft: true
+draft: false
 ---
 A VLAN (virtual {{< term "lan" >}}) lets one set of switches and cables carry several separate networks. Each frame is tagged with a VLAN number, and switches only deliver it to ports in the same VLAN, so devices on different VLANs can't talk directly. Traffic between them has to go through a router or firewall, where rules decide what is allowed. Guest networks and networks for untrusted devices are usually built this way.

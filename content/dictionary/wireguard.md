@@ -20,8 +20,8 @@ classification:
   - {standard: sp800-53, clause: "AC-17", topic: "Remote Access",
      url: "https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/SP_800_53_5_2_0/home?element=AC-17"}
 # Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first. classification ids checked against
+# wording (Max approved it 2026-11-11). Sources: primary/official first. classification ids checked against
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
-draft: true
+draft: false
 ---
 WireGuard is a {{< term "vpn" >}}: it creates an encrypted tunnel between devices so they can reach each other as if they were on the same network. It is deliberately small, with a fixed set of modern cryptography and no options to choose between. Each device has a key pair, and each side lists the public keys it will accept. It runs over {{< term "udp" >}} and stays silent to anything that doesn't present a valid key.

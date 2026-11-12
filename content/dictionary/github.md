@@ -18,8 +18,8 @@ classification:
   - {standard: attack, clause: "T1567.001", topic: "Exfiltration Over Web Service: Exfiltration to Code Repository",
      url: "https://attack.mitre.org/techniques/T1567/001/"}
 # Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first. classification ids checked against
+# wording (Max approved it 2026-11-11). Sources: primary/official first. classification ids checked against
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
-draft: true
+draft: false
 ---
 GitHub is a website for storing code and working on it together. Projects live in repositories that keep every change ever made, using the Git version-control system. Public repositories can be read by anyone, which is how most open-source software is shared, so a secret committed by mistake is quickly found by automated scanners. GitHub has been owned by Microsoft since 2018.
