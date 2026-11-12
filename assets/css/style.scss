@@ -822,6 +822,22 @@ a.ds-case:hover {
     border: 1px solid #000;
 }
 
+.post-figure {
+    margin: 1.25rem 0;
+
+    .post-image {
+        margin: 0;
+        max-width: 100%;
+        height: auto;
+    }
+
+    figcaption {
+        font: 0.8rem var(--ui);
+        color: var(--ink-2);
+        margin-top: 0.35rem;
+    }
+}
+
 .trip-meta {
     display: flex;
     flex-wrap: wrap;

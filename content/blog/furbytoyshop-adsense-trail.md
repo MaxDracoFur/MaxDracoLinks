@@ -9,7 +9,8 @@ review_status: "approved"
 introduces: []
 uses: []
 cover_image: "/res/covers/furbytoyshop-adsense-trail.jpg"
-cover_alt: "Album-style cover: the words One Ad Account beside a compact disc."
+cover_source: "stage:outbox/maxdraco-hack/2025-06-14/2025-06-14-01.jpg"
+cover_alt: "Max at a hacker conference table under a towering stack of tinfoil hats, face covered by a dragon sticker."
 summary: "Two unrelated hobby sites, one shared AdSense account. Here's how a public ID in page source ties sites together, and what a domain's history in the Wayback Machine says about who owns it now."
 ---
 
@@ -59,7 +60,13 @@ This section is mostly about the reader's side: the ID was always there. Nobody 
 
 *(measured 11-05, live page source)*
 
+{{< shot src="/res/furbytoyshop/furbytoyshop-2026.webp" alt="The furbytoyshop.com homepage: Furby Toy Shop, A little Furby. A lot to discover." caption="furbytoyshop.com, Nov 12, 2026 (screenshot)" >}}
+
+{{< shot src="/res/furbytoyshop/mayan-ruins-2026.webp" alt="The mayan-ruins.org homepage: Discover the Maya world, over a photo of a stepped pyramid." caption="mayan-ruins.org, Nov 12, 2026 (screenshot). Same publisher ID as the Furby site." >}}
+
 **Checked again, Nov 12.** furbytoyshop.com now also publishes the ID in its {{< term "ads-txt" "ads.txt" >}} file, the public list of who may sell its ad space: `google.com, pub-8865241261618143, DIRECT`. The Wayback Machine has that line by [July 2025](https://web.archive.org/web/20250717203412/https://furbytoyshop.com/ads.txt). mayan-ruins.org has no `ads.txt` line for it; the ID sits in the ad code on its pages. *(measured 11-12)*
+
+{{< shot src="/res/furbytoyshop/furbytoyshop-ads-txt.webp" alt="One line of text: google.com, pub-8865241261618143, DIRECT, f08c47fec0942fa0" caption="furbytoyshop.com/ads.txt, Nov 12, 2026 (screenshot, enlarged)" >}}
 
 **Did the traffic go up?** That was my hypothesis. What I'd seen was the Internet Archive's own record of the site: it was saving the Furby homepage far more often than it used to. Here's what that record says, counted as days with at least one saved copy of the homepage: *(measured 11-12, Wayback CDX: `web.archive.org/cdx/search/cdx?url=<site>/&collapse=timestamp:8`)*
 
@@ -97,6 +104,8 @@ So the honest answer is: I don't know if more people read it. The thing I took f
 - **By March 2025:** retitled "Best Furby Toy Reviews", with `ca-pub-8865241261618143`. It was on the live site when I first looked in April. It's still there today, now with a GA4 tag as well.
 
 *(measured 11-12 from the Wayback snapshots in the timeline, and the live page; the April sighting from my notes)*
+
+{{< shot src="/res/furbytoyshop/furbytoyshop-2018-wayback.webp" alt="The Wayback Machine's copy of furbytoyshop.com from January 3, 2018: a Furby Toy Shop banner and rows of Furby toys." caption="furbytoyshop.com as the Wayback Machine saved it on [Jan 3, 2018](https://web.archive.org/web/20180103133559/http://furbytoyshop.com/), before the change of hands (screenshot)" >}}
 
 **mayan-ruins.org's history** (archived since 2010):
 

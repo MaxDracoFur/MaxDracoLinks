@@ -1,0 +1,13 @@
+{{/* Screenshot of someone else's page, shown for commentary:
+     {{< shot src="/res/x.webp" alt="..." caption="..." >}}
+     Served from static/ on purpose: assets/ images get the "© maxdraco.com" watermark, which
+     would claim a third party's page as ours. The caption credits the source and date. */}}
+{{- $src := .Get "src" -}}
+{{- $w := 0 }}{{ $h := 0 -}}
+{{- with imageConfig (printf "static%s" $src) }}{{ $w = .Width }}{{ $h = .Height }}{{ end -}}
+<figure class="post-figure">
+<img src="{{ $src }}" alt="{{ .Get "alt" }}" class="post-image" loading="lazy" decoding="async"{{ with $w }} width="{{ . }}"{{ end }}{{ with $h }} height="{{ . }}"{{ end }}>
+{{- with .Get "caption" }}
+<figcaption>{{ . | markdownify }}</figcaption>
+{{- end }}
+</figure>

@@ -1,11 +1,32 @@
 {{/* Watermark: resize an image resource to width .w and stamp "© maxdraco.com"
-     bottom-right, white over a soft shadow. Returns the processed resource.
+     bottom-right in the brand colors: lime text (--lime) with a solid purple outline
+     (Max 2026-11-12: "make it purple/green").
+     images.Text has no bold or stroke option, so: the lime copy is stamped on a small
+     $b x $b grid (faux bold), and the purple copy around it at $o past each edge (outline).
+     Returns the processed resource.
      Every photo the site serves goes through this (header mark excepted). */}}
 {{ $img := .img.Resize (printf "%dx webp q82" .w) }}
-{{ $s := math.Max 11 (math.Round (div (float $img.Width) 42)) }}
+{{ $t := "© maxdraco.com" }}
+{{ $s := math.Max 13 (math.Round (div (float $img.Width) 34)) }}
 {{ $pad := math.Round (mul $s 0.9) }}
+{{ $x := sub $img.Width $pad }}
 {{ $y := sub $img.Height (mul $s 1.9) }}
-{{ $sh := images.Text "© maxdraco.com" (dict "color" "#000000aa" "size" $s "x" (add (sub $img.Width $pad) 2) "y" (add $y 2) "alignx" "right") }}
-{{ $tx := images.Text "© maxdraco.com" (dict "color" "#ffffffdd" "size" $s "x" (sub $img.Width $pad) "y" $y "alignx" "right") }}
-{{ $out := $img | images.Filter $sh $tx }}
+{{ $b := int (math.Max 1 (math.Round (div $s 24.0))) }}
+{{ $o := int (math.Max 1 (math.Round (div $s 18.0))) }}
+{{ $filters := slice }}
+{{/* outline: purple at the ring around the bold block */}}
+{{ range $dx := slice (sub 0 $o) 0 $b (add $b $o) }}
+  {{ range $dy := slice (sub 0 $o) 0 $b (add $b $o) }}
+    {{ if or (lt $dx 0) (gt $dx $b) (lt $dy 0) (gt $dy $b) }}
+      {{ $filters = $filters | append (images.Text $t (dict "color" "#4c1d95" "size" $s "x" (add $x $dx) "y" (add $y $dy) "alignx" "right")) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{/* fill: lime on the $b x $b grid */}}
+{{ range $dx := seq 0 $b }}
+  {{ range $dy := seq 0 $b }}
+    {{ $filters = $filters | append (images.Text $t (dict "color" "#7fd055" "size" $s "x" (add $x $dx) "y" (add $y $dy) "alignx" "right")) }}
+  {{ end }}
+{{ end }}
+{{ $out := $img.Filter $filters }}
 {{ return $out }}
