@@ -22,8 +22,8 @@ classification:
   - {standard: sp800-53, clause: "SC-20", topic: "Secure Name/Address Resolution Service (Authoritative Source)",
      url: "https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/SP_800_53_5_2_0/home?element=SC-20"}
 # Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first. classification ids checked against
+# wording (Max approved it 2026-11-12). Sources: primary/official first. classification ids checked against
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
-draft: true
+draft: false
 ---
 DNS (the Domain Name System) is how a computer finds out which numeric address belongs to a name such as example.com. Your device asks a resolver, the resolver asks the servers responsible for that name, and the answer is cached for a while. Almost every connection starts with a DNS lookup, which makes DNS a useful place both to block things and to watch what a network is doing.

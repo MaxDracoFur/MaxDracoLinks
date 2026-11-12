@@ -18,8 +18,8 @@ classification:
   - {standard: capec, clause: "CAPEC-287", topic: "TCP SYN Scan",
      url: "https://capec.mitre.org/data/definitions/287.html"}
 # Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first. classification ids checked against
+# wording (Max approved it 2026-11-12). Sources: primary/official first. classification ids checked against
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
-draft: true
+draft: false
 ---
-TCP (Transmission Control Protocol) is one of the two basic ways programs send data over the internet (the other is {{< term "udp" >}}). Before sending anything, the two sides set up a connection with a short handshake. TCP then numbers the data, resends anything lost and puts it back in order, so the receiving program sees one reliable stream. The web, email and {{< term "ssh" >}} all run over it.
+TCP (Transmission Control Protocol) is one of the two basic ways programs send data over the internet (the other is {{< term "udp" >}}). Before sending anything, the two sides set up a connection with a short handshake. TCP then numbers the data, resends anything lost and puts it back in order, so the receiving program sees one reliable stream. The web and email both run over it.

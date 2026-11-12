@@ -19,8 +19,8 @@ classification:
   - {standard: cpe, clause: "cpe:2.3:o:freebsd:freebsd", topic: "the name NVD files FreeBSD vulnerabilities under",
      url: "https://nvd.nist.gov/products/cpe/search/results?namingFormat=2.3&keyword=cpe%3A2.3%3Ao%3Afreebsd%3Afreebsd"}
 # Copy review: Claude drafted this entry (card maxdraco-dictionary, 2026-11-11). Max approves the
-# wording, then flips draft to false. Sources: primary/official first. CPE checked against the NVD CPE API
+# wording (Max approved it 2026-11-12). Sources: primary/official first. CPE checked against the NVD CPE API
 # on 2026-11-11 (cpeMatchString returned matches).
-draft: true
+draft: false
 ---
 FreeBSD is a free, open-source operating system descended from the Berkeley Software Distribution (BSD), the University of California's version of Unix. The kernel, drivers and basic tools are developed together as one project, which is part of why it is popular for servers, storage and network appliances. Firewalls such as {{< term "pfsense" >}} and {{< term "opnsense" >}} are built on it.
