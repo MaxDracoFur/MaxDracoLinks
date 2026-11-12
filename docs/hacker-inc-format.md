@@ -60,3 +60,33 @@ doesn't apply gets one sentence saying so.
   key material in the post.
 - **Disclosure.** A post about a vendor bug stays an untracked draft until the vendor's
   disclosure window ends. It says it was reported privately to the vendor, nothing more.
+- **Every term gets a dictionary link.** The first mention of anything a non-technical reader
+  might not know links to its `/dictionary/` page: products, but also concepts (SEO, domain,
+  firewall, IP address...). If the page doesn't exist, write it (a definition for visitors,
+  the primary source first, a taxonomy entry where one fits honestly) and get it approved
+  before the post publishes. `tools/dictionary.py` enforces the link; it can't tell you a
+  concept is missing a page, so read the draft as a newcomer would.
+- **Primary sources.** Cite the source that owns the fact: the vendor's or standard's own
+  page, the regulator, the dataset. A claim about a site's history cites the specific
+  archive snapshot (`web.archive.org/web/<timestamp>/<url>`), not "the Wayback Machine".
+- **Opinions are mine, and labelled.** A judgement ("reads like filler", "I think") is
+  marked as my view. Only what the evidence shows is stated as fact, and a hypothesis the
+  data doesn't support is written as a hypothesis, with what the data does show.
+- **No publishing while the risk is open.** A post whose own action items describe a live
+  weakness (an unrevoked credential, an untested isolation) carries a publish gate in its
+  front matter and on its card, and stays unpublished until those items are done and
+  re-tested. Then it's rewritten in the past tense.
+
+## Previewing
+
+- **Build drafts on current main.** The preview sandbox holds one build at a time, so a
+  build from a stale tree hides work that's already on main (it happened: table outlines
+  vanished from a drafts preview). Preview from a worktree of current main, with the drafts
+  copied in, never from an old checkout or a copied folder.
+- **The tooling refuses a stale tree.** `site_preview.py push --code-from <repo>` (what
+  `./preview.sh` calls) fetches and refuses unless the tree's HEAD contains `origin/main`,
+  and `deploy-cloudflare.sh` runs `site_preview.py fresh .` before it uploads. The fix is
+  to rebase or merge `origin/main` and rebuild. A deliberately old build needs
+  `PREVIEW_ALLOW_STALE=1` and says so.
+- **A deploy publishes the build the sandbox shows.** Pushing a drafts preview replaces it,
+  so run `./preview.sh` again right before `./deploy-cloudflare.sh`.
