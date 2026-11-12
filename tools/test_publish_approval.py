@@ -121,18 +121,20 @@ class ApprovalGate(unittest.TestCase):
         self.assertIn("terminal", r.stderr)
         self.assertFalse(os.path.exists(os.path.join(self.root, "approvals.json")))
 
-    def test_approve_works_at_a_real_terminal(self):
-        """Bug 2026-11-12: open('/dev/tty', 'r+') raises io.UnsupportedOperation ("not seekable",
-        an OSError subclass) on a real macOS terminal, so `approve` told Max he had no terminal.
-        Run it under a pseudo-terminal as its controlling terminal (what Terminal.app gives)."""
+    def at_terminal(self, answer: bytes):
+        """Run `approve` under a pseudo-terminal as its controlling terminal (what Terminal.app
+        gives), answer the prompt, return (exit code, output)."""
         import pty
+        import select
+        import signal
         import time
-        self.post(draft=True)
         pid, fd = pty.fork()
         if pid == 0:
             os.execv(sys.executable, [sys.executable, TOOL, "approve", "a", "--root", self.root])
-        out, sent, deadline = b"", False, time.time() + 20
+        out, sent, deadline = b"", False, time.time() + 10
         while time.time() < deadline:
+            if not select.select([fd], [], [], 0.5)[0]:
+                continue
             try:
                 chunk = os.read(fd, 4096)
             except OSError:
@@ -140,12 +142,36 @@ class ApprovalGate(unittest.TestCase):
             if not chunk:
                 break
             out += chunk
-            if not sent and b"Type the slug" in out:
-                os.write(fd, b"a\n")
+            if not sent and b"[y/N]" in out:
+                os.write(fd, answer)
                 sent = True
-        _, status = os.waitpid(pid, 0)
-        self.assertEqual(os.waitstatus_to_exitcode(status), 0, out.decode(errors="replace"))
-        self.assertIn("a", json.load(open(os.path.join(self.root, "approvals.json"))))
+        done, status = os.waitpid(pid, os.WNOHANG)
+        if done == 0:  # still waiting on the prompt: kill it, the test fails
+            os.kill(pid, signal.SIGKILL)
+            _, status = os.waitpid(pid, 0)
+        os.close(fd)
+        return os.waitstatus_to_exitcode(status), out.decode(errors="replace")
+
+    def test_approve_works_at_a_real_terminal(self):
+        """Bug 2026-11-12: open('/dev/tty', 'r+') raises io.UnsupportedOperation ("not seekable",
+        an OSError subclass) on a real macOS terminal, so `approve` told Max he had no terminal.
+        Max 2026-11-12: the answer is y or yes, anything else is no."""
+        for answer in (b"y\n", b"yes\n", b"Y\n", b"YES\n"):
+            with self.subTest(answer=answer):
+                self.setUp()
+                self.post(draft=True)
+                code, out = self.at_terminal(answer)
+                self.assertEqual(code, 0, out)
+                self.assertIn("a", json.load(open(os.path.join(self.root, "approvals.json"))))
+
+    def test_approve_anything_but_yes_is_no(self):
+        for answer in (b"n\n", b"\n", b"a\n", b"approve\n", b"yess\n", b"no\n"):
+            with self.subTest(answer=answer):
+                self.setUp()
+                self.post(draft=True)
+                code, out = self.at_terminal(answer)
+                self.assertNotEqual(code, 0, out)
+                self.assertFalse(os.path.exists(os.path.join(self.root, "approvals.json")))
 
 
 if __name__ == "__main__":

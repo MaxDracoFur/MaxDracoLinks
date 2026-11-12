@@ -10,7 +10,7 @@ pulled them the same morning: "that shouldn't have happened ... yes, fix the gat
     python3 tools/publish_approval.py plan             # drafts too: what each still needs; never fails
 
 - `approve` shows the post, its cover and where to read it in the sandbox, and records it only when
-  the slug is typed back on the controlling terminal (/dev/tty). An agent's shell has no terminal,
+  y or yes is typed on the controlling terminal (/dev/tty); anything else is no. An agent's shell has no terminal,
   so piping "y" into it does nothing. Agents never run `approve`, by any route.
 - approvals.json pins sha256 of the post (front matter minus date/draft/review_status, plus body)
   and of the cover file. Editing either afterwards voids the approval; scheduling doesn't.
@@ -123,9 +123,9 @@ def approve(root: str, slug: str) -> int:
                   f"  words:  {len(body.split())}\n  cover:  {fm.get('cover_image')} "
                   f"({'present' if cover else 'MISSING'})\n  source: {fm.get('cover_source') or '(none)'}\n"
                   f"  read it: {SANDBOX}/blog/{slug}/  (./preview.sh --drafts first)\n\n"
-                  f"Approve this exact text and cover for maxdraco.com? Type the slug to approve: ")
+                  f"Approve this exact text and cover for maxdraco.com? [y/N] ")
         tty.flush()
-        if tty_in.readline().strip() != slug:
+        if tty_in.readline().strip().lower() not in ("y", "yes"):  # Max 2026-11-12
             tty.write("Not approved.\n")
             return 1
         e = record(root, slug, via="terminal")
