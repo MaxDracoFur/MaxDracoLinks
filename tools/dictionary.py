@@ -468,7 +468,15 @@ def autolink(body: str, terms: dict, self_slug: str | None = None) -> tuple[str,
         text = body[m.start():m.end()]
         code = f'{{{{< term "{slug}" >}}}}' if text == t["title"] else f'{{{{< term "{slug}" "{text}" >}}}}'
         edits.append((m.start(), m.end(), code))
-    for a, b, code in sorted(edits, reverse=True):
+    # Two terms can match the same text ('Google' inside 'Google Analytics'). Keep the longest
+    # match at each start and drop any edit overlapping one already kept, or the splices corrupt
+    # each other.
+    kept, end = [], -1
+    for a, b, code in sorted(edits, key=lambda e: (e[0], -(e[1] - e[0]))):
+        if a >= end:
+            kept.append((a, b, code))
+            end = b
+    for a, b, code in reversed(kept):
         body = body[:a] + code + body[b:]
     return body, skipped
 

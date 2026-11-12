@@ -382,6 +382,23 @@ class AutoLink(unittest.TestCase):
         body, _ = D.autolink("UDP first, OPNsense second, UDP again.", terms)
         self.assertEqual(D.post_problems({"body": body}, terms, False), [])
 
+    def overlap_terms(self):
+        def t(slug, title, pattern):
+            return {"slug": slug, "title": title, "match": [pattern]}
+        return {"google": t("google", "Google", r"\bGoogle\b"),
+                "google-analytics": t("google-analytics", "Google Analytics", r"\bGoogle Analytics\b"),
+                "analytics": t("analytics", "Analytics", r"\bAnalytics\b")}
+
+    def test_same_start_overlap_keeps_longest_match(self):
+        # card dictionary-autolink-overlap-bug: was 'We used {{< term "google" >}}rm "google-analytics" >}} here.'
+        terms = {k: v for k, v in self.overlap_terms().items() if k != "analytics"}
+        body, _ = D.autolink("We used Google Analytics here.", terms)
+        self.assertEqual(body, 'We used {{< term "google-analytics" >}} here.')
+
+    def test_partial_overlap_is_skipped_not_spliced(self):
+        body, _ = D.autolink("We used Google Analytics here.", self.overlap_terms())
+        self.assertEqual(body, 'We used {{< term "google-analytics" >}} here.')
+
 
 if __name__ == "__main__":
     unittest.main()
