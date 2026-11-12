@@ -13,6 +13,8 @@ review_status: "copy-review"
 introduces: []   # concepts.yaml: what this post explains first
 uses: []         # concepts.yaml: what it leans on from earlier posts
 summary: ""      # one or two sentences for link previews: what failed, and what it cost
+cover_image: ""  # REQUIRED: /res/covers/<slug>.jpg, square CD-album-style (tools/cover_check.py)
+cover_alt: ""    # one line describing the cover for screen readers
 # Evidence: tag every fact in the text as measured (I saw it: a capture, a query, a count) or
 # inferred (I reasoned to it). Anything from older notes says so: "from my notes".
 # Disclosure: if a vendor is involved and their fix or advisory isn't public yet, keep this

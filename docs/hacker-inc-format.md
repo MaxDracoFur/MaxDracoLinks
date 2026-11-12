@@ -77,6 +77,20 @@ doesn't apply gets one sentence saying so.
   front matter and on its card, and stays unpublished until those items are done and
   re-tested. Then it's rewritten in the past tense.
 
+## Cover image
+
+- **Every post gets at least one square, CD-album-style cover.** It shows on the post and on its
+  CD-case tile in the lists. Set `cover_image` (and `cover_alt`) in front matter; put the file
+  under `assets/res/covers/` so it's watermarked on build.
+- **Where it comes from:** my own phone photos, or a graphic made for the post. Never stock, never
+  scraped. A phone photo only goes public through the stage app: approved for one maxdraco
+  destination, exported rebuilt from pixels, so EXIF and GPS are gone.
+- **Before a photo goes public:** no other people's faces, no addresses or number plates, no
+  screens showing anything secret, nothing that ties back to my legal name.
+- **Enforced:** `tools/cover_check.py check` refuses a post dated on or after 2026-11-12 that
+  publishes without a cover (or whose cover file is missing); older posts are warned about.
+  `plan` lists drafts still missing one. I approve the cover like any other copy.
+
 ## Previewing
 
 - **Build drafts on current main.** The preview sandbox holds one build at a time, so a
