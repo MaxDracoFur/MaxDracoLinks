@@ -26,4 +26,4 @@ classification:
 # MITRE's ATT&CK 20.1 STIX, CWE 5.0 and CAPEC XML, NIST's 800-53 5.2.0 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-An API key is a long random string that identifies a program to a service's API, a bit like a password made for software. Some services use a key alone; others pair a key with a separate secret. Anyone who gets hold of a working key can act as its owner, so keys are kept private and replaced when they might have been exposed.
+An {{< term "api" >}} key is a long random string that identifies a program to a service's API, a bit like a password made for software. Some services use a key alone; others pair a key with a separate secret. Anyone who gets hold of a working key can act as its owner, so keys are kept private and replaced when they might have been exposed.

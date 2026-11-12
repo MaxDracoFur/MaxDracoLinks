@@ -23,4 +23,4 @@ classification:
 # MITRE's ATT&CK 20.1 STIX, CWE 5.0 and CAPEC XML, NIST's 800-53 5.2.0 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-Alloy is an open-source telemetry collector from Grafana Labs. It receives or reads logs, metrics and traces, can change them on the way (for example, adding labels or dropping noisy lines), and forwards them to storage such as Loki or Prometheus. It is a distribution of the OpenTelemetry Collector and replaces Grafana's older agents, including Promtail.
+Alloy is an open-source telemetry collector from Grafana Labs. It receives or reads logs, metrics and traces, can change them on the way (for example, adding labels or dropping noisy lines), and forwards them to storage such as {{< term "grafana-loki" "Loki" >}} or {{< term "prometheus" >}}. It is a distribution of the OpenTelemetry Collector and replaces Grafana's older agents, including {{< term "promtail" >}}.

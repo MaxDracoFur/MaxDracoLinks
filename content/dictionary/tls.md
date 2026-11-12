@@ -29,4 +29,4 @@ classification:
 # MITRE's ATT&CK 20.1 STIX, CWE 5.0 and CAPEC XML, NIST's 800-53 5.2.0 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-TLS encrypts a connection between two programs and lets the client check it is talking to the right server. It replaced SSL, and it is what puts the padlock on HTTPS websites. The current version, TLS 1.3, is defined in RFC 8446. Other protocols, syslog among them, can run over TLS too.
+TLS encrypts a connection between two programs and lets the client check it is talking to the right server. It replaced SSL, and it is what puts the padlock on {{< term "http" "HTTPS" >}} websites. The current version, TLS 1.3, is defined in RFC 8446. Other protocols, {{< term "syslog" >}} among them, can run over TLS too.

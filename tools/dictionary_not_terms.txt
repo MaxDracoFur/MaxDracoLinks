@@ -1,0 +1,29 @@
+# Names tools/dictionary.py candidates found that are NOT dictionary terms (reviewed).
+# One per line, exact spelling; a trailing "s" plural is covered too. Everything else it
+# reports should get a page in content/dictionary/. Entries that would name an unpublished
+# post go in dictionary_not_terms.local.txt beside this file (git-excluded), read the same way.
+#
+# Ordinary words the heuristic catches (sentence starts, bold labels, table cells)
+Averaging
+Boop
+Bundling
+Capturing
+Conflict
+Contributing
+Download
+English
+Exposing
+Gateway
+Recommendations
+Redacting
+Reproduced
+Stricter
+Tickets
+Updates
+City
+AM
+PM
+TVs
+KEY        # "API KEY" in a quoted log line
+SECRET
+Wi         # "Wi-Fi" written with a non-ASCII hyphen; Wi-Fi itself is a candidate

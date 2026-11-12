@@ -28,4 +28,4 @@ classification:
 # MITRE's ATT&CK 20.1 STIX, CWE 5.0 and CAPEC XML, NIST's 800-53 5.2.0 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-Syslog is a simple format and protocol for log messages: each message has a timestamp, the host that sent it, how serious it is, and the text. It started on BSD Unix in the 1980s and is now an IETF standard. Devices can keep syslog locally or send it over the network to a central log server, classically over UDP port 514, or over TLS when the messages need protecting.
+Syslog is a simple format and protocol for log messages: each message has a timestamp, the host that sent it, how serious it is, and the text. It started on BSD Unix in the 1980s and is now an IETF standard. Devices can keep syslog locally or send it over the network to a central log server, classically over {{< term "udp" >}} port 514, or over {{< term "tls" >}} when the messages need protecting.

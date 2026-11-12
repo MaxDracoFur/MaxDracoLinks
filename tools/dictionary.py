@@ -27,7 +27,8 @@ A post links a term with the shortcode  {{< term "opnsense" >}}  (link text =
 the page title) or  {{< term "grafana-loki" "Loki" >}}  (own text), or a plain
 markdown link to /dictionary/<term>/.
 
-Over the posts a build will publish, `check` refuses when a post
+Over the posts a build will publish, and over every dictionary page it ships (pages link
+each other the same way, so a reader can walk from term to term), `check` refuses when a post
   1. names a known term without linking it, or its first mention isn't the link;
   2. links a term that has no page, or whose page is still a draft (Max approves
      every page's copy before a published post may lean on it);
@@ -37,6 +38,8 @@ primary source first, a non-https source, a regex Hugo's RE2 can't run).
     python3 tools/dictionary.py check     # publish mode: exit 1 on a break (preview.sh, deploy)
     python3 tools/dictionary.py plan      # drafts too: list what each draft still
                                           # needs; exit 1 only on broken pages/links
+    python3 tools/dictionary.py link      # link every unlinked first mention in place (then git diff)
+    python3 tools/dictionary.py candidates  # report names the site uses that have no page yet
     python3 tools/dictionary.py sync      # hand source URLs to the homelab checker and pull
                                           # its health into data/source_health.json (never fails)
 
@@ -77,6 +80,7 @@ MASKS = [
     re.compile(r"\{\{[<%].*?[>%]\}\}", re.S),               # any other shortcode
     re.compile(r"\]\([^)]*\)"),                             # link targets
     re.compile(r"https?://\S+"),                            # bare URLs
+    re.compile(r"(?<![\w}])/[\w.\-{}]+(?:/[\w.\-{}]*)*"),        # URL paths: /api/v1/status
     re.compile(r"^#{1,6} .*$", re.M),                       # headings: link in the body instead
 ]
 
@@ -126,10 +130,12 @@ def load_terms(dict_dir: str) -> dict:
         if not name.endswith(".md") or name.startswith("_"):
             continue
         with open(os.path.join(dict_dir, name)) as fh:
-            fm, body = _split(fh.read())
+            full = fh.read()
+        fm, body = _split(full)
         slug = str(fm.get("slug") or name[:-3])
         terms[slug] = {
             "file": name, "slug": slug, "fm": fm, "body": body,
+            "line_offset": full[:len(full) - len(body)].count("\n"),
             "title": fm.get("title") or slug,
             "draft": bool(fm.get("draft", False)),
             "match": [str(p) for p in (fm.get("match") or [])],
@@ -307,6 +313,10 @@ def check(posts: list[dict], terms: dict, now: datetime, publish: bool,
         if publish and t["draft"]:
             continue
         out = page_problems(t, topics, terms, publish)
+        # Pages link each other the way posts link pages (Max 2026-11-11: "you should be able
+        # to traverse the terms"). A page naming itself needs no link.
+        others = {k: v for k, v in terms.items() if k != t["slug"]}
+        out += post_problems(t, others, publish)
         if out:
             pages[t["file"]] = out
     for tp in topics.values():
@@ -363,9 +373,149 @@ def sync(root: str, terms: dict) -> int:
     return 0
 
 
+# ---- candidates: names the site uses that nothing covers yet (Max 2026-11-11: "scan my site for
+# terms that should be linked"). A heuristic, so it reports and never gates. Each name it lists
+# either gets a dictionary page or goes into NOT_TERMS_FILE after review, so the list can reach zero.
+NOT_TERMS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dictionary_not_terms.txt")
+CAND = re.compile(r"\b(?:[A-Z][a-z]+-[A-Z][a-z]+"            # Wi-Fi
+                  r"|[A-Za-z]*[a-z][A-Z][A-Za-z0-9]*"          # WireGuard, macOS, iPhone
+                  r"|[A-Z][A-Za-z0-9]*[A-Z0-9][A-Za-z0-9]*"   # VLAN, VLANs, WPA3, RP2040
+                  r"|[A-Z][a-z0-9]+(?: [A-Z][a-z0-9]+)*)\b")   # Prometheus, Flipper Zero
+FUNCTION_WORDS = set("""I A An The This That These Those It Its My Our Your Their His Her We You They He She
+Me Us Them In On At Of For And But Or Nor If When What Why How Who Whom Where Then So Not No Yes To By As
+Be Is Are Was Were Do Does Did Here There With Without From Into Onto Over Under After Before Since Until
+While Each Every Some All Any Both Most More Less Also Just Only Even Still Now Today Tonight Yesterday
+Tomorrow One Two Three Four Five Six Seven Eight Nine Ten Monday Tuesday Wednesday Thursday Friday Saturday
+Sunday January February March April May June July August September October November December Jan Feb Mar
+Apr Jun Jul Aug Sep Sept Oct Nov Dec OK Max Draco MaxDraco""".split())
+SENTENCE_START = re.compile(r"(?:^|[.!?:|>*(\-]|\d\.)\s*$")
+
+
+def _english() -> set:
+    try:
+        with open("/usr/share/dict/words") as fh:
+            return {w.strip() for w in fh if w[:1].islower()}
+    except OSError:
+        return set()
+
+
+def load_not_terms(path: str = NOT_TERMS_FILE) -> set:
+    """The committed list plus its git-excluded .local twin (names that would hint at unpublished posts)."""
+    out = set()
+    for p in (path, path.replace(".txt", ".local.txt")):
+        try:
+            with open(p) as fh:
+                out |= {ln.split("#")[0].strip() for ln in fh if ln.split("#")[0].strip()}
+        except OSError:
+            pass
+    return out
+
+
+def candidates(docs: dict, terms: dict, own: list, not_terms: set) -> list:
+    """docs {file: markdown body} -> [(name, mentions, [files])], most widely used first."""
+    masked = {f: scan(b)[1] for f, b in docs.items()}
+    lower = {w for m in masked.values() for w in re.findall(r"\b[a-z][a-z]+\b", m)}
+    english = _english()
+    covered = [re.compile(p, re.I) for t in terms.values() for p in t["match"]]
+    covered += [re.compile(p, re.I) for p in own]
+    hits: dict = {}
+    for f, m in masked.items():
+        for tok in CAND.finditer(m):
+            words = tok.group(0).split(" ")
+            start = m.rfind("\n", 0, tok.start()) + 1
+            initial = bool(SENTENCE_START.search(m[start:tok.start()]))
+            while words:  # drop leading ordinary words: "In October", "The Kea"
+                w = words[0]
+                ordinary = (w in FUNCTION_WORDS or
+                            (re.fullmatch(r"[A-Z][a-z]+", w) and
+                             (w.lower() in lower or (initial and w.lower() in english))))
+                if not ordinary:
+                    break
+                words, initial = words[1:], False
+            name = " ".join(words)
+            if not name or name in not_terms or (name.endswith("s") and name[:-1] in not_terms):
+                continue
+            if any(rx.search(name) for rx in covered):
+                continue
+            n, files = hits.setdefault(name, [0, set()])
+            hits[name][0] += 1
+            files.add(f)
+    for name in [n for n in hits if n.endswith("s") and n[:-1] in hits]:  # VLANs -> VLAN
+        n, files = hits.pop(name)
+        hits[name[:-1]][0] += n
+        hits[name[:-1]][1] |= files
+    return sorted(((w, n, sorted(fs)) for w, (n, fs) in hits.items()),
+                  key=lambda r: (-len(r[2]), -r[1], r[0]))
+
+
+def autolink(body: str, terms: dict, self_slug: str | None = None) -> tuple[str, list]:
+    """Wrap each term's first unlinked mention in {{< term >}}. -> (new body, [skipped notes]).
+    A mention inside markdown link text is skipped (a link can't nest), and reported."""
+    links, masked = scan(body)
+    edits, skipped = [], []
+    for slug, t in terms.items():
+        if slug == self_slug or slug in links:
+            continue
+        found = [m for p in t["match"] for m in re.finditer(p, masked, re.I)]
+        if not found:
+            continue
+        m = min(found, key=lambda x: x.start())
+        line_start = body.rfind("\n", 0, m.start()) + 1
+        before = body[line_start:m.start()]
+        if before.count("[") > before.count("]"):
+            skipped.append(f"{slug}: first mention is inside link text; link it by hand")
+            continue
+        text = body[m.start():m.end()]
+        code = f'{{{{< term "{slug}" >}}}}' if text == t["title"] else f'{{{{< term "{slug}" "{text}" >}}}}'
+        edits.append((m.start(), m.end(), code))
+    for a, b, code in sorted(edits, reverse=True):
+        body = body[:a] + code + body[b:]
+    return body, skipped
+
+
+def report_candidates(root: str, terms: dict, posts: list) -> int:
+    docs = {"blog/" + p["file"]: p["body"] for p in posts}
+    for extra in ("_index.md", "about/index.md"):
+        path = os.path.join(root, "content", extra)
+        if os.path.exists(path):
+            with open(path) as fh:
+                docs[extra] = _split(fh.read())[1]
+    own = []
+    cpath = os.path.join(root, "concepts.yaml")
+    if os.path.exists(cpath):
+        from concepts import load_concepts
+        own = [getattr(p, "pattern", p) for c in load_concepts(cpath).values() for p in c["match"]]
+    rows = candidates(docs, terms, own, load_not_terms())
+    for name, n, files in rows:
+        print(f"{len(files):3d} pages {n:4d}x  {name:32s} {', '.join(files)}")
+    print(f"dictionary: {len(rows)} candidate names; each gets a page or a line in "
+          f"tools/dictionary_not_terms.txt", file=sys.stderr)
+    return 0
+
+
+def link_all(root: str, terms: dict, posts: list) -> int:
+    """Rewrite posts and pages in place, linking each term's first mention. Review with git diff."""
+    targets = [(os.path.join(root, "content", "blog", p["file"]), p["body"], None) for p in posts]
+    targets += [(os.path.join(root, "content", "dictionary", t["file"]), t["body"], s)
+                for s, t in terms.items()]
+    changed = 0
+    for path, body, own in targets:
+        new, skipped = autolink(body, terms, own)
+        for note in skipped:
+            print(f"dictionary: link: {os.path.relpath(path, root)}: {note}", file=sys.stderr)
+        if new != body:
+            with open(path) as fh:
+                full = fh.read()
+            with open(path, "w") as fh:
+                fh.write(full[:len(full) - len(body)] + new)
+            changed += 1
+    print(f"dictionary: linked first mentions in {changed} file(s)", file=sys.stderr)
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=("check", "plan", "sync"))
+    ap.add_argument("mode", choices=("check", "plan", "sync", "candidates", "link"))
     ap.add_argument("--root", default=ROOT)
     a = ap.parse_args(argv)
     dict_dir = os.path.join(a.root, "content", "dictionary")
@@ -374,6 +524,10 @@ def main(argv=None) -> int:
         return sync(a.root, terms)
     blog = os.path.join(a.root, "content", "blog")
     posts = load_posts(blog)
+    if a.mode == "candidates":
+        return report_candidates(a.root, terms, posts)
+    if a.mode == "link":
+        return link_all(a.root, terms, posts)
     for p in posts:
         with open(os.path.join(blog, p["file"])) as fh:
             full = fh.read()

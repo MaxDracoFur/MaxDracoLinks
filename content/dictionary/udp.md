@@ -23,4 +23,4 @@ classification:
 # MITRE's ATT&CK 20.1 STIX, CWE 5.0 and CAPEC XML, NIST's 800-53 5.2.0 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-UDP is one of the two basic ways programs send data over the internet (the other is TCP). A sender just fires off a datagram: there is no connection set-up, no confirmation it arrived, and nothing on its own that encrypts it. That makes it fast and simple, which is why DNS, games, video calls and classic syslog use it.
+UDP is one of the two basic ways programs send data over the internet (the other is {{< term "tcp" >}}). A sender just fires off a datagram: there is no connection set-up, no confirmation it arrived, and nothing on its own that encrypts it. That makes it fast and simple, which is why {{< term "dns" >}}, games, video calls and classic {{< term "syslog" >}} use it.

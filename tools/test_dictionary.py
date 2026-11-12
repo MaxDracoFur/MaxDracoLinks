@@ -262,5 +262,126 @@ class Taxonomy(unittest.TestCase):
             self.assertEqual(D.page_problems(t, topics, terms), [], t["file"])
 
 
+UDP = """---
+title: "UDP"
+term_kind: protocol
+topics: [networking]
+summary: "Datagrams."
+match: ['\\bUDP\\b']
+sources:
+  - {title: "RFC 768", url: "https://www.rfc-editor.org/rfc/rfc768", primary: true}
+draft: false
+---
+%s
+"""
+
+
+class CrossLinks(unittest.TestCase):
+    """Max 2026-11-11: you should be able to traverse the terms, so a page that names another
+    term links its first mention, exactly like a post."""
+
+    def site(self, opnsense_body):
+        s = Site()
+        s.term("opnsense", (TERM % "false").replace("OPNsense is a firewall.", opnsense_body))
+        s.term("udp", UDP % "UDP sends datagrams.")
+        return s
+
+    def test_page_naming_another_term_unlinked_refused(self):
+        pages, _ = self.site("OPNsense can send syslog over UDP.").problems()
+        self.assertIn("names UDP without linking it", pages["opnsense.md"][0])
+
+    def test_page_linking_another_term_passes(self):
+        s = self.site('OPNsense can send syslog over {{< term "udp" >}}.')
+        self.assertEqual(s.problems(), ({}, {}))
+
+    def test_page_naming_itself_needs_no_link(self):
+        s = self.site("OPNsense is a firewall. OPNsense again.")
+        self.assertEqual(s.problems(), ({}, {}))
+
+    def test_published_page_linking_draft_page_refused(self):
+        s = self.site('Over {{< term "udp" >}}.')
+        s.term("udp", (UDP % "UDP.").replace("draft: false", "draft: true"))
+        pages, _ = s.problems()
+        self.assertIn("still a draft", pages["opnsense.md"][0])
+
+    def test_seed_pages_link_each_other(self):
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        d = os.path.join(root, "content", "dictionary")
+        pages, _ = D.check([], D.load_terms(d), NOW, publish=False, topics=D.load_topics(d))
+        self.assertEqual(pages, {})
+
+
+class Candidates(unittest.TestCase):
+    """Max 2026-11-11: "scan my site for terms that should be linked". Report-only: names the
+    site uses that no dictionary page, concept or reviewed not-a-term entry covers."""
+
+    def run_on(self, body, not_terms=()):
+        s = Site()
+        s.post("p", body)
+        terms = D.load_terms(os.path.join(s.dir, "content", "dictionary"))
+        docs = {"p.md": D.load_posts(os.path.join(s.dir, "content", "blog"))[0]["body"]}
+        return {w: files for w, _, files in D.candidates(docs, terms, [], set(not_terms))}
+
+    def test_unpaged_names_reported(self):
+        got = self.run_on("Postgres talks to Redis over a VPN.")
+        self.assertEqual(set(got), {"Postgres", "Redis", "VPN"})
+
+    def test_paged_term_not_reported(self):
+        self.assertNotIn("OPNsense", self.run_on('My {{< term "opnsense" >}} box. OPNsense again.'))
+
+    def test_ordinary_words_and_reviewed_not_terms_dropped(self):
+        got = self.run_on("Look here. Then look again, Read it and read it. My PC runs.",
+                          not_terms={"PC"})
+        self.assertEqual(got, {})
+
+    def test_plurals_fold_and_hyphenated_names_kept_whole(self):
+        got = self.run_on("One VLAN, two VLANs, on Wi-Fi.")
+        self.assertEqual(set(got), {"VLAN", "Wi-Fi"})
+
+    def test_code_and_links_ignored(self):
+        self.assertEqual(self.run_on("Run `Redis` or see [x](https://Prometheus.io/)."), {})
+
+    def test_own_concepts_not_reported(self):
+        s = Site()
+        terms = D.load_terms(os.path.join(s.dir, "content", "dictionary"))
+        got = D.candidates({"p.md": "My badgescope rig, Badgescope again."}, terms,
+                           [r"\bbadgescope\b"], set())
+        self.assertEqual(got, [])
+
+
+class AutoLink(unittest.TestCase):
+    """`dictionary.py link` wraps each term's first unlinked mention, so the rule is cheap to follow."""
+
+    def terms(self):
+        s = Site()
+        s.term("udp", UDP % "UDP.")
+        return D.load_terms(os.path.join(s.dir, "content", "dictionary"))
+
+    def test_wraps_first_mention_only_keeping_its_text(self):
+        body, skipped = D.autolink("OPNsense and udp. More OPNsense.", self.terms())
+        self.assertEqual(body, '{{< term "opnsense" >}} and {{< term "udp" "udp" >}}. More OPNsense.')
+        self.assertEqual(skipped, [])
+
+    def test_leaves_linked_code_and_self_alone(self):
+        text = 'See {{< term "opnsense" >}}. `UDP` here, then UDP.'
+        body, _ = D.autolink(text, self.terms(), self_slug="udp")
+        self.assertEqual(body, text)
+
+    def test_mention_inside_link_text_is_skipped_not_nested(self):
+        body, skipped = D.autolink("[my OPNsense notes](https://example.com/)", self.terms())
+        self.assertEqual(body, "[my OPNsense notes](https://example.com/)")
+        self.assertIn("opnsense", skipped[0])
+
+    def test_url_paths_are_not_mentions(self):
+        s = Site()
+        s.post("p", 'The docs say "GET /opnsense/api/v1/status". Then {{< term "opnsense" >}}.')
+        self.assertEqual(s.problems(), ({}, {}))
+
+    def test_result_passes_the_check(self):
+        terms = self.terms()
+        body, _ = D.autolink("UDP first, OPNsense second, UDP again.", terms)
+        self.assertEqual(D.post_problems({"body": body}, terms, False), [])
+
+
 if __name__ == "__main__":
     unittest.main()
