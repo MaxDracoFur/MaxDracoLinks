@@ -157,7 +157,9 @@
         ev.preventDefault();
         if (open) setActive(active <= 0 ? items.length - 1 : active - 1);
       } else if (ev.key === "Enter") {
-        if (open && active >= 0) { ev.preventDefault(); location.href = items[active].u; }
+        ev.preventDefault();
+        if (open && active >= 0) location.href = items[active].u;
+        else if (input.value.trim()) location.href = form.action + "?q=" + encodeURIComponent(input.value.trim());
       } else if (ev.key === "Escape") {
         if (!list.hidden) { ev.preventDefault(); setOpen(false); }
         else if (input.value) { ev.preventDefault(); input.value = ""; render(""); }
