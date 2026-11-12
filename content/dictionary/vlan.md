@@ -24,4 +24,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-A VLAN (virtual {{< term "lan" >}}) lets one set of switches and cables carry several separate networks. Each frame is tagged with a VLAN number, and switches only deliver it to ports in the same VLAN, so devices on different VLANs can't talk directly. Traffic between them has to go through a router or firewall, where rules decide what is allowed. Guest networks and networks for untrusted devices are usually built this way.
+A VLAN (virtual {{< term "lan" >}}) lets one set of switches and cables carry several separate networks. Each frame is tagged with a VLAN number, and switches only deliver it to ports in the same VLAN, so devices on different VLANs can't talk directly. Traffic between them has to go through a {{< term "router" "router" >}} or {{< term "firewall" "firewall" >}}, where rules decide what is allowed. Guest networks and networks for untrusted devices are usually built this way.

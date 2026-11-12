@@ -23,4 +23,4 @@ classification:
 # on 2026-11-11 (cpeMatchString returned matches).
 draft: false
 ---
-FreeBSD is a free, open-source operating system descended from the Berkeley Software Distribution (BSD), the University of California's version of Unix. The kernel, drivers and basic tools are developed together as one project, which is part of why it is popular for servers, storage and network appliances. Firewalls such as {{< term "pfsense" >}} and {{< term "opnsense" >}} are built on it.
+FreeBSD is a free, {{< term "open-source" "open-source" >}} operating system descended from the Berkeley Software Distribution (BSD), the University of California's version of Unix. The {{< term "kernel" "kernel" >}}, {{< term "driver" "drivers" >}} and basic tools are developed together as one project, which is part of why it is popular for servers, storage and network appliances. {{< term "firewall" "Firewalls" >}} such as {{< term "pfsense" >}} and {{< term "opnsense" >}} are built on it.

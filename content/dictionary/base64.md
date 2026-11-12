@@ -27,4 +27,4 @@ classification:
 # MITRE's ATT&CK 20.1 STIX, CWE 5.0 and CAPEC XML, NIST's 800-53 5.2.0 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-Base64 turns bytes into text so they can travel through systems that only handle letters and digits, such as email, URLs or config files. Every 3 bytes become 4 characters, and = signs pad the end. It is an encoding, not encryption: anyone can turn it back into the original bytes.
+Base64 turns bytes into text so they can travel through systems that only handle letters and digits, such as email, URLs or config files. Every 3 bytes become 4 characters, and = signs pad the end. It is an encoding, not {{< term "encryption" "encryption" >}}: anyone can turn it back into the original bytes.

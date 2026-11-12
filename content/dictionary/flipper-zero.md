@@ -23,4 +23,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-Flipper Zero is a small handheld device for experimenting with the signals around everyday electronics. It can read, save and replay sub-GHz radio, infrared remote, NFC and RFID signals, act as a {{< term "usb" >}} keyboard, and talk to hardware through its GPIO pins. Its firmware is open source, and people extend it with their own apps. It is popular with hardware hackers and security testers.
+Flipper Zero is a small handheld device for experimenting with the signals around everyday electronics. It can read, save and replay sub-GHz radio, infrared remote, NFC and RFID signals, act as a {{< term "usb" >}} keyboard, and talk to hardware through its GPIO pins. Its {{< term "firmware" "firmware" >}} is {{< term "open-source" "open source" >}}, and people extend it with their own apps. It is popular with hardware hackers and security testers.

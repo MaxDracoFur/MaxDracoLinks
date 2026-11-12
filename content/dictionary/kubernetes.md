@@ -29,4 +29,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-Kubernetes (often written k8s) runs software packaged as containers across a group of machines called a cluster. You describe what should be running, such as three copies of a web app with a given amount of memory, and Kubernetes starts them, restarts them when they fail and moves them when a machine goes down. It began at {{< term "google" >}} and is now an open-source project of the Cloud Native Computing Foundation.
+Kubernetes (often written k8s) runs software packaged as {{< term "container" "containers" >}} across a group of machines called a {{< term "cluster" "cluster" >}}. You describe what should be running, such as three copies of a web app with a given amount of memory, and Kubernetes starts them, restarts them when they fail and moves them when a machine goes down. It began at {{< term "google" >}} and is now an {{< term "open-source" "open-source" >}} project of the Cloud Native Computing Foundation.

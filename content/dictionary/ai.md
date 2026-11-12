@@ -22,4 +22,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-AI (artificial intelligence) is a broad name for software that does things such as recognising images, understanding text or making decisions, usually by learning patterns from large amounts of data rather than following hand-written rules. Today the term most often means large language models, which generate text and can be connected to tools to carry out tasks. Because they act on instructions written in plain language, they can also be tricked by instructions hidden in the data they read.
+AI (artificial intelligence) is a broad name for software that does things such as recognising images, understanding text or making decisions, usually by learning patterns from large amounts of data rather than following hand-written rules. Today the term most often means {{< term "llm" "large language models" >}}, which generate text and can be connected to tools to carry out tasks. Because they act on instructions written in plain language, they can also be tricked by instructions hidden in the data they read.

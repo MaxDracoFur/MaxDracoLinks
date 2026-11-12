@@ -26,4 +26,4 @@ classification:
 # MITRE's ATT&CK 20.1 STIX, CWE 5.0 and CAPEC XML, NIST's 800-53 5.2.0 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-Loki stores logs and lets you search them. Instead of indexing every word of every line, it indexes a few labels per stream (which host, which app) and scans the text only when you search. That keeps it cheap to run. It is open source, made by Grafana Labs, and is usually queried from Grafana with a language called LogQL.
+Loki stores logs and lets you search them. Instead of indexing every word of every line, it indexes a few labels per stream (which host, which app) and scans the text only when you search. That keeps it cheap to run. It is {{< term "open-source" "open source" >}}, made by {{< term "grafana" "Grafana Labs" >}}, and is usually queried from Grafana with a language called LogQL.

@@ -24,4 +24,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-SSH (Secure Shell) lets you log in to another computer over the network and run commands on it, with the whole session encrypted. It replaced older tools such as Telnet that sent passwords in plain text. You can sign in with a password or, more safely, with a key pair: the server keeps your public key and you keep the private one. OpenSSH is the version almost every Linux and Mac system ships.
+SSH (Secure {{< term "shell" "Shell" >}}) lets you log in to another computer over the network and run commands on it, with the whole session {{< term "encryption" "encrypted" >}}. It replaced older tools such as Telnet that sent passwords in plain text. You can sign in with a password or, more safely, with a {{< term "public-key-cryptography" "key pair" >}}: the server keeps your public key and you keep the private one. OpenSSH is the version almost every {{< term "linux" >}} and Mac system ships.

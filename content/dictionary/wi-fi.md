@@ -22,4 +22,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-Wi-Fi is the everyday name for wireless local networking, built on the IEEE 802.11 standards and certified by the Wi-Fi Alliance. Devices connect to an access point by network name and, usually, a password; WPA2 and WPA3 encrypt the traffic between the device and the access point. Because radio reaches beyond walls, anyone nearby can see a Wi-Fi network and try to join it.
+Wi-Fi is the everyday name for wireless local networking, built on the IEEE 802.11 standards and certified by the Wi-Fi Alliance. Devices connect to an {{< term "access-point" "access point" >}} by network name and, usually, a password; {{< term "wpa" "WPA2" >}} and WPA3 {{< term "encryption" "encrypt" >}} the traffic between the device and the access point. Because radio reaches beyond walls, anyone nearby can see a Wi-Fi network and try to join it.

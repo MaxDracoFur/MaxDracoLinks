@@ -24,4 +24,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-WireGuard is a {{< term "vpn" >}}: it creates an encrypted tunnel between devices so they can reach each other as if they were on the same network. It is deliberately small, with a fixed set of modern cryptography and no options to choose between. Each device has a key pair, and each side lists the public keys it will accept. It runs over {{< term "udp" >}} and stays silent to anything that doesn't present a valid key.
+WireGuard is a {{< term "vpn" >}}: it creates an {{< term "tunnel" "encrypted tunnel" >}} between devices so they can reach each other as if they were on the same network. It is deliberately small, with a fixed set of modern cryptography and no options to choose between. Each device has a {{< term "public-key-cryptography" "key pair" >}}, and each side lists the public keys it will accept. It runs over {{< term "udp" >}} and stays silent to anything that doesn't present a valid key.

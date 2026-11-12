@@ -26,4 +26,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-DNS (the Domain Name System) is how a computer finds out which numeric address belongs to a name such as example.com. Your device asks a resolver, the resolver asks the servers responsible for that name, and the answer is cached for a while. Almost every connection starts with a DNS lookup, which makes DNS a useful place both to block things and to watch what a network is doing.
+DNS (the {{< term "domain" "Domain Name" >}} System) is how a computer finds out which numeric address belongs to a name such as example.com. Your device asks a resolver, the resolver asks the servers responsible for that name, and the answer is cached for a while. Almost every connection starts with a DNS lookup, which makes DNS a useful place both to block things and to watch what a network is doing.

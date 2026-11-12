@@ -24,4 +24,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-A LAN (local area network) is the network inside one place: the computers, phones, printers and other devices in a home or office, connected by Ethernet cables or {{< term "wi-fi" >}} to the same switches. Devices on a LAN can usually reach each other directly, which is convenient but also means one compromised device can see and attack the others. A router connects the LAN to the internet.
+A LAN (local area network) is the network inside one place: the computers, phones, printers and other devices in a home or office, connected by {{< term "ethernet" "Ethernet" >}} cables or {{< term "wi-fi" >}} to the same switches. Devices on a LAN can usually reach each other directly, which is convenient but also means one compromised device can see and attack the others. A {{< term "router" "router" >}} connects the LAN to the internet.

@@ -25,4 +25,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-Prometheus is a free, open-source monitoring system. Every few seconds it visits a list of targets and reads their metrics, numbers such as CPU use, request counts or temperature, then stores them as time series. You query them with a language called PromQL, draw them as graphs, and write alert rules that fire when a value goes wrong. Small programs called exporters translate other systems' numbers into Prometheus's format.
+Prometheus is a free, {{< term "open-source" "open-source" >}} monitoring system. Every few seconds it visits a list of targets and reads their {{< term "metrics" "metrics" >}}, numbers such as CPU use, request counts or temperature, then stores them as time series. You query them with a language called PromQL, draw them as graphs, and write alert rules that fire when a value goes wrong. Small programs called {{< term "exporter" "exporters" >}} translate other systems' numbers into Prometheus's format.

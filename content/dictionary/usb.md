@@ -26,4 +26,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-USB (Universal Serial Bus) is the standard way to plug keyboards, storage, network adapters, phones and almost anything else into a computer, and to power them. A USB device tells the computer what kind of device it is, and the computer loads a driver to match. That trust is why a malicious device can pretend to be a keyboard, and why some systems limit which USB devices they accept.
+USB (Universal Serial Bus) is the standard way to plug keyboards, storage, network adapters, phones and almost anything else into a computer, and to power them. A USB device tells the computer what kind of device it is, and the computer loads a {{< term "driver" "driver" >}} to match. That trust is why a malicious device can pretend to be a keyboard, and why some systems limit which USB devices they accept.

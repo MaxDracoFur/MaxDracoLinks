@@ -22,4 +22,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-GitHub is a website for storing code and working on it together. Projects live in repositories that keep every change ever made, using the Git version-control system. Public repositories can be read by anyone, which is how most open-source software is shared, so a secret committed by mistake is quickly found by automated scanners. GitHub has been owned by Microsoft since 2018.
+GitHub is a website for storing code and working on it together. Projects live in repositories that keep every change ever made, using the {{< term "git" >}} version-control system. Public repositories can be read by anyone, which is how most {{< term "open-source" "open-source" >}} software is shared, so a secret committed by mistake is quickly found by automated scanners. GitHub has been owned by Microsoft since 2018.

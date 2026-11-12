@@ -22,4 +22,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-Python is a free, open-source programming language designed to be easy to read. It comes with a large standard library and is widely used for scripts, automation, web services, data analysis and security tooling. Programs run through an interpreter rather than being compiled first, so a script is just a text file you can read and change.
+Python is a free, {{< term "open-source" "open-source" >}} programming language designed to be easy to read. It comes with a large standard library and is widely used for scripts, automation, web services, data analysis and security tooling. Programs run through an interpreter rather than being compiled first, so a script is just a text file you can read and change.

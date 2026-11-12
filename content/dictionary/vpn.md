@@ -24,4 +24,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-A VPN (virtual private network) creates an encrypted tunnel from a device to another network, so the device can use that network as if it were plugged in there. Companies use VPNs to let staff reach internal systems from home; individuals use them to get back to their home network, or to hide their traffic from the local network they're on. Anything on the local network sees only encrypted traffic going to the VPN server.
+A VPN (virtual private network) creates an {{< term "tunnel" "encrypted tunnel" >}} from a device to another network, so the device can use that network as if it were plugged in there. Companies use VPNs to let staff reach internal systems from home; individuals use them to get back to their home network, or to hide their traffic from the local network they're on. Anything on the local network sees only {{< term "encryption" "encrypted" >}} traffic going to the VPN server.

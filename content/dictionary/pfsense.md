@@ -23,4 +23,4 @@ classification:
 # on 2026-11-11 (cpeMatchString returned matches).
 draft: false
 ---
-pfSense is firewall and router software that runs on {{< term "freebsd" >}} and is managed from a web interface. It dates from 2004 and is developed by Netgate, which offers a free Community Edition and a commercial pfSense Plus. In 2015 a group of developers forked it to create {{< term "opnsense" >}}.
+pfSense is {{< term "firewall" "firewall" >}} and {{< term "router" "router" >}} software that runs on {{< term "freebsd" >}} and is managed from a web interface. It dates from 2004 and is developed by Netgate, which offers a free Community Edition and a commercial pfSense Plus. In 2015 a group of developers forked it to create {{< term "opnsense" >}}.

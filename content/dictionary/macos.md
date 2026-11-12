@@ -22,4 +22,4 @@ classification:
 # MITRE's ATT&CK STIX, CWE 5.0, CAPEC and ATLAS data, NIST's 800-53 rev5 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-macOS is the operating system Apple ships on its Mac computers. Underneath the graphical interface it is a Unix system, so it has a terminal and many of the same command-line tools as Linux. It keeps passwords and keys in an encrypted store called the Keychain, and runs background services through a system called launchd.
+macOS is the operating system Apple ships on its Mac computers. Underneath the graphical interface it is a Unix system, so it has a terminal and many of the same command-line tools as {{< term "linux" >}}. It keeps passwords and keys in an {{< term "encryption" "encrypted" >}} store called the {{< term "keychain" "Keychain" >}}, and runs {{< term "daemon" "background services" >}} through a system called launchd.

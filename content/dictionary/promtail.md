@@ -21,4 +21,4 @@ classification:
 # MITRE's ATT&CK 20.1 STIX, CWE 5.0 and CAPEC XML, NIST's 800-53 5.2.0 OSCAL catalog and the NVD CPE API on 2026-11-11.
 draft: false
 ---
-Promtail was the agent that read log files (or received {{< term "syslog" >}}), attached labels and pushed the lines to {{< term "grafana-loki" "Loki" >}}. Grafana Labs has deprecated it in favour of {{< term "grafana-alloy" >}}, which does the same job and more; its documentation includes a migration guide.
+Promtail was the agent that read log files (or received {{< term "syslog" >}}), attached labels and pushed the lines to {{< term "grafana-loki" "Loki" >}}. {{< term "grafana" "Grafana Labs" >}} has deprecated it in favour of {{< term "grafana-alloy" >}}, which does the same job and more; its documentation includes a migration guide.
