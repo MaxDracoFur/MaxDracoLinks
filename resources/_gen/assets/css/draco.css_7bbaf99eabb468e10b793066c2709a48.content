@@ -649,6 +649,17 @@ a.ds-case:hover {
   margin: 1.25rem 0;
   border: 1px solid #000; }
 
+.post-figure {
+  margin: 1.25rem 0; }
+  .post-figure .post-image {
+    margin: 0;
+    max-width: 100%;
+    height: auto; }
+  .post-figure figcaption {
+    font: 0.8rem var(--ui);
+    color: var(--ink-2);
+    margin-top: 0.35rem; }
+
 .trip-meta {
   display: flex;
   flex-wrap: wrap;
@@ -667,6 +678,57 @@ a.ds-case:hover {
   border: 1px solid var(--rule);
   padding: 0.6rem 0.75rem;
   font: 0.85rem/1.4 var(--mono); }
+
+.post-table {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0 0 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--window); }
+
+.post-table:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px; }
+
+.post-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 0.85rem/1.45 var(--ui); }
+
+.post-table th,
+.post-table td {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--rule);
+  vertical-align: top;
+  text-align: left; }
+
+.post-table tr > :first-child {
+  border-left: 0; }
+
+.post-table tr > :last-child {
+  border-right: 0; }
+
+.post-table thead tr:first-child > * {
+  border-top: 0; }
+
+.post-table tbody tr:last-child > * {
+  border-bottom: 0; }
+
+.post-table th {
+  background: var(--head);
+  color: var(--ink);
+  font-weight: 700;
+  border-bottom: 2px solid var(--rule); }
+
+@media (max-width: 640px) {
+  .post-table table {
+    min-width: 34rem; } }
+
+.post-table tbody tr:nth-child(even) td {
+  background: var(--zebra); }
+
+.post-table tbody tr:hover td {
+  background: var(--hover); }
 
 .ds-intro {
   display: flex;
