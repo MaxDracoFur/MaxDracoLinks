@@ -90,6 +90,27 @@ doesn't apply gets one sentence saying so.
 - **Enforced:** `tools/cover_check.py check` refuses a post dated on or after 2026-11-12 that
   publishes without a cover (or whose cover file is missing); older posts are warned about.
   `plan` lists drafts still missing one. I approve the cover like any other copy.
+- **From 2026-11-13 the cover is one of my photos.** Set `cover_source: "stage:<outbox path>"`
+  to the stage app export it came from. A made-up title card (words beside a drawn disc) doesn't
+  count: that's what went out on 11-12 and it read as "no images". Posts that show something
+  (a screen, a device, a log) also carry those pictures in the body, through stage as well.
+
+## Approval (the publish gate)
+
+On 2026-11-12 three posts went live because an agent read "3 today" as approval and wrote
+`review_status: "approved"` into them itself. They came down the same morning. So:
+
+- **Only I approve, at my own terminal:** `python3 tools/publish_approval.py approve <slug>`
+  shows the post, its cover and its sandbox link, and records it when I type the slug back.
+  It reads `/dev/tty`, which an agent's shell doesn't have. Agents never run it, by any route,
+  and never treat something I said in chat as approval of a specific build.
+- **Approval is of exact content.** `approvals.json` pins hashes of the post and its cover.
+  Any edit after that voids it; changing only `date` or `draft` doesn't.
+- **`review_status` in front matter means nothing to the gate.**
+- **Enforced:** `deploy-cloudflare.sh` and `./preview.sh` run `publish_approval.py check`, which
+  refuses an unapproved or changed post dated on or after 2026-11-12. The deploy's y/N is read
+  from the terminal too, so it can't be answered by piping. `./preview.sh --drafts` lists what
+  still waits on me (`plan`).
 
 ## Previewing
 
