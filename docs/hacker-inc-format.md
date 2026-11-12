@@ -77,6 +77,25 @@ doesn't apply gets one sentence saying so.
   front matter and on its card, and stays unpublished until those items are done and
   re-tested. Then it's rewritten in the past tense.
 
+## Title
+
+- **Say what the post shows, plainly.** No teaser, no cliffhanger, no listicle ("10 ... Tricks").
+  A title states a finding, not a mystery.
+- **Carry one phrase a stranger would search for.** Set `search_phrase:` in front matter to the 2
+  to 6 words someone would type to find this post ("AdSense publisher ID", "ads.txt"), and put
+  those words in the title.
+- **Keep the hook too.** The specific, odd detail is what earns the tap from Telegram or a link.
+  The best title has both: the search phrase and the detail.
+- **Worked example:** [A Furby fan site, a Mayan ruins guide, and one ad account](https://maxdraco.com/blog/furbytoyshop-adsense-trail/)
+  (2026-11-12). The hook works: it was the most-read page on the site its first week, all from
+  direct links and Telegram, with readers spending about two minutes on it. But it got no search
+  traffic, because nobody searches "Furby fan site Mayan ruins". *(measured 11-12: 17 human
+  pageviews, 0 search referrers)* With the rule it would read something like "One AdSense
+  publisher ID, two unrelated sites: a Furby fan site and a Mayan ruins guide".
+- **Enforced:** `tools/title_check.py check` refuses a post dated on or after 2026-11-13 that
+  publishes without a `search_phrase`, with a title that doesn't contain it, or with a listicle
+  title. `plan` lists drafts. Older posts are untouched.
+
 ## Cover image
 
 - **Every post gets at least one square, CD-album-style cover.** It shows on the post and on its

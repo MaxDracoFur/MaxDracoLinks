@@ -14,6 +14,7 @@ review_status: "copy-review"
 introduces: []   # concepts.yaml: what this post explains first
 uses: []         # concepts.yaml: what it leans on from earlier posts
 summary: ""      # one or two sentences for link previews: what failed, and what it cost
+search_phrase: ""  # REQUIRED: 2-6 words a stranger would search for; the title must contain them (tools/title_check.py)
 cover_image: ""  # REQUIRED: /res/covers/<slug>.jpg, square CD-album-style (tools/cover_check.py)
 cover_source: ""  # REQUIRED: "stage:<outbox path>", one of Max's photos exported by the stage app (tools/publish_approval.py)
 cover_alt: ""    # one line describing the cover for screen readers
