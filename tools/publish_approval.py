@@ -105,8 +105,12 @@ def problems(root: str, now: datetime, drafts: bool):
 
 
 def approve(root: str, slug: str) -> int:
+    # Two handles, not one "r+": a terminal isn't seekable, and Python's "r+" text mode raises
+    # io.UnsupportedOperation (an OSError) on every real terminal, which read as "no terminal".
+    # With no controlling terminal (an agent's shell) the open itself fails with ENXIO.
     try:
-        tty = open("/dev/tty", "r+")
+        tty_in = open("/dev/tty", "r")
+        tty = open("/dev/tty", "w")
     except OSError:
         print("approve: needs Max at a real terminal (no controlling terminal here). "
               "Agents never approve posts.", file=sys.stderr)
@@ -121,7 +125,7 @@ def approve(root: str, slug: str) -> int:
                   f"  read it: {SANDBOX}/blog/{slug}/  (./preview.sh --drafts first)\n\n"
                   f"Approve this exact text and cover for maxdraco.com? Type the slug to approve: ")
         tty.flush()
-        if tty.readline().strip() != slug:
+        if tty_in.readline().strip() != slug:
             tty.write("Not approved.\n")
             return 1
         e = record(root, slug, via="terminal")

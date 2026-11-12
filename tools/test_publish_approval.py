@@ -121,6 +121,32 @@ class ApprovalGate(unittest.TestCase):
         self.assertIn("terminal", r.stderr)
         self.assertFalse(os.path.exists(os.path.join(self.root, "approvals.json")))
 
+    def test_approve_works_at_a_real_terminal(self):
+        """Bug 2026-11-12: open('/dev/tty', 'r+') raises io.UnsupportedOperation ("not seekable",
+        an OSError subclass) on a real macOS terminal, so `approve` told Max he had no terminal.
+        Run it under a pseudo-terminal as its controlling terminal (what Terminal.app gives)."""
+        import pty
+        import time
+        self.post(draft=True)
+        pid, fd = pty.fork()
+        if pid == 0:
+            os.execv(sys.executable, [sys.executable, TOOL, "approve", "a", "--root", self.root])
+        out, sent, deadline = b"", False, time.time() + 20
+        while time.time() < deadline:
+            try:
+                chunk = os.read(fd, 4096)
+            except OSError:
+                break
+            if not chunk:
+                break
+            out += chunk
+            if not sent and b"Type the slug" in out:
+                os.write(fd, b"a\n")
+                sent = True
+        _, status = os.waitpid(pid, 0)
+        self.assertEqual(os.waitstatus_to_exitcode(status), 0, out.decode(errors="replace"))
+        self.assertIn("a", json.load(open(os.path.join(self.root, "approvals.json"))))
+
 
 if __name__ == "__main__":
     unittest.main()
