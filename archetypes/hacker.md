@@ -7,6 +7,7 @@ title: "{{ replace .File.ContentBaseName "-" " " | title }}"
 slug: "{{ .File.ContentBaseName }}"
 url: "/blog/{{ .File.ContentBaseName }}"
 layout: "blog/single"
+series: "hacker"   # drives the home page Security badge and the hack. writeup list
 date: {{ .Date }}
 draft: true
 review_status: "copy-review"

@@ -5,8 +5,10 @@
 <ol class="ds-tracklist">
     <li>
         <span class="ds-pos">1</span>
-        <div class="ds-track"><a class="ds-name" href="https://hack.maxdraco.com/">Security research</a><span class="ds-desc">Hardware, network and badge hacking. Writeups will be published at hack.maxdraco.com.</span></div>
-        <span class="ds-len"><span class="ds-host">hack.</span> <span class="ds-badge ds-badge-soon">Soon</span></span>
+        {{- /* Open once any hacker post is published (series: hacker; drafts/future posts aren't built). */ -}}
+        {{- $hackLive := where (where site.RegularPages "Section" "blog") "Params.series" "hacker" }}
+        <div class="ds-track"><a class="ds-name" href="https://hack.maxdraco.com/">Security research</a><span class="ds-desc">Hardware, network and badge hacking. {{ if $hackLive }}Writeups at hack.maxdraco.com.{{ else }}Writeups will be published at hack.maxdraco.com.{{ end }}</span></div>
+        <span class="ds-len"><span class="ds-host">hack.</span> {{ if $hackLive }}<span class="ds-badge">Open</span>{{ else }}<span class="ds-badge ds-badge-soon">Soon</span>{{ end }}</span>
     </li>
     <li>
         <span class="ds-pos">2</span>
