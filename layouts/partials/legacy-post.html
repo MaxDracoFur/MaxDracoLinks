@@ -19,8 +19,12 @@
         {{ end }}
     </article>
     {{ else }}
+    {{- with .Params.cover_image }}{{ $.Store.Set "og_image" . }}{{ end -}}
     <article class="post">
         <h1>{{ .Title }}</h1>
+        {{ with .Params.cover_image }}
+        <img src="{{ partial "img-url.html" (dict "src" . "w" 1200) }}" alt="{{ $.Params.cover_alt }}" class="post-image post-cover">
+        {{ end }}
         {{ .Content }}
     </article>
     {{ end }}

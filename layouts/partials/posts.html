@@ -20,4 +20,19 @@
     "cover" (.Params.cover_image | default "")
     "where" (.Params.city | default "")) }}
 {{ end }}
+{{/* Markdown posts outside the travel series (hacker/INC posts...), unless data/blog.yaml already
+     lists that slug. Covers come from front matter cover_image (rule 2026-11-12). */}}
+{{ $dataSlugs := slice }}
+{{ range site.Data.blog.blog }}{{ $dataSlugs = $dataSlugs | append (string .post.slug) }}{{ end }}
+{{ range where (where site.RegularPages "Section" "blog") "Params.series" "!=" "travel" }}
+{{ if not (in $dataSlugs .File.TranslationBaseName) }}
+{{ $posts = $posts | append (dict
+    "title" .Title
+    "url" .RelPermalink
+    "date" (.Date.Format "2006-01-02")
+    "series" (.Params.series | default "")
+    "cover" (.Params.cover_image | default "")
+    "where" "") }}
+{{ end }}
+{{ end }}
 {{ return sort $posts "date" "desc" }}
