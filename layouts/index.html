@@ -1,5 +1,7 @@
 {{ define "main" }}
-<h1>Welcome to Max Draco</h1>
+{{/* Max 2026-11-13: the greeting "isn't needed" on the page. Kept for screen readers and the
+     document outline (one h1 per page), hidden visually with .ds-vh. */}}
+<h1 class="ds-vh">Max Draco</h1>
 
 <h2 id="projects">Projects</h2>
 <ol class="ds-tracklist">
@@ -31,16 +33,6 @@
 {{ $posts := partial "posts.html" . }}
 <div class="ds-releases">
     {{ range $posts }}{{ partial "cd-listing.html" . }}{{ end }}
-    {{ if not (where $posts "series" "travel") }}
-    <article class="ds-release ds-release-soon">
-        <span class="ds-case"><span class="ds-case-blank"><span>max<b>draco</b></span></span></span>
-        <div class="ds-release-info">
-            <h3>First trip report</h3>
-            <p class="ds-artist">Max Draco</p>
-            <dl><dt>Style</dt><dd>Furry travel</dd><dt>Status</dt><dd><span class="ds-badge ds-badge-soon">Coming soon</span></dd></dl>
-        </div>
-    </article>
-    {{ end }}
 </div>
 
 <h2 id="booking">Booking</h2>

@@ -16,8 +16,6 @@
             <td class="ds-hide-sm">Furry travel</td>
             <td><time datetime="{{ .date }}">{{ .date }}</time></td>
         </tr>
-        {{ else }}
-        <tr class="ds-empty"><td colspan="3">Furry travel: cons, meetups, and the cities around them. First trip report coming soon.</td></tr>
         {{ end }}
         {{ range sort $other "date" "desc" }}
         <tr>
