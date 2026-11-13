@@ -68,6 +68,8 @@ Three of them cover a lot of small events. All are in [§ 4-156-305](https://cod
 
 A public meetup announced online is not "not advertised to the general public". And a ticket of any size, or a door charge, or a required minimum spend, knocks out (c) and (d) on its own.
 
+These are the ordinance's own exemptions, not loopholes, and fitting one is not a way around anything. The capacity test below still applies, every other rule still applies, and whether the venue itself is properly licensed for what it does remains the venue's problem and not something you can fix by charging nothing at the door.
+
 ## The trap in the capacity test
 
 This is the part I'd have got wrong. The capacity in exception (c) is not the capacity of your room. The last line of § 4-156-305 says that when working out whether a venue holds more than 100 people, "the total occupancy of all rooms or other occupancy areas of the premises of the business operating the amusement shall be calculated". *(measured 11-13)*
@@ -95,6 +97,13 @@ The city's table says which licences exist. It doesn't say what a licence's plan
 
 So treat the lookup as a first screen. The real check is still asking the venue directly, before anyone pays a deposit.
 
-*Again: I am not a lawyer. This is general information from reading the ordinance myself, not legal advice, and the code can change after this is published. Every section cited here was read on 13 November 2026.*
+## Before you use any of this
+
+- **I am not a lawyer and this is not legal advice.** Reading it doesn't make me your lawyer. It's one organizer's description of how he checks a thing before booking a room.
+- **It's a reading of the code on one day.** Every section quoted here was read on 13 November 2026, and the licence lookups were run the same day. Ordinances get amended and licences lapse. Check the current text and the current record yourself.
+- **A lookup is a first screen, not proof.** Public records lag reality in both directions: a licence can be granted and not yet show, or show and have been surrendered since.
+- **Please don't accuse a venue in public on the strength of a missing row.** If you can't find a licence, the useful next step is to ask the venue, not to post about them. A public accusation that turns out to be wrong can be defamation, and it can do real damage to a small business that did nothing wrong. I only name venues here that I checked and that came back licensed.
+- **The licence isn't the only rule.** Occupancy limits, fire rules, liquor licensing and the amusement tax are separate, and nothing here speaks to any of them.
+- **If there's a deposit, a contract or real money involved, ask someone qualified.** This post is a reason to ask a better question, not a substitute for the answer.
 
 <!-- MAX: closing line / where other organizers can ask you about it. -->
