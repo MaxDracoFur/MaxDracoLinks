@@ -38,17 +38,19 @@ summary: "In Chicago, if the venue your meetup books has no Public Place of Amus
 <!-- MAX: one or two lines on what Furcago is, in your words. This post introduces it to
      maxdraco.com readers, so later posts can lean on it. -->
 
-I run Furcago, a Chicago furry meetup group. Most of what we do is ordinary: bowling, a bar night, a movie. Before booking any of it I check one thing, and almost no organizer I've asked has heard of it: whether the venue holds a **Public Place of Amusement** licence. If it doesn't, the city can fine the organizer, not just the venue. *(my account)*
+**I am not a lawyer, and nothing here is legal advice.** I'm a meetup organizer who read the rules that apply to me, and wrote down how I check them. If real money or a real problem is involved, ask someone qualified.
 
-The check takes about two minutes against the city's own public data, and there's a trap in that data that will tell you a venue is fine when it isn't.
+I run [Furcago](https://furcago.com/), a Chicago furry meetup group. Most of what we do is ordinary: bowling, a bar night, a movie. Before booking any of it I check one thing, and almost no organizer I've asked has heard of it: whether the venue holds a **Public Place of Amusement licence**. That's the permit Chicago requires of a place where entertainment happens, and if the venue doesn't have one, the city can fine the organizer, not just the venue. *(my account)*
+
+The check takes about two minutes against the city's own public records, and there's a trap in them that will tell you a venue is fine when it isn't.
 
 ## Why the organizer is on the hook
 
-Chicago's Municipal Code says that if an amusement happens somewhere without that licence, six different people are in violation at once: the owner of the property, the lessee, the manager, **the producer of the amusement, the presenter of it, and the person conducting it**. Each one "shall be subject to a fine of up to $10,000.00". *(measured 11-13, [§ 4-156-300(a)](https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2634203))*
+Chicago's {{< term "ordinance" "municipal code" >}} says that if an amusement happens somewhere without that licence, six different people are in violation at once: the owner of the property, the lessee (whoever holds the lease on it), the manager, **the producer of the amusement, the presenter of it, and the person conducting it**. Each one "shall be subject to a fine of up to $10,000.00". *(measured 11-13, [§ 4-156-300(a)](https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2634203))*
 
 For a meetup, the last three are the organizer. You don't have to own the room to be on that list.
 
-It also doesn't matter that amusement isn't what the venue mainly does. The licence is required "regardless of whether the use is incidental to the property's principal use". *(measured 11-13, § 4-156-300(b))*
+It also doesn't matter that amusement isn't what the venue mainly does. The licence is required "regardless of whether the use is incidental to the property's principal use" *(measured 11-13, § 4-156-300(b))* — in plain words, a bar is still a bar, but the night it hosts dancing it needs the licence as well.
 
 ## "Amusement" is broader than it sounds
 
@@ -61,8 +63,8 @@ Read that list against a normal furry meetup calendar. Bowling is on it by name.
 Three of them cover a lot of small events. All are in [§ 4-156-305](https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2634203). *(measured 11-13)*
 
 - **(c) Small and free.** Music, dancing or other amusement needs no licence if the venue's capacity is under 100 **and** there is no admission fee, minimum purchase, membership fee "or other fee or charge" to get in.
-- **(d) A private event at a restaurant.** Live or recorded music and dancing at a banquet hall or restaurant that holds a retail food licence, at an event "not open or advertised to the general public", with no charge to get in. The code's own examples are a wedding, a graduation, a religious celebration.
-- **(g) A private club or lodge.** For members and their guests only, on premises it owns or leases for at least two years, where the club is a not-for-profit that has existed three years or more and has more than 50 members paying dues on a regular basis. Dues collected at the door don't count.
+- **(d) A private event at a restaurant.** Live or recorded music and dancing at a banquet hall or restaurant that holds a retail food licence — the ordinary permit any place needs to serve food — at an event "not open or advertised to the general public", with no charge to get in. The code's own examples are a wedding, a graduation, a religious celebration.
+- **(g) A private club or lodge.** For members and their guests only, on premises it owns or leases for at least two years, where the club is a not-for-profit (an organisation that isn't run to make a profit for owners) that has existed three years or more and has more than 50 members paying dues on a regular basis. Signing people up at the door and calling the fee "dues" doesn't count; the code rules that out explicitly.
 
 A public meetup announced online is not "not advertised to the general public". And a ticket of any size, or a door charge, or a required minimum spend, knocks out (c) and (d) on its own.
 
@@ -74,13 +76,13 @@ So the back room of a bar that seats 40 doesn't get you the exception if the bar
 
 ## The two-minute check
 
-Chicago publishes every business licence as open data, and you can search it by name or address without an account or an {{< term "api" "API" >}} key.
+Chicago publishes every business licence as {{< term "open-data" "open data" >}}: a public table anyone can search in a browser, with no account and no {{< term "api" "API" >}} key.
 
-1. Open the city's Business Licenses dataset and search the venue's name or street address.
+1. Open the city's Business Licenses table and search the venue's name or street address.
 2. Look for a row whose licence type is **Public Place of Amusement**.
 3. **Check the status and the expiry on that row**, which is where people get caught out. See below.
 
-**The trap:** the dataset holds one row per licence *term*, going back years, and the status column is a code. The dataset's own description defines them: `AAI` means the licence was issued, `AAC` means it "was cancelled during its term", `REV` revoked, `REA` revocation appealed. A venue can show a long history of Public Place of Amusement rows that are every one of them cancelled or expired. Filter for `AAI` with an expiry date in the future, or you'll read a dead licence as a live one. *(measured 11-13)*
+**The trap:** the table holds one row per licence *term* — one row each time the licence was first issued or renewed — going back years, and the status column is a code rather than a word. The dataset's own description defines them: `AAI` means the licence was issued, `AAC` means it "was cancelled during its term", `REV` revoked, `REA` revocation appealed. A venue can show a long history of Public Place of Amusement rows that are every one of them cancelled or expired. Filter for `AAI` with an expiry date in the future, or you'll read a dead licence as a live one. *(measured 11-13)*
 
 When I ran it on the bowling alley on the cover, Diversey River Bowl, it came back with a live Public Place of Amusement licence that runs to 15 November 2027. The Music Box Theatre holds four live licences at once, Public Place of Amusement among them, to 15 June 2028. *(measured 11-13)*
 
@@ -89,10 +91,10 @@ When I ran it on the bowling alley on the cover, Diversey River Bowl, it came ba
 
 ## What the check can't tell you
 
-The city's table says which licences exist. It doesn't say what a licence's plan of operation allows, and it doesn't give you the room's occupancy, which is the number on the venue's posted occupancy sign and isn't published anywhere. Selling tickets can also bring Chicago's amusement tax into it, which is a separate question from the licence.
+The city's table says which licences exist. It doesn't say what a licence's plan of operation allows, and it doesn't give you the room's occupancy — the maximum number of people allowed in, printed on the sign the venue has to post by the door, which isn't published anywhere online. Selling tickets can also bring Chicago's amusement tax into it: a tax the city charges on paid entertainment, which is a separate question from the licence and has its own rules.
 
 So treat the lookup as a first screen. The real check is still asking the venue directly, before anyone pays a deposit.
 
-*This is general information from reading the ordinance, not legal advice.*
+*Again: I am not a lawyer. This is general information from reading the ordinance myself, not legal advice, and the code can change after this is published. Every section cited here was read on 13 November 2026.*
 
 <!-- MAX: closing line / where other organizers can ask you about it. -->
