@@ -96,6 +96,31 @@ doesn't apply gets one sentence saying so.
   publishes without a `search_phrase`, with a title that doesn't contain it, or with a listicle
   title. `plan` lists drafts. Older posts are untouched.
 
+## Harm check and disclaimers
+
+Before a post publishes, read it adversarially: against the reader who will act on it, and against
+anyone it names. Two questions, both answered in writing before it goes out.
+
+- **Does it help anyone break a law?** Describing how to comply isn't that, and quoting a rule's own
+  exemptions isn't either — but say so in the post, so an exemption can't be read as a workaround.
+- **Who is hurt if a reader acts on this and is wrong?** Name that person in the post and tell the
+  reader what to do instead. On the venue-licence post it's the venue a reader can't find a licence
+  for: the post says ask them, don't post about them, because a wrong public accusation is
+  defamation and can damage a business that did nothing wrong.
+
+A post that tells readers what a law requires of them also carries, in my own words:
+
+- **"I am not a lawyer and this is not legal advice."** Near the top, not only at the end.
+- **The date the rules were read**, because ordinances get amended and licences lapse.
+- **A warning that a public record is a first screen**, not proof: registers lag reality both ways.
+- **What the post doesn't cover** (other licences, taxes, fire and occupancy rules).
+- **"If there's a contract or real money in it, ask someone qualified."**
+
+**Enforced:** the compliance registry entry `pub-harm-read` (Publishing Rules), and the
+`legal-guidance-disclaimer` rule in `check_post`, which `tools/legal_check.py` runs on every deploy.
+It warns rather than blocks, because the wording is always mine. The harm read itself is a person's
+job; no regex does it.
+
 ## Cover image
 
 - **Every post gets at least one square, CD-album-style cover.** It shows on the post and on its
