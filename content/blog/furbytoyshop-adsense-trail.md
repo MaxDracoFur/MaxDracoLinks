@@ -3,6 +3,7 @@ title: "A Furby fan site, a Mayan ruins guide, and one ad account"
 slug: "furbytoyshop-adsense-trail"
 url: "/blog/furbytoyshop-adsense-trail"
 layout: "blog/single"
+series: "hacker"
 date: 2026-11-12T07:00:00-06:00
 draft: false
 review_status: "approved"
