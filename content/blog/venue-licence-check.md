@@ -22,8 +22,8 @@ draft: true
 #  - Only venues that PASS are named: Diversey River Bowl (PPA to 2027-11-15) and the Music Box
 #    (PPA to 2028-06-15), both checked 11-13. Don't add one without re-checking it.
 #  - The intro needs a line or two from you on what Furcago is: this post introduces it.
-#  - COVER: is that your suit outside the bowling alley? If it's someone else's, say and I'll swap
-#    the photo. Number plates and faces are cropped out; the venue is named in the post anyway.
+#  - COVER: CONFIRMED by Max 2026-11-13, the suit outside the bowling alley is his own. Number
+#    plates and faces are cropped out; the venue is named in the post anyway (it passes the check).
 #  - You built a tool for this check; the post describes the manual steps instead. Say if you want
 #    it mentioned, and whether it is public.
 #  - Not legal advice: that line stays.
