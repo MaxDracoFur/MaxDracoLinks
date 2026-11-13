@@ -1,0 +1,10 @@
+{{/* Markdown images in posts: ![alt](/res/x.jpg).
+     A /res/ path is one of Max's own files under assets/, so it goes through img-url.html and
+     comes back resized and watermarked, the same as a cover. Anything else (an absolute URL, or
+     a file served from static/) is left alone: the watermark must never land on someone else's
+     picture. Added 2026-11-13 so the legacy posts could move from data/blog.yaml to Markdown. */}}
+{{- $src := .Destination -}}
+{{- if hasPrefix $src "/res/" -}}
+  {{- $src = partial "img-url.html" (dict "src" .Destination "w" 1400) -}}
+{{- end -}}
+<img src="{{ $src }}" alt="{{ .Text }}" class="post-image" loading="lazy" decoding="async">
