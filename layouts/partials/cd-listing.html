@@ -1,6 +1,6 @@
 {{/* One blog post as a CD release: jewel case with the post's cover, then
      the release facts. Only real fields: no invented catalogue numbers. */}}
-{{ $style := cond (eq .series "travel") "Furry travel" (cond (eq .series "hacker") "Security" (cond (eq .series "cds") "Used CDs" "Notes")) }}
+{{ $style := cond (eq .series "travel") "Furry travel" (cond (eq .series "hacker") "Security" (cond (eq .series "cds") "Used CDs" (cond (eq .series "furcago") "Furcago" "Notes"))) }}
 <article class="ds-release">
     <a class="ds-case" href="{{ .url }}" aria-label="{{ .title }}">
         {{ with .cover }}<img src="{{ partial "img-url.html" (dict "src" . "w" 480) }}" alt="" loading="lazy">{{ else }}<span class="ds-case-blank"><span>max<b>draco</b></span></span>{{ end }}
