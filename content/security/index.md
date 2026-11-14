@@ -22,6 +22,7 @@ legal action against you for that research. Stay within these limits: test only 
 stop and tell us if you reach someone else's data; do not degrade the service (no denial of service, no load
 testing, no spam); no social engineering or physical attacks; do not keep data you did not need.
 
+<!-- legal-ok unauthorized-access: our own disclosure policy's out-of-scope list; it tells researchers which systems they may NOT test and describes no access by us. Read in context 2026-11-13. -->
 **Out of scope.** Hosting and platforms we use (Cloudflare, Railway, GitHub, Google). Please report those to the
 vendor through its own program. Also out of scope: findings with no security impact, such as missing headers on
 static pages without a working exploit, or a version banner on its own.
