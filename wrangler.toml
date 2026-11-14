@@ -23,3 +23,13 @@ binding = "BEACON"
 database_name = "maxdraco-beacon"
 database_id = "faeafdc9-21cf-4352-b617-1bef9c836265"
 migrations_dir = "migrations/beacon"
+
+# Blog email subscribers (functions/api/subscribe.js, card blog-email-subscription).
+# Created 2026-11-13 with `wrangler d1 create maxdraco-subs --location enam`;
+# schema: wrangler d1 migrations apply maxdraco-subs --remote
+# Read by the homelab CronJob through the D1 API, which sends the confirmations.
+[[d1_databases]]
+binding = "SUBS"
+database_name = "maxdraco-subs"
+database_id = "c14317fd-2203-42d2-9928-f712bcb25a23"
+migrations_dir = "migrations/subs"

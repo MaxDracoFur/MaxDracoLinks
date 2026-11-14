@@ -1,0 +1,44 @@
+{{/* Email subscription form (card blog-email-subscription). Posts to the Pages Function
+     functions/api/subscribe.js. Works with no JavaScript: without it the browser submits
+     normally and shows the Function's one-line answer. With it, the answer replaces the form.
+     Nothing here tracks anyone, so it is not behind the consent banner: the reader types an
+     address and presses a button, which is the consent. */}}
+<section class="ds-subscribe" id="subscribe">
+    <h2>Get an email when there's a new post</h2>
+    <form method="post" action="/api/subscribe" data-subscribe>
+        <label for="sub-email">Email address</label>
+        <input type="email" id="sub-email" name="email" required autocomplete="email"
+               inputmode="email" maxlength="254" placeholder="you@example.com">
+        <input type="hidden" name="p" value="{{ .RelPermalink }}">
+        <button class="ds-btn" type="submit">Subscribe</button>
+    </form>
+    <p class="ds-meta" data-subscribe-note>
+        You'll get a confirmation email first, and nothing else until you click the link in it.
+        Every email has an unsubscribe link. Stored: your address, the page you signed up from,
+        and the dates. Not stored: your IP address, your browser or your name.
+    </p>
+</section>
+<script>
+(function () {
+  var form = document.querySelector('[data-subscribe]')
+  if (!form) return
+  form.addEventListener('submit', function (e) {
+    e.preventDefault()
+    var btn = form.querySelector('button')
+    btn.disabled = true
+    fetch('/api/subscribe', { method: 'POST', body: new FormData(form) })
+      .then(function (r) { return r.text() })
+      .then(function (text) {
+        var p = document.createElement('p')
+        p.className = 'ds-subscribe-said'
+        p.textContent = text
+        form.replaceWith(p)
+      })
+      .catch(function () {
+        btn.disabled = false
+        var p = document.querySelector('[data-subscribe-note]')
+        p.textContent = 'That did not go through. Try again, or email admin@maxdraco.com.'
+      })
+  })
+})()
+</script>

@@ -1413,3 +1413,42 @@ a.dict-term {
         margin-left: 0;
     }
 }
+
+// Email subscription form (partials/subscribe.html, card blog-email-subscription).
+.ds-subscribe {
+    border: 1px solid var(--rule);
+    background: var(--panel);
+    padding: 0.9rem 1rem;
+    margin: 1.5rem 0 0;
+
+    h2 { margin: 0 0 0.6rem; font-size: 1rem; }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    label {
+        font: 0.8rem var(--ui);
+        color: var(--ink-2);
+    }
+
+    input[type="email"] {
+        flex: 1 1 16rem;
+        min-width: 0;
+        font: 0.95rem var(--ui);
+        padding: 0.4rem 0.5rem;
+        border: 1px solid var(--rule);
+        background: var(--window);
+        color: var(--ink);
+    }
+
+    .ds-meta { margin: 0.6rem 0 0; font-size: 0.78rem; }
+}
+
+.ds-subscribe-said {
+    margin: 0;
+    font: 0.95rem var(--ui);
+}
