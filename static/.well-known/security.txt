@@ -1,4 +1,5 @@
 Contact: mailto:admin@maxdraco.com
 Expires: 2027-11-06T00:00:00.000Z
+Policy: https://maxdraco.com/security/
 Preferred-Languages: en
 Canonical: https://maxdraco.com/.well-known/security.txt
