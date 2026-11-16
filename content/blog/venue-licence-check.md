@@ -5,10 +5,14 @@ slug: "venue-licence-check"
 url: "/blog/venue-licence-check"
 layout: "blog/single"
 series: "furcago"
+# PULLED BACK TO DRAFT 2026-11-15. Max: "this entire article is trash and reads as someone who
+# understands legal operations of running a local meetup where you haven't fully understood it,
+# made assumptions, made me act like I know it and then try to sell it." He is right. Do not
+# publish this as it stands. The specific faults are listed in WIP/blog-backlog-review.md.
 # Dated 2026-11-16 by Claude 11-15 so it is ready to go out; Max changes it if he wants another day.
 # It took the slot the disc-ID post vacated when that was shelved for failing the lane test.
 date: 2026-11-16
-draft: false
+draft: true
 # Rewritten 2026-11-13 from the 11-04 draft, to the quality bar: payoff first, length to match.
 # EVERY legal claim re-read at the primary source on 2026-11-13, in a browser (the code library
 # blocks automated fetches): Municipal Code of Chicago 4-156-010 (definition of "amusement"),
