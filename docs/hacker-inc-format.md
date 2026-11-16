@@ -96,6 +96,32 @@ doesn't apply gets one sentence saying so.
   publishes without a `search_phrase`, with a title that doesn't contain it, or with a listicle
   title. `plan` lists drafts. Older posts are untouched.
 
+## Plain words, no jargon
+
+Max, 2026-11-15: "can we have a no jargon rule." Written after a post said "(my account)" at
+readers who had never been told what that meant, called one sentence of an ordinance "the trap",
+and sold itself as "the two-minute check".
+
+- **Write for someone outside the field.** If a term is unavoidable — Public Place of Amusement
+  licence, disc ID, AdSense publisher ID — explain it in plain words the first time, or link its
+  dictionary page. Both is better.
+- **The evidence labels are an INC convention.** *(measured 11-05)*, *(inferred)*, *(my account)*
+  make sense in a hacker incident report, where the format introduces them. In any other post they
+  are our shorthand pointed at a stranger. Say "I checked this on 5 November" instead.
+- **Never use our own words for how the site is made.** Lane test, INC format, front matter,
+  cover_source, the rotation, copy review, the publish gate. A reader has no idea what those are
+  and does not need to.
+- **A heading says what the section shows, or tells the reader what to do.** It never sells.
+  "The trap in the capacity test" and "The two-minute check" are both pitches. "Take two minutes to
+  check before you book" is an instruction, and Max's own phrasing.
+- **Say the smaller true thing.** A post may claim what I actually did, never what the law or the
+  tooling requires of a reader. See the venue-licence post in the backlog review for how that goes
+  wrong.
+
+**Enforced, as warnings:** `tools/jargon_check.py check` (and `plan` for drafts) runs on preview and
+deploy. It can see the three mechanical faults above. It cannot see the fourth and most important
+one — would a stranger follow this? — so that stays a person reading it.
+
 ## Harm check and disclaimers
 
 Before a post publishes, read it adversarially: against the reader who will act on it, and against
