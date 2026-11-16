@@ -1,10 +1,6 @@
 ---
 title: "About"
-# Still hidden: noindex, out of the sitemap, nothing links here. Flip all three in the commit that
-# settles the copy, and add About to layouts/partials/header.html.
-noindex: true
-sitemap:
-  disable: true
+# Unhidden 2026-11-15 once Max settled the copy: indexed, in the sitemap, and in the nav.
 summary: "Who runs maxdraco.com."
 ---
 
