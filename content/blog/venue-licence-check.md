@@ -22,7 +22,13 @@ draft: true
 # names bowling and dancing (4-156-010), and the licence status codes from the city's own dataset
 # description. Diversey River Bowl and the Music Box were both checked that day and both pass.
 # MAX: cut anything that still sounds like me telling people the law.
-review_status: "copy-review"
+# ON HOLD 2026-11-15, Max: "we should consult a lawyer before posting something like this,
+# especially as this is connected to my llc." Not to be published until a lawyer has read it.
+# Two reasons it matters more than it looked: anything describing what an ordinance requires,
+# published by someone attached to an LLC, can read as the company giving advice; and the post
+# names the exemption Furcago might itself rely on, which is a live question for that entity.
+# Tracked on card furcago-liability-shield. Do not set draft: false.
+review_status: "legal-hold"
 introduces: [furcago]
 cover_image: "/res/covers/venue-licence-check.jpg"
 cover_source: "stage:outbox/maxdraco-furry/2025-06-14/2025-06-14-01.jpg"
