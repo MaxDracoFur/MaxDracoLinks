@@ -5,10 +5,10 @@ slug: "venue-licence-check"
 url: "/blog/venue-licence-check"
 layout: "blog/single"
 series: "furcago"
-# Rotation (Max 11-13: Cyber, CDs, Furry, repeat): the Furry slot after the CD post.
-# Placeholder date: Max picks the real one.
-date: 2026-12-24
-draft: true
+# Dated 2026-11-16 by Claude 11-15 so it is ready to go out; Max changes it if he wants another day.
+# It took the slot the disc-ID post vacated when that was shelved for failing the lane test.
+date: 2026-11-16
+draft: false
 # Rewritten 2026-11-13 from the 11-04 draft, to the quality bar: payoff first, length to match.
 # EVERY legal claim re-read at the primary source on 2026-11-13, in a browser (the code library
 # blocks automated fetches): Municipal Code of Chicago 4-156-010 (definition of "amusement"),
@@ -34,9 +34,6 @@ cover_source: "stage:outbox/maxdraco-furry/2025-06-14/2025-06-14-01.jpg"
 cover_alt: "A fursuiter with arms spread outside the entrance of a bowling alley, under its neon BOWL sign."
 summary: "In Chicago, if the venue your meetup books has no Public Place of Amusement licence, the organizer can be fined too. The lookup takes two minutes, and the city's own data has a trap in it."
 ---
-
-<!-- MAX: one or two lines on what Furcago is, in your words. This post introduces it to
-     maxdraco.com readers, so later posts can lean on it. -->
 
 **I am not a lawyer, and nothing here is legal advice.** I'm a meetup organizer who read the rules that apply to me, and wrote down how I check them. If real money or a real problem is involved, ask someone qualified.
 
@@ -88,8 +85,8 @@ Chicago publishes every business licence as {{< term "open-data" "open data" >}}
 
 When I ran it on the bowling alley on the cover, Diversey River Bowl, it came back with a live Public Place of Amusement licence that runs to 15 November 2027. The Music Box Theatre holds four live licences at once, Public Place of Amusement among them, to 15 June 2028. *(measured 11-13)*
 
-<!-- MAX: say how you actually run it (you built a small tool) or keep the manual steps above.
-     Don't name venues that came back without a licence. -->
+<!-- MAX, optional: one line on the tool you built for this, if you want it mentioned and it is
+     public. The post stands without it. Never name a venue that came back without a licence. -->
 
 ## What the check can't tell you
 
@@ -106,4 +103,4 @@ So treat the lookup as a first screen. The real check is still asking the venue 
 - **The licence isn't the only rule.** Occupancy limits, fire rules, liquor licensing and the amusement tax are separate, and nothing here speaks to any of them.
 - **If there's a deposit, a contract or real money involved, ask someone qualified.** This post is a reason to ask a better question, not a substitute for the answer.
 
-<!-- MAX: closing line / where other organizers can ask you about it. -->
+<!-- MAX, optional: a closing line telling other organizers where to ask you. -->
