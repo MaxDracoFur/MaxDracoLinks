@@ -7,10 +7,8 @@
 <ol class="ds-tracklist">
     <li>
         <span class="ds-pos">1</span>
-        {{- /* Open once any hacker post is published (series: hacker; drafts/future posts aren't built). */ -}}
-        {{- $hackLive := where (where site.RegularPages "Section" "blog") "Params.series" "hacker" }}
-        <div class="ds-track"><a class="ds-name" href="https://hack.maxdraco.com/">Security research</a><span class="ds-desc">Hardware, network and badge hacking. {{ if $hackLive }}Writeups at hack.maxdraco.com.{{ else }}Writeups will be published at hack.maxdraco.com.{{ end }}</span></div>
-        <span class="ds-len"><span class="ds-host">hack.</span> {{ if $hackLive }}<span class="ds-badge">Open</span>{{ else }}<span class="ds-badge ds-badge-soon">Soon</span>{{ end }}</span>
+        <div class="ds-track"><a class="ds-name" href="https://furcago.com/">Furcago</a><span class="ds-desc">The furries of Chicago: the community's site and its directory of local chats.</span></div>
+        <span class="ds-len"><span class="ds-host">furcago.com</span> <span class="ds-badge">Open</span></span>
     </li>
     <li>
         <span class="ds-pos">2</span>
@@ -19,12 +17,14 @@
     </li>
     <li>
         <span class="ds-pos">3</span>
-        <div class="ds-track"><a class="ds-name" href="https://furcago.com/">Furcago</a><span class="ds-desc">The furries of Chicago: the community's site and its directory of local chats.</span></div>
-        <span class="ds-len"><span class="ds-host">furcago.com</span> <span class="ds-badge">Open</span></span>
+        {{- /* Open once any hacker post is published (series: hacker; drafts/future posts aren't built). */ -}}
+        {{- $hackLive := where (where site.RegularPages "Section" "blog") "Params.series" "hacker" }}
+        <div class="ds-track"><a class="ds-name" href="https://hack.maxdraco.com/">Security research</a><span class="ds-desc">Hardware, network and badge hacking. {{ if $hackLive }}Writeups at hack.maxdraco.com.{{ else }}Writeups will be published at hack.maxdraco.com.{{ end }}</span></div>
+        <span class="ds-len"><span class="ds-host">hack.</span> {{ if $hackLive }}<span class="ds-badge">Open</span>{{ else }}<span class="ds-badge ds-badge-soon">Soon</span>{{ end }}</span>
     </li>
     <li>
         <span class="ds-pos">4</span>
-        <div class="ds-track"><a class="ds-name" href="/blog/">Blog</a><span class="ds-desc">Furry travel: cons, meetups, and the cities around them.</span></div>
+        <div class="ds-track"><a class="ds-name" href="/blog/">Blog</a><span class="ds-desc">What I find and check: the CD trade, the places we meet, and the security work.</span></div>
         <span class="ds-len"><span class="ds-host">blog.</span> <span class="ds-badge">Open</span></span>
     </li>
 </ol>
