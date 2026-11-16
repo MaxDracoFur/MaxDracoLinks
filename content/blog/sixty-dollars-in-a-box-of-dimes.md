@@ -1,6 +1,6 @@
 ---
-title: "Buying used CDs in bulk: sixty dollars in a box of dimes"
-search_phrase: "buying used CDs in bulk"
+title: "What used CDs are worth: sixty dollars in a box of dimes"
+search_phrase: "what used CDs are worth"
 slug: "sixty-dollars-in-a-box-of-dimes"
 url: "/blog/sixty-dollars-in-a-box-of-dimes"
 layout: "blog/single"
@@ -12,6 +12,12 @@ draft: true
 # title; the three evidence labels rewritten as plain sentences (no-jargon rule); the grading
 # section's open "verify in a browser" block resolved and a factual error in it corrected (see
 # GRADING below); the link to an unwritten bootleg post removed; have/want figures re-read.
+# Third pass 2026-11-16 after Max read it: the draft opened "I don't buy CDs one at a time",
+# which is FALSE -- at thrift stores that is exactly what he does, and they don't offer lots.
+# Section rewritten and the table relabelled Buys, not Lots: the 22 thrift rows are hand-picked
+# cartloads (~50 discs a trip), and real bulk is only the 2 private collections. Title and
+# search_phrase moved off "buying used CDs in bulk", which the post no longer mainly is.
+# The find came from a thrift store, so it was picked by hand too -- now said in the text.
 # Stays draft until Max reads it and approves. Nothing here publishes it.
 # Max 11-12: "pull it rather than check my memory"; "only CDs" (no vinyl); "not black sabbath"
 # (that one is the separate mis-ID post, card blog-cds-wrong-release-match). Find confirmed:
@@ -54,7 +60,7 @@ review_status: "copy-review"
 series: "cds"          # rotation area: security -> CDs -> travel -> events
 introduces: []
 uses: []
-summary: "My median sale is 85 cents. The best CD I've found sold for $60: a four-disc disco box from a Chicago thrift shop. How bulk lots get bought, graded and priced, and what one find says about the rest of the bin."
+summary: "My median sale is 85 cents. The best CD I've found sold for $60: a four-disc disco box from a Chicago thrift shop. What a bin of discs is actually worth, how one gets graded and priced, and why the best thing I ever found was picked up by hand."
 cover_image: "/res/covers/sixty-dollars-in-a-box-of-dimes.jpg"
 cover_alt: "Album-style cover: the words Sixty in the Dimes beside a compact disc."
 # Card: blog-cds-remarkable-find
@@ -64,23 +70,25 @@ I sell used CDs on {{< term "discogs" >}}. Since June 2025 I've sold 11,130 item
 
 The best CD I've found went for **$60**. It came out of a thrift shop in Chicago, and on the shelf it looked like nothing much.
 
-## What a bulk lot is
+## Where the discs come from
 
-I don't buy CDs one at a time. I buy them by the bin and the box: a thrift store's CD shelf, a music store's cull pile, someone clearing out a collection they've stopped playing. Nobody wants to price two thousand discs one by one, so the box gets a single price.
+At a thrift store I buy CDs one at a time. They don't sell the shelf as a job lot, and they wouldn't price one if you asked: you stand there, go through the bin disc by disc, and take what you want to the counter at whatever the shelf price is. That's most of my buying trips, and it's the only part of this that looks like shopping.
 
-From my own records, 39 lots since the start of 2026 brought in about 14,600 discs for about $7,500 in all:
+The boxes come from somewhere else. A music store's cull pile, the discs they won't put out. Somebody clearing a collection they've stopped playing, who wants it gone in one go. Nobody is pricing two thousand discs individually, so the whole thing gets one number.
 
-| Where from | Lots | Discs | About per disc |
+Both end up in the same ledger, and the split since the start of 2026 is lopsided:
+
+| Where from | Buys | Discs | About per disc |
 |---|---:|---:|---:|
-| Thrift stores | 22 | about 1,100 | about 40¢ |
-| Music stores | 14 | about 500 | about 65¢ |
-| Individuals | 2 | about 3,500 | about 60¢ |
+| Thrift stores, picked by hand | 22 | about 1,100 | about 40¢ |
+| Music stores, cull piles | 14 | about 500 | about 65¢ |
+| Individuals, whole collections | 2 | about 3,500 | about 60¢ |
 
-The biggest was about 3,500 discs for about $2,000. The cheapest per disc was a box of about 670 for about $25, under four cents each.
+Twenty-two trips to thrift stores came to about 50 discs each: a cartload, chosen one at a time. Two people clearing out collections came to about 3,500 discs between them. Two buys, more discs than the other thirty-seven put together. The biggest single one was about 3,500 discs for about $2,000; the cheapest per disc was a box of about 670 for about $25, under four cents each.
 
-The useful way to think about a box is that you aren't buying CDs. You're buying a distribution: hundreds of discs worth less than a dollar, a few dozen worth a few dollars, and, if you're lucky, one that pays for the box.
+A box and a bin come to the same thing in the end. You aren't buying CDs, you're buying a distribution: hundreds of discs worth less than a dollar, a few dozen worth a few dollars, and, if you're lucky, one that pays for the box.
 
-So how much is a box worth? What I pay right now is 25 cents for a CD that still has its case and 5 cents for one that doesn't. A disc without its case is a disc I have to re-case or sell for almost nothing, so it's worth a fifth as much to me going in.
+So what's it worth to me per disc, either way? What I pay right now is 25 cents for a CD that still has its case and 5 cents for one that doesn't. A disc without its case is a disc I have to re-case or sell for almost nothing, so it's worth a fifth as much to me going in.
 
 ## Grading is most of the price
 
@@ -102,7 +110,7 @@ A price comes from a few things: what the lowest comparable copy is listed for, 
 
 *The M+M Mixes Volume IV* is a four-CD set of disco and boogie remixes by John Morales, who started out DJing in Bronx clubs in the 1970s and became one of the early makers of the extended mix. The UK label BBE put it out in December 2017, catalogue number BBE287CCD. It isn't a famous album, and nothing about a DJ-mix compilation says "valuable" to someone flicking through a bin of greatest-hits discs.
 
-It came from [Brown Elephant](https://brownelephant.org/), a group of Chicago resale shops whose sales fund Howard Brown Health. Checking the release page today, 344 Discogs members have it and 272 want it. For a CD, that's a lot of people looking for a copy.
+It came from [Brown Elephant](https://brownelephant.org/), a group of Chicago resale shops whose sales fund Howard Brown Health. Which means nobody sold me a box that happened to have it in: I was standing at a bin going through discs one at a time, and I picked it up. Checking the release page today, 344 Discogs members have it and 272 want it. For a CD, that's a lot of people looking for a copy.
 
 It sold on December 10, 2025, for $60, about seventy times my median sale. No return, no dispute, and the buyer was happy with it.
 
